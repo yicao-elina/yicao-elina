@@ -1,86 +1,32 @@
 <!DOCTYPE HTML>
 <html>
+
+<!-- Navigation Bar -->
+<nav id="nav">
+    <ul class="container">
+        <li><a href="index.html#top">Home</a></li>
+        <li><a href="index.html#two">Research</a></li>
+        <li><a href="index.html#three">Experience</a></li>
+        <li><a href="presentations.html">Presentations</a></li>
+        <li><a href="index.html#vision">Vision</a></li>
+        <li><a href="index.html#four">Contact</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="CAO_Yi_CV.pdf" target="_blank">CV</a></li>
+    </ul>
+</nav>
+
 <head>
-    <title>Blog & Resources - Yi Cao</title>
+    <title>Conference Presentations - Yi Cao</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css" />
-    <style>
-    /* Navigation styling */
-    #navbar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        background-color: rgba(255, 255, 255, 0.98);
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        z-index: 10000;
-        height: 60px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    #navbar ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        display: flex;
-        align-items: center;
-    }
-
-    #navbar li {
-        margin: 0 15px;
-    }
-
-    #navbar a {
-        color: #333;
-        text-decoration: none;
-        font-weight: 500;
-        font-size: 0.9em;
-        transition: color 0.3s ease;
-        padding: 5px 10px;
-    }
-
-    #navbar a:hover, #navbar a.active {
-        color: #0079FF;
-    }
-
-    #header {
-        padding-top: 60px;
-    }
-
-    /* Blog post styling */
-    .blog-category {
-        margin-bottom: 4em;
-    }
-
-    .blog-category h2 {
-        color: #0079FF;
-        margin-bottom: 1.5em;
-    }
-    </style>
 </head>
 <body class="is-preload">
-    
-    <!-- Navigation Bar -->
-    <div id="navbar">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="index.html#two">Research</a></li>
-            <li><a href="index.html#three">Experience</a></li>
-            <li><a href="presentations.html">Presentations</a></li>
-            <li><a href="index.html#vision">Vision</a></li>
-            <li><a href="blog.html" class="active">Blog</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-            <li><a href="Yi_Cao_CV.pdf" target="_blank">CV</a></li>
-        </ul>
-    </div>
 
     <!-- Header -->
     <header id="header">
         <div class="inner">
-            <a href="index.html" class="image avatar"><img src="images/avatar.jpg" alt="" /></a>
+            <a href="index.html" class="image avatar"><img src="images/blog/Yi_2024_blossom.jpeg" alt="" /></a>
             <h1><strong>Yi Cao</strong><br />
             Blog & Resources</h1>
         </div>
@@ -96,9 +42,11 @@
             </header>
             <p>Welcome to my blog where I share technical insights from my research and glimpses of life beyond the lab. From DFT calculations to table tennis strategies, this is where science meets personal interests.</p>
         </section>
-
+		<a href="#technical-tips" class="button">Technical Tips</a>
+        <a href="#personal-blog" class="button">Life Beyond Research</a>
+        
         <!-- Technical Tips Section -->
-        <section class="blog-category">
+        <section class="blog-category", id="technical-tips">
             <h2>Technical Tips & Tutorials</h2>
             <div class="row">
                 
@@ -147,10 +95,16 @@
                 </article>
 
             </div>
+            <!-- Add this before the closing </section> tag on project pages -->
+    <p><small>
+        <i class="fas fa-copyright"></i> 2025 Yi Cao. 
+        This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
+        	CC BY-NC-SA 4.0</a>.
+    </small></p>
         </section>
 
         <!-- Personal Blog Section -->
-        <section class="blog-category">
+        <section class="blog-category", id="personal-blog">
             <h2>Life Beyond Research</h2>
             <div class="row">
                 
@@ -299,11 +253,16 @@ def extract_bandgap_from_qe_output(filename='bands.out'):
 # Run it
 extract_bandgap_from_qe_output('bands.out')
                             </code></pre>
-                        <p><small>Posted: January 8, 2025 | Tags: VASP, pymatgen, band structure</small></p>
+                        <p><small>Posted: January 8, 2025 | Tags: Quantum ESPRESSO, ASE, band structure</small></p>
                     </div>
 
                 </div>
             </div>
+                        <!-- Add this before the closing </section> tag on project pages -->
+    <p><small>
+        <i class="fas fa-copyright"></i> 2025 Yi Cao. 
+        This work is licensed under  <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>.
+    </small></p>
         </section>
 
         <!-- Subscribe/Follow Section -->
