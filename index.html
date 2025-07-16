@@ -149,7 +149,7 @@ for Next-Generation 2D Electronics</h2>
 	<div class="container">
 	  <header class="major">
 		<h2>Vision for AI-Accelerated Materials Discovery</h2>
-		<p>Hover over each question to explore my philosophy and research motivation.</p>
+		<p>Hover or click to expand; click again to collapse.</p>
 	  </header>
   
 	  <!-- Card 1 -->
@@ -157,7 +157,14 @@ for Next-Generation 2D Electronics</h2>
 		<div class="card-header">What is your long-term goal?</div>
 		<div class="card-short">Build a closed-loop system linking AI + simulations + experiments.</div>
 		<div class="card-full">
-		  My long-term goal is to bridge the gap between computational simulations and experimental materials science, enabling a closed-loop design process. With prior wet-lab training in biomaterials, I’ve seen how tedious trial-and-error methods are. My vision is to build systems that minimize experiments by learning from past data and simulations—so materials discovery becomes faster, deeper, and smarter.
+		</p>
+			My long-term goal is to bridge the gap between computational simulations and experimental materials science, enabling a closed-loop design process.
+			 With prior wet-lab training in biomaterials, I’ve seen how tedious trial-and-error methods are. 
+			</p>
+		</p>
+			 My vision is to build systems that minimize experiments by learning from past data and simulations—so materials discovery becomes faster, deeper, and smarter.
+		  </p>
+		  <div class="collapse-toggle">▲ Collapse</div>
 		</div>
 	  </div>
   
@@ -166,7 +173,10 @@ for Next-Generation 2D Electronics</h2>
 		<div class="card-header">What is your mission as a simulation researcher?</div>
 		<div class="card-short">Use ML to extract maximum insight from minimal experiments.</div>
 		<div class="card-full">
-		  I aim to merge simulation data and historical experiments using advanced ML techniques like active learning and transfer learning to uncover hidden patterns. This allows us to optimize material design with fewer experiments, while gaining more knowledge—accelerating understanding of atomic-level interactions and enabling better materials in fewer cycles.
+		  <p>
+			I aim to merge simulation data and historical experiments using advanced ML techniques like active learning and transfer learning to uncover hidden patterns. This allows us to optimize material design with fewer experiments, while gaining more knowledge—accelerating understanding of atomic-level interactions and enabling better materials in fewer cycles.
+		  </p>
+		  <div class="collapse-toggle">▲ Collapse</div>
 		</div>
 	  </div>
   
@@ -175,11 +185,20 @@ for Next-Generation 2D Electronics</h2>
 		<div class="card-header">How do you understand Machine Learning?</div>
 		<div class="card-short">ML is not a black box—it’s a transparent, evolving partner in science.</div>
 		<div class="card-full">
-		  To me, ML is not magic—it’s a dynamic tool that gains strength when guided by domain knowledge. With strong grounding in materials science, I see ML as a transparent, explainable collaborator. CPUs and GPUs are extensions of human thought. AI and humans co-evolve, inspiring each other. As Curie said, “the more we understand the world, the less we fear.”
+		  <p>
+			To me, ML is not magic—it’s a dynamic tool that gains strength when guided by domain knowledge. With strong grounding in materials science, I see ML as a transparent, explainable collaborator. 
+			CPUs and GPUs are extensions of human thought. AI and humans co-evolve, inspiring each other. 
+		</p> 
+		<p>	
+			As Marie Curie once said, <strong>"Nothing in life is to be feared, it is only to be understood."</strong> Through interdisciplinary research in ML and materials, I hope to help people understand—and therefore face—the world with greater confidence and curiosity.
+		  </p>
+		  <div class="collapse-toggle">▲ Collapse</div>
 		</div>
 	  </div>
 	</div>
   </section>
+  
+  
   
 
 	<!-- Four -->
@@ -249,6 +268,39 @@ for Next-Generation 2D Electronics</h2>
 <script src="assets/js/breakpoints.min.js"></script>
 <script src="assets/js/util.js"></script>
 <script src="assets/js/main.js"></script>
+
+<script>
+	document.querySelectorAll('.expand-card').forEach(card => {
+	  let hoverTimeout = null;
+  
+	  // Hover opens after brief delay
+	  card.addEventListener('mouseenter', () => {
+		if (!card.classList.contains('expanded')) {
+		  hoverTimeout = setTimeout(() => {
+			card.classList.add('expanded');
+		  }, 200);  // delay for short hover
+		}
+	  });
+  
+	  card.addEventListener('mouseleave', () => {
+		clearTimeout(hoverTimeout);
+	  });
+  
+	  // Click toggles expansion
+	  card.addEventListener('click', function (e) {
+		// If clicking the collapse arrow or header/card — toggle
+		if (
+		  e.target.classList.contains('collapse-toggle') ||
+		  e.target.classList.contains('expand-card') ||
+		  e.target.classList.contains('card-header')
+		) {
+		  card.classList.toggle('expanded');
+		}
+	  });
+	});
+  </script>
+  
+
 
 </body>
 </html>

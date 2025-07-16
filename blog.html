@@ -1,0 +1,343 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Blog & Resources - Yi Cao</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <style>
+    /* Navigation styling */
+    #navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.98);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        z-index: 10000;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #navbar ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        align-items: center;
+    }
+
+    #navbar li {
+        margin: 0 15px;
+    }
+
+    #navbar a {
+        color: #333;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.9em;
+        transition: color 0.3s ease;
+        padding: 5px 10px;
+    }
+
+    #navbar a:hover, #navbar a.active {
+        color: #0079FF;
+    }
+
+    #header {
+        padding-top: 60px;
+    }
+
+    /* Blog post styling */
+    .blog-category {
+        margin-bottom: 4em;
+    }
+
+    .blog-category h2 {
+        color: #0079FF;
+        margin-bottom: 1.5em;
+    }
+    </style>
+</head>
+<body class="is-preload">
+    
+    <!-- Navigation Bar -->
+    <div id="navbar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#two">Research</a></li>
+            <li><a href="index.html#three">Experience</a></li>
+            <li><a href="presentations.html">Presentations</a></li>
+            <li><a href="index.html#vision">Vision</a></li>
+            <li><a href="blog.html" class="active">Blog</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="Yi_Cao_CV.pdf" target="_blank">CV</a></li>
+        </ul>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="inner">
+            <a href="index.html" class="image avatar"><img src="images/avatar.jpg" alt="" /></a>
+            <h1><strong>Yi Cao</strong><br />
+            Blog & Resources</h1>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <div id="main">
+        
+        <!-- Introduction -->
+        <section id="intro">
+            <header class="major">
+                <h2>Sharing Knowledge & Life</h2>
+            </header>
+            <p>Welcome to my blog where I share technical insights from my research and glimpses of life beyond the lab. From DFT calculations to table tennis strategies, this is where science meets personal interests.</p>
+        </section>
+
+        <!-- Technical Tips Section -->
+        <section class="blog-category">
+            <h2>Technical Tips & Tutorials</h2>
+            <div class="row">
+                
+                <!-- DFT Calculation Tips -->
+                <article class="col-6 col-12-xsmall work-item">
+                    <a href="blog/dft-convergence.html" class="image fit thumb">
+                        <img src="images/blog/dft-tips.png" alt="DFT Tips" />
+                    </a>
+                    <h3>DFT Convergence Tips</h3>
+                    <p class="blog-meta"><i class="far fa-calendar"></i> January 15, 2025</p>
+                    <p>Practical strategies for achieving convergence in challenging DFT calculations, including mixing schemes and initial guess optimization.</p>
+                    <a href="blog/dft-convergence.html" class="button small">Read More</a>
+                </article>
+
+                <!-- MLFF Tutorial -->
+                <article class="col-6 col-12-xsmall work-item">
+                    <a href="blog/mlff-tutorial.html" class="image fit thumb">
+                        <img src="images/blog/mlff-tutorial.png" alt="MLFF Tutorial" />
+                    </a>
+                    <h3>Getting Started with ML Force Fields</h3>
+                    <p class="blog-meta"><i class="far fa-calendar"></i> December 20, 2024</p>
+                    <p>A beginner's guide to implementing machine learning force fields using ASE and MACE for molecular dynamics simulations.</p>
+                    <a href="blog/mlff-tutorial.html" class="button small">Read More</a>
+                </article>
+
+                <!-- Quantum ESPRESSO Scripts -->
+                <article class="col-6 col-12-xsmall work-item">
+                    <a href="blog/qe-scripts.html" class="image fit thumb">
+                        <img src="images/blog/1200px-Quantum_ESPRESSO_logo.jpg" alt="QE Scripts" />
+                    </a>
+                    <h3>Useful Quantum ESPRESSO Scripts</h3>
+                    <p class="blog-meta"><i class="far fa-calendar"></i> November 10, 2024</p>
+                    <p>Collection of Python scripts for automating Quantum ESPRESSO workflows, from input generation to data analysis.</p>
+                    <a href="blog/qe-scripts.html" class="button small">Read More</a>
+                </article>
+
+                <!-- Data Visualization -->
+                <article class="col-6 col-12-xsmall work-item">
+                    <a href="blog/data-viz.html" class="image fit thumb">
+                        <img src="images/thumbs/01-Defect-thumb.png" alt="Data Visualization" />
+                    </a>
+                    <h3>Beautiful Plots for Materials Science</h3>
+                    <p class="blog-meta"><i class="far fa-calendar"></i> October 5, 2024</p>
+                    <p>Creating publication-quality figures for band structures, density of states, and crystal structures using matplotlib and plotly.</p>
+                    <a href="blog/data-viz.html" class="button small">Read More</a>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- Personal Blog Section -->
+        <section class="blog-category">
+            <h2>Life Beyond Research</h2>
+            <div class="row">
+                
+                <!-- Table Tennis -->
+                <article class="col-6 col-12-xsmall work-item">
+                    <a href="blog/table-tennis-journey.html" class="image fit thumb">
+                        <img src="images/blog/Table_Tennis.jpg" alt="Table Tennis" />
+                    </a>
+                    <h3>My Table Tennis Journey</h3>
+                    <p class="blog-meta"><i class="far fa-calendar"></i> January 5, 2025</p>
+                    <p>From beginner to competitive player - lessons learned on and off the table, and how sports complement research life.</p>
+                    <a href="blog/table-tennis-journey.html" class="button small">Read More</a>
+                </article>
+
+                <!-- Tennis Learning -->
+                <article class="col-6 col-12-xsmall work-item">
+                    <a href="blog/learning-tennis.html" class="image fit thumb">
+                        <img src="images/blog/tennis.JPG" alt="Learning Tennis" />
+                    </a>
+                    <h3>Learning Tennis at 25</h3>
+                    <p class="blog-meta"><i class="far fa-calendar"></i> December 15, 2024</p>
+                    <p>Why I decided to pick up tennis during my PhD and the surprising parallels between mastering a sport and research.</p>
+                    <a href="blog/learning-tennis.html" class="button small">Read More</a>
+                </article>
+
+                <!-- JHU Campus Photography -->
+                <article class="col-6 col-12-xsmall work-item">
+                    <a href="blog/jhu-seasons.html" class="image fit thumb">
+                        <img src="images/blog/JHU_blossom.jpg" alt="JHU Campus" />
+                    </a>
+                    <h3>Four Seasons at Hopkins</h3>
+                    <p class="blog-meta"><i class="far fa-calendar"></i> November 20, 2024</p>
+                    <p>Capturing the beauty of JHU's Homewood campus through the seasons - a photographer's perspective.</p>
+                    <a href="blog/jhu-seasons.html" class="button small">View Gallery</a>
+                </article>
+
+                <!-- Travel Photography -->
+                <article class="col-6 col-12-xsmall work-item">
+                    <a href="blog/conference-travels.html" class="image fit thumb">
+                        <img src="images/blog/Yi_DC_blossom.JPG" alt="Travel Photography" />
+                    </a>
+                    <h3>Conference Cities Through My Lens</h3>
+                    <p class="blog-meta"><i class="far fa-calendar"></i> October 25, 2024</p>
+                    <p>Exploring DC, Boston, Bellevue, and beyond - combining conference attendance with street photography.</p>
+                    <a href="blog/conference-travels.html" class="button small">View Gallery</a>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- Code Snippets Section -->
+        <section class="blog-category">
+            <h2>Quick Code Snippets</h2>
+            <div class="row">
+                <div class="col-12">
+                    <h3>Recent Snippets</h3>
+                    
+                    <!-- Snippet 1 -->
+                    <div style="background: #f5f5f5; padding: 1em; margin-bottom: 1em; border-left: 3px solid #0079FF;">
+                        <h4>Parse QE `relax.out` for energies</h4>
+                        <pre><code>import re
+from ase.io import read
+
+# Read the last structure from Quantum ESPRESSO output
+atoms = read('relax.out')  # Automatically reads the last image
+
+# Total energy in eV
+energy_eV = atoms.get_potential_energy()
+
+# Lattice parameters
+cell = atoms.get_cell()
+a, b, c = cell.lengths()  # in Ångstrom
+alpha, beta, gamma = cell.angles()  # in degrees
+
+# Print results
+print(f"Total Energy: {energy_eV:.6f} eV")
+print(f"Lattice Parameters (a, b, c): {a:.6f}, {b:.6f}, {c:.6f} Å")
+print(f"Lattice Angles (α, β, γ): {alpha:.2f}°, {beta:.2f}°, {gamma:.2f}°")
+                            
+    return energies</code></pre>
+                        <p><small>Posted: January 10, 2025 | <a href="https://github.com/pclancy-lab/perovskite_defect_study.git">View on GitHub</a></small></p>
+                    </div>
+
+                    <!-- Snippet 2 -->
+                    <div style="background: #f5f5f5; padding: 1em; margin-bottom: 1em; border-left: 3px solid #0079FF;">
+                        <h4>Quick band gap extraction</h4>
+                        <pre><code>import numpy as np
+
+def extract_bandgap_from_qe_output(filename='bands.out'):
+    with open(filename, 'r') as f:
+        lines = f.readlines()
+
+    fermi_energy = None
+    band_energies = []
+    kpoints = []
+    current_kpoint_bands = []
+
+    for line in lines:
+        if 'the Fermi energy is' in line:
+            fermi_energy = float(line.split()[-2])  # in eV
+
+        elif 'k =' in line:
+            if current_kpoint_bands:
+                band_energies.append(current_kpoint_bands)
+                current_kpoint_bands = []
+            k_line = line.strip().split()
+            kpt = list(map(float, [k_line[2], k_line[3], k_line[4]]))
+            kpoints.append(kpt)
+
+        elif line.strip() and len(line.split()) == 2:
+            band_energy = float(line.split()[1])
+            current_kpoint_bands.append(band_energy)
+
+    if current_kpoint_bands:
+        band_energies.append(current_kpoint_bands)
+
+    # Convert to numpy array: shape (n_kpoints, n_bands)
+    band_energies = np.array(band_energies)
+
+    if fermi_energy is None:
+        raise ValueError("Fermi energy not found in file.")
+
+    # Shift energies relative to Fermi level
+    shifted_energies = band_energies - fermi_energy
+
+    # Find VBM and CBM
+    vbm = np.max(shifted_energies[shifted_energies <= 0])
+    cbm = np.min(shifted_energies[shifted_energies >= 0])
+    band_gap = cbm - vbm if cbm > vbm else 0.0
+
+    print(f"Fermi energy: {fermi_energy:.6f} eV")
+    print(f"Valence Band Maximum (VBM): {vbm:.6f} eV")
+    print(f"Conduction Band Minimum (CBM): {cbm:.6f} eV")
+    print(f"Band Gap: {band_gap:.6f} eV")
+
+    if band_gap == 0.0:
+        print("This material is metallic.")
+    else:
+        # Check direct vs indirect band gap
+        vbm_k = np.where(shifted_energies == vbm)[0][0]
+        cbm_k = np.where(shifted_energies == cbm)[0][0]
+        if vbm_k == cbm_k:
+            print("Direct band gap.")
+        else:
+            print("Indirect band gap.")
+# Run it
+extract_bandgap_from_qe_output('bands.out')
+                            </code></pre>
+                        <p><small>Posted: January 8, 2025 | Tags: VASP, pymatgen, band structure</small></p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Subscribe/Follow Section -->
+        <section>
+            <h2>Stay Connected</h2>
+            <p>Get updates when I post new content:</p>
+            <ul class="actions">
+                <li><a href="https://github.com/yicao-elina" class="button"><i class="fab fa-github"></i> Follow on GitHub</a></li>
+                <li><a href="https://www.linkedin.com/in/yi-cao-1368ab292/" class="button"><i class="fab fa-linkedin"></i> Connect on LinkedIn</a></li>
+                <li><a href="index.html" class="button">Back to Home</a></li>
+            </ul>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="inner">
+            <ul class="icons">
+                <li><a href="https://www.linkedin.com/in/yi-cao-1368ab292/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+                <li><a href="https://github.com/yicao-elina" class="icon brands fa-github"><span class="label">Github</span></a></li>
+                <li><a href="mailto:ycao73@jh.edu" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+            </ul>
+            <ul class="copyright">
+                <li>&copy; 2025 Yi Cao</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
