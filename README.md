@@ -30,18 +30,6 @@ On the science side:
 - 2D materials;
 - Thermoelectrics - Next-generation materials for energy conservation ("waste to watts")
 
-**Expertise keywords:**
-
-- Machine learning interatomic potential (MLIP)
-- Density functional theory (DFT)
-- Molecular dynamics (MD) simulation
-- Scientific Computing
-- Physics-informed machine learning
-- Thermoelectric materials
-- 2D van der Waals heterostructures
-- AI-driven materials discovery
-- Defect engineering
-
 ---
 
 ### 💬 Let's Connect
