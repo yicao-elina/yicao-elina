@@ -14,11 +14,31 @@ I'm building **first-principles + machine learning frameworks** to accelerate th
 
 ### 🔍 Research Interests
 
-* 🧮 **DFT + ML integration** for accelerated materials screening
-* 🔄 **Machine Learning Force Fields (MLFF)** and interatomic potential fitting
-* 💥 **Ab initio Molecular Dynamics (AIMD)** for stability analysis
-* ⚡ **Boltzmann Transport + Electron–Phonon Coupling** for thermoelectric performance
-* 🛠️ Workflow automation and Python scripting for high-throughput materials informatics
+**Research sub domains:**
+On the technique side:
+
+- AI4Science (DFT + ML + MD integration) - Multiscale Modeling and Simulation
+- Active learning for ML force field development
+- Reinforcement learning for synthesis optimization
+- Physics-informed neural networks (PINNs)
+- Generative AI for semiconductor materials design
+- Transfer learning for small materials datasets
+On the science side:
+- Quantum materials and spintronics;
+- 2D materials;
+- Thermoelectrics - Next-generation materials for energy conservation ("waste to watts")
+
+**Expertise keywords:**
+
+- Machine learning force fields (MLFF)
+- Density functional theory (DFT)
+- Molecular dynamics (MD) simulation
+- Scientific Computing
+- Physics-informed machine learning
+- Thermoelectric materials
+- 2D van der Waals heterostructures
+- AI-driven materials discovery
+- Defect engineering
 
 ---
 
