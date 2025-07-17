@@ -16,19 +16,12 @@ I'm building **first-principles + machine learning frameworks** to accelerate th
 
 **Research sub domains:**
 
-On the technique side:
-
 - AI4Science (DFT + ML + MD integration) ; Multiscale Modeling and Simulation
 - Active learning for ML force field development
 - Reinforcement learning for synthesis optimization
 - Physics-informed neural networks (PINNs)
 - Generative AI for semiconductor materials design
 - Transfer learning for small materials datasets
-
-On the science side:
-- Quantum materials and spintronics;
-- 2D materials;
-- Thermoelectrics - Next-generation materials for energy conservation ("waste to watts")
 
 ---
 
