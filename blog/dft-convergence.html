@@ -1,0 +1,230 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>DFT Convergence Tips - Yi Cao</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+</head>
+
+<body class="is-preload">
+<!-- Navigation Bar -->
+<nav id="nav">
+    <ul class="container">
+        <li><a href="#top" class="scrolly">Home</a></li>
+        <li><a href="#two" class="scrolly">Research</a></li>
+        <li><a href="#three" class="scrolly">Experience</a></li>
+        <li><a href="presentations.html">Presentations</a></li>
+        <li><a href="#vision" class="scrolly">Vision</a></li>
+        <li><a href="#four" class="scrolly">Contact</a></li>
+		<li><a href="blog.html">Blog</a></li>
+		<li><a href="CAO_Yi_CV.pdf" target="_blank">CV</a></li>
+		<li><a href="https://github.com/yicao-elina" target="_blank">GitHub</a></li>
+    </ul>
+</nav>
+
+
+    <!-- Header -->
+    <header id="header">
+        <div class="inner">
+            <a href="../index.html" class="image avatar"><img src="../images/blog/Yi_2024_blossom.jpeg" alt="" /></a>
+            <h1><strong>Yi Cao</strong><br />
+            DFT Convergence Tips</h1>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <div id="main">
+        
+        <!-- Blog Post -->
+        <article>
+            <header>
+                <h1>DFT Convergence Tips</h1>
+                <p class="blog-meta"><i class="far fa-calendar"></i> January 15, 2025</p>
+            </header>
+
+            <p>Achieving self-consistent field (SCF) convergence is often the trickiest part of running density functional theory (DFT) calculations, especially for metallic or highly correlated systems. As a regular Quantum ESPRESSO user, I've compiled below some of my favorite strategies and settings for overcoming tricky SCF convergence issues.</p>
+
+            <hr />
+
+            <h2>1. Choose a Good Initial Guess</h2>
+            
+            <ul>
+                <li><strong>Setup Matters:</strong> Quantum ESPRESSO provides several ways to initialize the wavefunctions and electron density. Use
+                    <pre><code>startingwfc = 'atomic'
+startingpot = 'atomic'</code></pre>
+                    in your <code>&CONTROL</code> or <code>&SYSTEM</code> inputs to begin with atomic orbitals.
+                </li>
+                
+                <li><strong>From Previous Runs:</strong> If continuing from a converged calculation, set
+                    <pre><code>restart_mode = 'restart'</code></pre>
+                    and ensure your old <code>*.save</code> directories are available.
+                </li>
+                
+                <li><strong>Spin Guessing:</strong> For magnetic systems, specify the <code>starting_magnetization</code> for each atomic species.</li>
+            </ul>
+
+            <hr />
+
+            <h2>2. Tweak the Mixing Scheme</h2>
+            
+            <ul>
+                <li><strong>Default is Not Always Best:</strong> The default mixing (<code>mixing_mode = 'plain'</code>, <code>mixing_beta = 0.7</code>) can fail in metals or large systems.</li>
+                
+                <li><strong>Broyden Mixing:</strong> Try
+                    <pre><code>mixing_mode = 'local-TF'</code></pre>
+                    or
+                    <pre><code>mixing_mode = 'damp'</code></pre>
+                </li>
+                
+                <li><strong>Lower Mixing Beta:</strong> Reduce <code>mixing_beta</code> (try 0.3 or even 0.1) to damp oscillations in problematic cases.</li>
+            </ul>
+
+            <p>Sample:</p>
+            <pre><code>&SYSTEM
+    mixing_mode = 'local-TF',
+    mixing_beta = 0.2,
+/</code></pre>
+
+            <ul>
+                <li><strong>Increase Mixing Step:</strong> Sometimes, setting
+                    <pre><code>mixing_ndim = 8</code></pre>
+                    builds a longer memory of past density changes and helps convergence.
+                </li>
+            </ul>
+
+            <hr />
+
+            <h2>3. Check K-Points and Smearing</h2>
+            
+            <ul>
+                <li><strong>Smearing Is Essential for Metals:</strong> Use a Methfessel-Paxton or Marzari-Vanderbilt smearing in <code>occupations</code>:
+                    <pre><code>occupations = 'smearing'
+smearing = 'mp'
+degauss = 0.02   ! Try varying degauss for best results</code></pre>
+                </li>
+                
+                <li><strong>Γ-Only for Insulators:</strong> For molecules, try <code>occupations = 'fixed'</code>.</li>
+                
+                <li><strong>K-Point Mesh:</strong> Start with a coarse mesh to get a feel for the system, then refine.</li>
+            </ul>
+
+            <hr />
+
+            <h2>4. Adjust Electronic Minimization</h2>
+            
+            <ul>
+                <li><strong>Convergence Threshold:</strong> Set a more lenient <code>conv_thr</code> at first, then tighten once convergence is achieved, e.g., from <code>1.0e-5</code> to <code>1.0e-8</code>.</li>
+                
+                <li><strong>Maximum Iterations:</strong> The default (<code>electron_maxstep=100</code>) may not suffice. Set
+                    <pre><code>electron_maxstep = 200</code></pre>
+                </li>
+            </ul>
+
+            <hr />
+
+            <h2>5. Diagnose Stuck Calculations</h2>
+            
+            <p>If SCF oscillates or diverges:</p>
+            
+            <ul>
+                <li>Try a different mixing scheme.</li>
+                <li>Lower your cutoff energies (<code>ecutwfc</code>, <code>ecutrho</code>) to test for stability.</li>
+                <li>Revisit your pseudopotentials; some are less stable than others.</li>
+                <li>Check if the structure needs relaxation—distant atoms or unreasonable lattice constants can cause trouble.</li>
+            </ul>
+
+            <hr />
+
+            <h2>6. Useful Input Snippet</h2>
+            
+            <p>Here's a snippet with convergence-aiding settings:</p>
+            
+            <pre><code>&SYSTEM
+  nosym = .true.
+  occupations = 'smearing'
+  smearing = 'mv'
+  degauss = 0.01
+  mixing_mode = 'local-TF'
+  mixing_beta = 0.3
+  mixing_ndim = 10
+/
+&ELECTRONS
+  conv_thr = 1.0e-7
+  electron_maxstep = 200
+/</code></pre>
+
+            <hr />
+
+            <h2>Summary Table</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Problem</th>
+                        <th>Strategy</th>
+                        <th>Input Option</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Oscillating SCF</td>
+                        <td>Lower <code>mixing_beta</code>, different <code>mixing_mode</code></td>
+                        <td><code>mixing_beta</code>, <code>mixing_mode</code></td>
+                    </tr>
+                    <tr>
+                        <td>Divergent SCF</td>
+                        <td>Try smaller <code>degauss</code>, check structure</td>
+                        <td><code>degauss</code></td>
+                    </tr>
+                    <tr>
+                        <td>Metals</td>
+                        <td>Use smearing, proper k-points</td>
+                        <td><code>occupations</code>, <code>smearing</code></td>
+                    </tr>
+                    <tr>
+                        <td>Magnetic/Spin</td>
+                        <td>Set <code>starting_magnetization</code></td>
+                        <td><code>starting_magnetization</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr />
+
+            <h2>Final Thoughts</h2>
+            
+            <p>Don't be afraid to experiment systematically—changing one variable at a time and keeping detailed logs. For persistent problems, the <a href="https://lists.quantum-espresso.org/mailman/listinfo/users" target="_blank">Quantum ESPRESSO forums</a> and documentation are invaluable resources.</p>
+            
+            <p><strong>What are your go-to tricks for SCF convergence? Share in the comments below!</strong></p>
+            
+            <hr />
+            
+            <p><strong>#QuantumEspresso #DFT #Convergence #MaterialsScience</strong></p>
+
+        </article>
+
+        <!-- Navigation -->
+        <section>
+            <ul class="actions">
+                <li><a href="../blog.html" class="button">Back to Blog</a></li>
+                <li><a href="../index.html" class="button">Home</a></li>
+            </ul>
+        </section>
+
+        <!-- License -->
+        <p><small>
+            <i class="fas fa-copyright"></i> 2025 Yi Cao. 
+            This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
+                CC BY-NC-SA 4.0</a>.
+        </small></p>
+
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="inner">
+            <ul class="icons">
+                <li><a href="https://www.linkedin.com/in/yi-cao-1368ab292/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+                <li><a href="https://github

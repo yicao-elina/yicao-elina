@@ -1,0 +1,446 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Getting Started with ML Force Fields - Yi Cao</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+</head>
+
+<body class="is-preload">
+
+<!-- Navigation Bar -->
+<nav id="nav">
+    <ul class="container">
+        <li><a href="#top" class="scrolly">Home</a></li>
+        <li><a href="#two" class="scrolly">Research</a></li>
+        <li><a href="#three" class="scrolly">Experience</a></li>
+        <li><a href="presentations.html">Presentations</a></li>
+        <li><a href="#vision" class="scrolly">Vision</a></li>
+        <li><a href="#four" class="scrolly">Contact</a></li>
+		<li><a href="blog.html">Blog</a></li>
+		<li><a href="CAO_Yi_CV.pdf" target="_blank">CV</a></li>
+		<li><a href="https://github.com/yicao-elina" target="_blank">GitHub</a></li>
+    </ul>
+</nav>
+
+
+    <!-- Header -->
+    <header id="header">
+        <div class="inner">
+            <a href="../index.html" class="image avatar"><img src="../images/blog/Yi_2024_blossom.jpeg" alt="" /></a>
+            <h1><strong>Yi Cao</strong><br />
+            Getting Started with ML Force Fields</h1>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <div id="main">
+        
+        <!-- Blog Post -->
+        <article>
+            <header>
+                <h1>Getting Started with ML Force Fields</h1>
+                <p class="blog-meta"><i class="far fa-calendar"></i> December 20, 2024</p>
+            </header>
+
+            <p>Machine learning force fields (MLFFs) are revolutionizing molecular dynamics simulations by providing near-DFT accuracy at a fraction of the computational cost. In this tutorial, I'll walk you through implementing your first MLFF using the Atomic Simulation Environment (ASE) and MACE (Multi-Atomic Cluster Expansion).</p>
+
+            <hr />
+
+            <h2>Why Machine Learning Force Fields?</h2>
+            
+            <p>Traditional force fields are fast but often lack accuracy for complex systems. DFT calculations are accurate but computationally expensive for large-scale dynamics. MLFFs bridge this gap by:</p>
+            
+            <ul>
+                <li>Learning from DFT reference data</li>
+                <li>Providing forces and energies 1000-10000× faster than DFT</li>
+                <li>Maintaining chemical accuracy (~1 meV/atom)</li>
+                <li>Capturing complex many-body interactions</li>
+            </ul>
+
+            <hr />
+
+            <h2>Prerequisites</h2>
+            
+            <p>Before we start, make sure you have:</p>
+            
+            <ul>
+                <li>Python 3.8 or higher</li>
+                <li>Basic knowledge of ASE and molecular dynamics</li>
+                <li>Some DFT trajectory data (or we'll generate it)</li>
+            </ul>
+
+            <p>Install the required packages:</p>
+            
+            <pre><code>pip install ase mace-torch matplotlib
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118</code></pre>
+
+            <hr />
+
+            <h2>Step 1: Prepare Training Data</h2>
+            
+            <p>First, let's generate some training data. For this example, we'll use a simple water molecule:</p>
+            
+            <pre><code>from ase import Atoms
+from ase.calculators.emt import EMT
+from ase.md.velocitydistribution import MaxwellBoltzmannDistribution
+from ase.md import VelocityVerlet
+from ase.io import write, read
+import numpy as np
+
+# Create a water molecule
+water = Atoms('H2O', 
+              positions=[[0, 0, 0],
+                        [0.76, 0.59, 0],
+                        [-0.76, 0.59, 0]])
+
+# For demonstration, we'll use EMT (in practice, use DFT)
+water.calc = EMT()
+
+# Run a short MD to generate configurations
+MaxwellBoltzmannDistribution(water, temperature_K=300)
+dyn = VelocityVerlet(water, timestep=0.5)
+
+# Collect configurations
+configurations = []
+for i in range(100):
+    dyn.run(10)
+    # Add some noise to create diverse configurations
+    water.positions += np.random.normal(0, 0.01, water.positions.shape)
+    configurations.append(water.copy())
+
+# Save training data
+write('training_data.xyz', configurations)</code></pre>
+
+            <p><strong>Note:</strong> In real applications, you should use DFT calculations (e.g., Quantum ESPRESSO, VASP) to generate accurate reference data.</p>
+
+            <hr />
+
+            <h2>Step 2: Convert Data to MACE Format</h2>
+            
+            <p>MACE requires data in a specific format. Let's prepare our dataset:</p>
+            
+            <pre><code>from mace.tools import torch_geometric
+from mace.data import AtomicData, Configuration
+import torch
+
+# Read configurations
+configs = read('training_data.xyz', index=':')
+
+# Convert to MACE configurations
+mace_configs = []
+for atoms in configs:
+    config = Configuration(
+        atomic_numbers=atoms.numbers,
+        positions=atoms.positions,
+        energy=atoms.get_potential_energy(),
+        forces=atoms.get_forces(),
+        cell=atoms.cell if atoms.pbc.any() else None,
+        pbc=atoms.pbc,
+    )
+    mace_configs.append(config)
+
+# Split into training and validation
+n_train = int(0.8 * len(mace_configs))
+train_configs = mace_configs[:n_train]
+valid_configs = mace_configs[n_train:]
+
+print(f"Training configurations: {len(train_configs)}")
+print(f"Validation configurations: {len(valid_configs)}")</code></pre>
+
+            <hr />
+
+            <h2>Step 3: Train the MACE Model</h2>
+            
+            <p>Now comes the exciting part - training the MLFF:</p>
+            
+            <pre><code># Create a configuration file for MACE training
+config_yaml = """
+# MACE training configuration
+seed: 123
+model: MACE
+r_max: 5.0
+num_radial_basis: 8
+num_cutoff_basis: 5
+max_ell: 3
+interaction_cls: RealAgnosticResidualInteractionBlock
+num_interactions: 2
+num_species: 2
+hidden_irreps: 32x0e + 32x1o
+MLP_irreps: 16x0e
+avg_num_neighbors: auto
+correlation: 3
+gate: silu
+
+# Training settings
+batch_size: 10
+max_num_epochs: 1000
+patience: 50
+learning_rate: 0.01
+weight_decay: 0.0
+energy_weight: 1.0
+forces_weight: 100.0
+stress_weight: 0.0
+
+# Loss and optimization
+loss: weighted_mse
+optimizer: adam
+lr_scheduler: reduce_on_plateau
+lr_scheduler_patience: 50
+lr_scheduler_factor: 0.8
+"""
+
+with open('config.yaml', 'w') as f:
+    f.write(config_yaml)
+
+# Train the model using MACE CLI
+import subprocess
+subprocess.run([
+    'mace_train',
+    '--config', 'config.yaml',
+    '--train_file', 'training_data.xyz',
+    '--valid_file', 'validation_data.xyz',
+    '--model_dir', './mace_model',
+    '--device', 'cuda'  # or 'cpu' if no GPU
+])</code></pre>
+
+            <hr />
+
+            <h2>Step 4: Use the Trained Model</h2>
+            
+            <p>Once training is complete, let's use our MLFF for molecular dynamics:</p>
+            
+            <pre><code>from mace.calculators import MACECalculator
+from ase.md.langevin import Langevin
+from ase import units
+from ase.io.trajectory import Trajectory
+
+# Load the trained model
+calc = MACECalculator(model_path='mace_model/best_model.pth', device='cuda')
+
+# Create a new water molecule
+water_md = Atoms('H2O', 
+                 positions=[[0, 0, 0],
+                           [0.76, 0.59, 0],
+                           [-0.76, 0.59, 0]])
+water_md.calc = calc
+
+# Run MD simulation
+dyn = Langevin(water_md, 
+               timestep=0.5 * units.fs,
+               temperature_K=300,
+               friction=0.01)
+
+# Save trajectory
+traj = Trajectory('water_mlff_md.traj', 'w', water_md)
+dyn.attach(traj.write, interval=10)
+
+# Run for 1000 steps
+dyn.run(1000)
+
+print("MD simulation completed!")</code></pre>
+
+            <hr />
+
+            <h2>Step 5: Analyze Results</h2>
+            
+            <p>Let's analyze our MLFF simulation and compare with reference data:</p>
+            
+            <pre><code>import matplotlib.pyplot as plt
+from ase.io import read
+
+# Read trajectory
+traj = read('water_mlff_md.traj', index=':')
+
+# Extract energies
+energies = [atoms.get_potential_energy() for atoms in traj]
+times = np.arange(len(energies)) * 0.5 * 10  # fs
+
+# Plot energy conservation
+plt.figure(figsize=(10, 6))
+plt.plot(times, energies)
+plt.xlabel('Time (fs)')
+plt.ylabel('Potential Energy (eV)')
+plt.title('Energy Conservation in MLFF MD')
+plt.grid(True)
+plt.savefig('energy_conservation.png')
+
+# Calculate and plot bond lengths
+def get_bond_lengths(atoms):
+    d1 = atoms.get_distance(0, 1)  # O-H1
+    d2 = atoms.get_distance(0, 2)  # O-H2
+    angle = atoms.get_angle(1, 0, 2)  # H-O-H
+    return d1, d2, angle
+
+bond_data = [get_bond_lengths(atoms) for atoms in traj]
+oh1_lengths = [d[0] for d in bond_data]
+oh2_lengths = [d[1] for d in bond_data]
+angles = [d[2] for d in bond_data]
+
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8))
+
+ax1.plot(times, oh1_lengths, label='O-H1')
+ax1.plot(times, oh2_lengths, label='O-H2')
+ax1.set_xlabel('Time (fs)')
+ax1.set_ylabel('Bond Length (Å)')
+ax1.legend()
+ax1.grid(True)
+
+ax2.plot(times, angles)
+ax2.set_xlabel('Time (fs)')
+ax2.set_ylabel('H-O-H Angle (degrees)')
+ax2.grid(True)
+
+plt.tight_layout()
+plt.savefig('structural_analysis.png')</code></pre>
+
+            <hr />
+
+            <h2>Best Practices and Tips</h2>
+            
+            <ol>
+                <li><strong>Data Quality:</strong> The quality of your MLFF depends entirely on your training data. Use well-converged DFT calculations.</li>
+                
+                <li><strong>Data Diversity:</strong> Include various configurations:
+                    <ul>
+                        <li>Different temperatures</li>
+                        <li>Compressed and expanded structures</li>
+                        <li>Transition states if studying reactions</li>
+                    </ul>
+                </li>
+                
+                <li><strong>Validation:</strong> Always validate your MLFF against unseen DFT data before production runs.</li>
+                
+                <li><strong>Active Learning:</strong> Use uncertainty quantification to identify configurations where the model is uncertain, then add DFT data for those.</li>
+                
+                <li><strong>Model Selection:</strong> Different architectures work better for different systems:
+                    <ul>
+                        <li>MACE: Excellent for general systems</li>
+                        <li>NequIP: Good for small molecules</li>
+                        <li>DeepMD: Efficient for large-scale simulations</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <hr />
+
+            <h2>Common Pitfalls</h2>
+            
+            <ul>
+                <li><strong>Extrapolation:</strong> MLFFs perform poorly outside their training domain. Always check if your simulation explores new configurations.</li>
+                
+                <li><strong>Energy Drift:</strong> Monitor energy conservation in NVE simulations. Poor conservation indicates the model needs improvement.</li>
+                
+                <li><strong>Overfitting:</strong> Use proper train/validation splits and early stopping to prevent overfitting.</li>
+            </ul>
+
+            <hr />
+
+            <h2>Next Steps</h2>
+            
+            <p>Now that you have a working MLFF, consider:</p>
+            
+            <ul>
+                <li>Scaling up to larger systems (proteins, materials)</li>
+                <li>Implementing active learning workflows</li>
+                <li>Combining with enhanced sampling methods</li>
+                <li>Studying rare events and chemical reactions</li>
+            </ul>
+
+            <hr />
+
+            <h2>Resources</h2>
+            
+            <ul>
+                <li><a href="https://github.com/ACEsuit/mace" target="_blank">MACE GitHub Repository</a></li>
+                <li><a href="https://wiki.fysik.dtu.dk/ase/" target="_blank">ASE Documentation</a></li>
+                <li><a href="https://arxiv.org/abs/2206.07697" target="_blank">MACE Paper</a></li>
+                <li><a href="https://github.com/mir-group/nequip" target="_blank">NequIP Alternative</a></li>
+            </ul>
+
+            <p><strong>Happy simulating! Feel free to reach out with questions or share your MLFF experiences.</strong></p>
+            
+            <hr />
+            
+            <p><strong>#MachineLearning #MolecularDynamics #MACE #ComputationalChemistry #MLForceFields</strong></p>
+
+        </article>
+
+        <!-- Navigation -->
+        <section>
+            <ul class="actions">
+                <li><a href="../blog.html" class="button">Back to Blog</a></li>
+                <li><a href="../index.html" class="button">Home</a></li>
+            </ul>
+        </section>
+
+        <!-- License -->
+        <p><small>
+            <i class="fas fa-copyright"></i> 2024 Yi Cao. 
+            This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
+                CC BY-NC-SA 4.0</a>.
+        </small></p>
+
+    </div>
+
+
+<!-- Footer -->
+<footer id="footer">
+    <div class="inner">
+    <ul class="icons">
+    <li><a href="https://www.linkedin.com/in/yi-cao-1368ab292/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+    <li><a href="https://github.com/yicao-elina" class="icon brands fa-github"><span class="label">Github</span></a></li>
+    <li><a href="mailto:ycao73@jh.edu" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+    <li><a href="https://scholar.google.com/citations?user=t_gDF-EAAAAJ&hl=en" class="icon solid fa-graduation-cap"><span class="label">Google Scholar</span></a></li>
+    </ul>
+    <ul class="copyright">
+    <li>&copy; 2025 Yi Cao</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+    </ul>
+    </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.poptrox.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+    
+    <script>
+        document.querySelectorAll('.expand-card').forEach(card => {
+          let hoverTimeout = null;
+      
+          // Hover opens after brief delay
+          card.addEventListener('mouseenter', () => {
+            if (!card.classList.contains('expanded')) {
+              hoverTimeout = setTimeout(() => {
+                card.classList.add('expanded');
+              }, 200);  // delay for short hover
+            }
+          });
+      
+          card.addEventListener('mouseleave', () => {
+            clearTimeout(hoverTimeout);
+          });
+      
+          // Click toggles expansion
+          card.addEventListener('click', function (e) {
+            // If clicking the collapse arrow or header/card — toggle
+            if (
+              e.target.classList.contains('collapse-toggle') ||
+              e.target.classList.contains('expand-card') ||
+              e.target.classList.contains('card-header')
+            ) {
+              card.classList.toggle('expanded');
+            }
+          });
+        });
+      </script>
+      
+    
+    
+    </body>
+    </html>
