@@ -35,8 +35,8 @@ On the science side:
 ### 💬 Let's Connect
 
 * 💡 Ask me about **DFT, AIMD, Boltzmann transport, or building reproducible Python workflows**
-* 📨 Contact: [ycao73@jh.edu](mailto:ycao73@jh.edu)
-* 🔗 [LinkedIn](https://www.linkedin.com/in/yi-cao-1368ab292)
+* 📨 Contact: [ycao73@jh.edu](mailto:ycao73@jh.edu) 🔗 [LinkedIn](https://www.linkedin.com/in/yi-cao-1368ab292)
+* 🌐 Personal Website [yicao-elina](https://yicao-elina.github.io/yicao-elina/) 
 
 ---
 
