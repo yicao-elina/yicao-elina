@@ -15,14 +15,16 @@ I'm building **first-principles + machine learning frameworks** to accelerate th
 ### 🔍 Research Interests
 
 **Research sub domains:**
+
 On the technique side:
 
-- AI4Science (DFT + ML + MD integration) - Multiscale Modeling and Simulation
+- AI4Science (DFT + ML + MD integration) ; Multiscale Modeling and Simulation
 - Active learning for ML force field development
 - Reinforcement learning for synthesis optimization
 - Physics-informed neural networks (PINNs)
 - Generative AI for semiconductor materials design
 - Transfer learning for small materials datasets
+
 On the science side:
 - Quantum materials and spintronics;
 - 2D materials;
@@ -30,7 +32,7 @@ On the science side:
 
 **Expertise keywords:**
 
-- Machine learning force fields (MLFF)
+- Machine learning interatomic potential (MLIP)
 - Density functional theory (DFT)
 - Molecular dynamics (MD) simulation
 - Scientific Computing
@@ -52,7 +54,7 @@ On the science side:
 
 ### ⚙️ Tech Stack
 
-`Python` ·  `Quantum ESPRESSO` · `ASE` · `BoltzTraP2` · `Matplotlib` · `pymatgen` · `MLIP/MACE` · `scikit-learn` · `PyTorch`
+`Machine learning` · `Density functional theory (DFT)` · `Molecular dynamics (MD)` · `Python` ·  `Quantum ESPRESSO` · `ASE` · `pymatgen` · `MLIP` · `scikit-learn` · `PyTorch`
 
 <!--
 **yicao-elina/yicao-elina** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
