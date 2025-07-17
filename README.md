@@ -2,7 +2,7 @@
 
 🔬 **PhD Student | AI + Materials Enthusiast | Computational Researcher**
 📍 Department of Chemical and Biomolecular Engineering, Johns Hopkins University
-📫 [ycao73@jh.edu](mailto:ycao73@jh.edu) | 🌐 [Personal Website](https://yicao-elina.github.io/yicao-elina/) 🔗 [LinkedIn](https://www.linkedin.com/in/yi-cao-1368ab292)
+📫 [ycao73@jh.edu](mailto:ycao73@jh.edu) | 🌐 [Personal Website](https://yicao-elina.github.io/yicao-elina/) | 🔗 [LinkedIn](https://www.linkedin.com/in/yi-cao-1368ab292)
 
 ---
 
@@ -36,7 +36,7 @@ On the science side:
 
 * 💡 Ask me about **DFT, AIMD, Boltzmann transport, or building reproducible Python workflows**
 * 📨 Contact: [ycao73@jh.edu](mailto:ycao73@jh.edu) 🔗 [LinkedIn](https://www.linkedin.com/in/yi-cao-1368ab292)
-* 🌐 Personal Website [yicao-elina](https://yicao-elina.github.io/yicao-elina/) 
+* 🌐 Personal Website: [yicao-elina](https://yicao-elina.github.io/yicao-elina/) 
 
 ---
 
