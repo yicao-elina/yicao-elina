@@ -56,6 +56,8 @@ On the science side:
 
 `Machine learning` · `Density functional theory (DFT)` · `Molecular dynamics (MD)` · `Python` ·  `Quantum ESPRESSO` · `ASE` · `pymatgen` · `MLIP` · `scikit-learn` · `PyTorch`
 
+`2D van der Waals heterostructures` · `Thermoelectrics`  · `Defect engineering` ·  `AI-driven materials discovery`
+
 <!--
 **yicao-elina/yicao-elina** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
