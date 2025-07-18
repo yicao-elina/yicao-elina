@@ -146,10 +146,161 @@
             </ul>
         </section>
     </div>
+<!-- Like Button Section -->
+<section style="text-align: center; margin: 1em 0;">
+    <button id="likeButton" style="
+        background: #fff;
+        border: 2px solid #49bf9d;
+        color: #49bf9d;
+        padding: 10px 30px;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    ">
+        <i class="far fa-heart" id="heartIcon"></i>
+        <span id="likeText">Like this post</span>
+        <span id="likeCount" style="
+            background: #49bf9d;
+            color: white;
+            border-radius: 12px;
+            padding: 2px 8px;
+            margin-left: 5px;
+            font-size: 14px;
+        ">0</span>
+    </button>
+</section>
 
+<style>
+    #likeButton:hover {
+        background: #49bf9d !important;
+        color: white !important;
+    }
+
+    #likeButton.liked {
+        background: #49bf9d !important;
+        color: white !important;
+    }
+
+    #likeButton.liked #heartIcon {
+        font-weight: 900;
+    }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the current page identifier
+    const pageId = window.location.pathname;
+    
+    // Like button elements
+    const likeButton = document.getElementById('likeButton');
+    const likeCount = document.getElementById('likeCount');
+    const heartIcon = document.getElementById('heartIcon');
+    const likeText = document.getElementById('likeText');
+    
+    // Load saved like data
+    let likes = parseInt(localStorage.getItem(`likes_${pageId}`) || '0');
+    let hasLiked = localStorage.getItem(`hasLiked_${pageId}`) === 'true';
+    
+    // Initialize display
+    updateLikeButton();
+    
+    // Handle like button click
+    likeButton.addEventListener('click', function() {
+        if (hasLiked) {
+            // Unlike
+            likes--;
+            hasLiked = false;
+            heartIcon.className = 'far fa-heart';
+            likeText.textContent = 'Like this post';
+            likeButton.classList.remove('liked');
+        } else {
+            // Like
+            likes++;
+            hasLiked = true;
+            heartIcon.className = 'fas fa-heart';
+            likeText.textContent = 'Liked';
+            likeButton.classList.add('liked');
+            
+            // Add animation
+            likeButton.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                likeButton.style.transform = 'scale(1)';
+            }, 200);
+        }
+        
+        // Save to localStorage
+        localStorage.setItem(`likes_${pageId}`, likes);
+        localStorage.setItem(`hasLiked_${pageId}`, hasLiked);
+        
+        // Update display
+        updateLikeButton();
+    });
+    
+    function updateLikeButton() {
+        likeCount.textContent = likes;
+        if (hasLiked) {
+            heartIcon.className = 'fas fa-heart';
+            likeText.textContent = 'Liked';
+            likeButton.classList.add('liked');
+        }
+    }
+});
+</script>
         <!-- License -->
         <p><small>
             <i class="fas fa-copyright"></i> 2025 Yi Cao. 
              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
                 CC BY-NC-SA 4.0</a>.
         </small></p>
+
+                <!-- Navigation -->
+                <section>
+                    <ul class="actions">
+                        <li><a href="../blog.html" class="button">Back to Blog</a></li>
+                        <li><a href="../index.html" class="button">Home</a></li>
+                    </ul>
+                </section>
+            </div>
+            <!-- Footer -->
+            <footer id="footer">
+                <div class="inner">
+                    <p><small>
+                        <i class="fas fa-copyright"></i> 2025 Yi Cao. 
+                        This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>.
+                    </small></p>
+                </div>
+            </footer>
+            <!-- Scripts -->
+            <script src="../assets/js/jquery.min.js"></script>
+            <script src="../assets/js/browser.min.js"></script>
+            <script src="../assets/js/breakpoints.min.js"></script>
+            <script src="../assets/js/util.js"></script>
+            <script src="../assets/js/main.js"></script>
+            <script>
+                // Expand/collapse functionality for code cards
+                document.querySelectorAll('.code-expand-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        card.classList.toggle('expanded');
+                    });
+                });
+            </script>
+        
+                <!-- License -->
+                <p><small>
+                    <i class="fas fa-copyright"></i> 2025 Yi Cao. 
+                     <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
+                        CC BY-NC-SA 4.0</a>.
+                </small></p>
+        
+        
+        
+
+    
+        
+        </body>
+        </html>
+        

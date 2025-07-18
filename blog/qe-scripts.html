@@ -983,36 +983,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
- <!-- Navigation -->
-        <section>
-            <ul class="actions">
-                <li><a href="../blog.html" class="button">Back to Blog</a></li>
-                <li><a href="../index.html" class="button">Home</a></li>
-            </ul>
-        </section>
-    </div>
-
-           <!-- License -->
-           <p><small>
-            <i class="fas fa-copyright"></i> 2025 Yi Cao. 
-             <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
-                CC BY-NC-SA 4.0</a>.
-        </small></p> 
-
-        <!-- Scripts -->
-    <script src="../assets/js/jquery.min.js"></script>
-    <script src="../assets/js/browser.min.js"></script>
-    <script src="../assets/js/breakpoints.min.js"></script>
-    <script src="../assets/js/util.js"></script>
-    <script src="../assets/js/main.js"></script>
-    <script>
-        // Expand/collapse functionality for code cards
-        document.querySelectorAll('.code-expand-card').forEach(card => {
-            card.addEventListener('click', () => {
-                card.classList.toggle('expanded');
-            });
-        });
-    </script>
+ 
 <!-- Like Button Section -->
 <section style="text-align: center; margin: 3em 0;">
     <button id="likeButton" style="
@@ -1115,6 +1086,37 @@ document.addEventListener('DOMContentLoaded', function() {
             likeButton.classList.add('liked');
         }
     }
+});
+</script>
+
+<!-- Navigation -->
+<section>
+    <ul class="actions">
+        <li><a href="../blog.html" class="button">Back to Blog</a></li>
+        <li><a href="../index.html" class="button">Home</a></li>
+    </ul>
+</section>
+</div>
+
+   <!-- License -->
+   <p><small>
+    <i class="fas fa-copyright"></i> 2025 Yi Cao. 
+     <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
+        CC BY-NC-SA 4.0</a>.
+</small></p> 
+
+<!-- Scripts -->
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/browser.min.js"></script>
+<script src="../assets/js/breakpoints.min.js"></script>
+<script src="../assets/js/util.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>
+// Expand/collapse functionality for code cards
+document.querySelectorAll('.code-expand-card').forEach(card => {
+    card.addEventListener('click', () => {
+        card.classList.toggle('expanded');
+    });
 });
 </script>
 </body>
