@@ -13,12 +13,75 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 </head>
 <body class="is-preload">
 
+<style>
+    /* Dropdown Menu Styles */
+    #nav li.dropdown {
+        position: relative;
+    }
+    
+    #nav li.dropdown:hover .dropdown-menu {
+        display: block;
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    
+    .dropdown-menu {
+        display: none; /* Hidden by default */
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%) translateY(10px);
+        background-color: #fff;
+        min-width: 200px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        border-radius: 4px;
+        padding: 10px 0;
+        z-index: 10001;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        border: 1px solid #eee;
+    }
+    
+    .dropdown-menu li {
+        display: block !important; /* Override inline-block from parent */
+        margin: 0 !important;
+        text-align: left;
+    }
+    
+    .dropdown-menu a {
+        display: block;
+        padding: 10px 20px !important;
+        color: #666 !important;
+        border-bottom: none !important;
+        font-size: 0.9em !important;
+    }
+    
+    .dropdown-menu a:hover {
+        background-color: #f7f7f7;
+        color: #49bf9d !important;
+    }
+    
+    /* Caret icon */
+    .fa-caret-down {
+        margin-left: 5px;
+        font-size: 0.8em;
+    }
+</style>
+
 <!-- Navigation Bar -->
 <nav id="nav">
     <ul class="container">
         <li><a href="#top" class="scrolly">Home</a></li>
         <li><a href="#two" class="scrolly">Research</a></li>
-        <li><a href="#three" class="scrolly">Experience</a></li>
+        <li class="dropdown">
+            <a href="#skills-timeline" class="scrolly">Experience <i class="icon solid fa-caret-down"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href="#skills-timeline" class="scrolly">Education</a></li>
+                <li><a href="#three" class="scrolly">Work Gallery</a></li>
+            </ul>
+        </li>
         <li><a href="presentations.html">Presentations</a></li>
         <li><a href="#vision" class="scrolly">Vision</a></li>
         <li><a href="#four" class="scrolly">Contact</a></li>
@@ -356,7 +419,9 @@ at <a href="https://www.jhu.edu">Johns Hopkins University</a>.</h1>
 <section id="three">
 	<h2>Work Experience</h2>
 	<div class="row">
-	
+
+
+
 	<article class="col-6 col-12-xsmall work-item">
 	<a href="images/fulls/viva-yi_full.png" target="_blank" class="image fit thumb">
 		<img src="images/thumbs/viva-yi.png" alt="Viva Biotech" />
