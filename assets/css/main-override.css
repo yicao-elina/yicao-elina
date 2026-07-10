@@ -209,6 +209,13 @@ body:not(:has(#hero)) {
   margin-top: 1.5em;
 }
 
+/* The [hidden] attribute is weaker than .recent-work-list's display:grid,
+   so the folded "Read more" list (#rw-more-list) would otherwise stay
+   visible. Force it hidden when the attribute is present. */
+.recent-work-list[hidden] {
+  display: none;
+}
+
 .recent-work-list .rw-card {
   display: grid;
   grid-template-columns: 220px 1fr;
