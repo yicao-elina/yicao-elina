@@ -392,3 +392,58 @@ html.no-js .spring-panel {
   opacity: 1 !important;
   overflow: visible !important;
 }
+
+/* ---------- Recent Work (#two): bumped thumbs + spring header ---------- */
+
+.recent-work-list .row {
+  cursor: pointer;
+}
+.recent-work-list .row.spring-open {
+  background: rgba(255, 255, 255, 0.82);   /* slightly stronger glass when open */
+}
+.recent-work-list .row > a:first-child img {
+  width: 220px;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+}
+.recent-work-list .row > .row-body {
+  min-width: 0;       /* allow flex/grid child to shrink */
+}
+.recent-work-list .row .row-header-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-text);
+  font-size: 13px;
+  color: var(--mint);
+  margin-top: 12px;
+  text-decoration: none;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+.recent-work-list .row .row-header-toggle:hover { color: var(--mint-bright); }
+.recent-work-list .row .row-header-toggle .chev {
+  display: inline-block;
+  transition: transform 200ms var(--ease-spring);
+}
+.recent-work-list .row[aria-expanded="true"] .row-header-toggle .chev { transform: rotate(90deg); }
+.recent-work-list .row .spring-panel {
+  grid-column: 1 / -1;        /* span the full grid width inside the row */
+  margin-top: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--glass-border-strong);
+  color: var(--graphite);
+  font-size: 16px;
+  line-height: 1.6;
+}
+.recent-work-list .row .spring-panel p { margin: 0 0 12px; }
+.recent-work-list .row .spring-panel .panel-links {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
