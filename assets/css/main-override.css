@@ -99,7 +99,7 @@ body {
 #main a.button {
   display: inline-block;
   background: #2a8a6e;
-  color: #fff;
+  color: #fff !important;
   border: 0;
   border-radius: 999px;
   padding: 0.85em 2em;
@@ -111,7 +111,7 @@ body {
 
 #main a.button:hover {
   background: #1f6a54;
-  color: #fff;
+  color: #fff !important;
   transform: translateY(-1px);
   box-shadow: 0 10px 24px -8px rgba(42, 138, 110, 0.6);
 }
@@ -446,4 +446,22 @@ html.no-js .spring-panel {
   gap: 14px;
   flex-wrap: wrap;
   margin-top: 8px;
+}
+
+/* ---------- Publications / Work Gallery thumbs (Strata .image.fit) ----------
+   Without this rule the .col-3 .image.fit <img> renders at its native
+   size inside a 25%-width column, producing the tiny ~32px thumbs
+   reported on the presentations page. Force a minimum visible size
+   with object-fit: cover. */
+.image.fit {
+  display: block;
+  width: 100%;
+  max-width: 220px;
+}
+.image.fit > img {
+  display: block;
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
 }
