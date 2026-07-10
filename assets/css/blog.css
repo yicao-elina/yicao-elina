@@ -67,6 +67,8 @@ body.no-motion .blog-mesh::after {
   animation: none;
 }
 
+body.no-motion .meta-tile-chevron { transition: none; }
+
 /* ---------- Glass card ---------- */
 
 .glass-card {
@@ -202,12 +204,23 @@ body.no-motion .glass-card::before { opacity: 0; }
   .glass-card,
   .btn-teal,
   .glass-card::before { transition: none; }
+  .meta-tile,
+  .meta-tile-chevron,
+  .timeline-row,
+  .filter-chip,
+  .write-form-input,
+  .write-form-textarea,
+  .write-form-select,
+  .write-download { transition: none; }
 }
 
 /* ---------- Browser fallback for missing backdrop-filter ---------- */
 
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .glass-card { background: rgba(255, 255, 255, 0.92); }
+  .meta-tile-overlay { background: rgba(255, 255, 255, 0.92); }
+  .write-tool { background: rgba(255, 255, 255, 0.92); }
+  .write-preview { background: rgba(255, 255, 255, 0.88); }
 }
 
 /* ---------- Section header typography refresh ---------- */
@@ -221,11 +234,448 @@ body.no-motion .glass-card::before { opacity: 0; }
   color: #1d1d1f;
 }
 
+/* ---------- Meta-tiles (binary category overview) ---------- */
+
+.meta-tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 32px 0 24px;
+}
+
+.meta-tile {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 32px;
+  aspect-ratio: 16 / 9;
+  background-color: #1d1d1f;
+  background-size: cover;
+  background-position: center;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  transform: perspective(1200px) rotateX(0) rotateY(0) translateY(0);
+  transform-style: preserve-3d;
+  transition: transform 240ms ease-out, box-shadow 240ms ease;
+  will-change: transform;
+  cursor: pointer;
+}
+
+.meta-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.55) 100%);
+  pointer-events: none;
+}
+
+.meta-tile:hover,
+.meta-tile:focus-visible {
+  transform: perspective(1200px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg)) translateY(-8px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.10);
+  outline: none;
+}
+
+.meta-tile:focus-visible {
+  outline: 2px solid #49bf9d;
+  outline-offset: 4px;
+}
+
+.meta-tile-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.55);
+  border-top: 1px solid rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom-left-radius: 32px;
+  border-bottom-right-radius: 32px;
+  z-index: 1;
+}
+
+.meta-tile-overlay h3 {
+  margin: 0 0 4px;
+  font-family: "SF Pro Display", system-ui, -apple-system, sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.28px;
+  color: #1d1d1f;
+  line-height: 1.2;
+}
+
+.meta-tile-overlay p {
+  margin: 0 0 12px;
+  font-family: "SF Pro Text", system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #7a7a7a;
+}
+
+.meta-tile-count {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background: rgba(73, 191, 157, 0.14);
+  color: #2a8a6e;
+  font-family: "SF Pro Text", system-ui, -apple-system, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.meta-tile-chevron {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  font-family: "SF Pro Text", system-ui, -apple-system, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: #2a8a6e;
+  transition: transform 220ms ease-out;
+  z-index: 1;
+}
+
+.meta-tile:hover .meta-tile-chevron,
+.meta-tile:focus-visible .meta-tile-chevron {
+  transform: translateX(4px);
+}
+
+/* ---------- Timeline (chronological post list) ---------- */
+
+.timeline {
+  margin: 48px 0 0;
+}
+
+.timeline h2 {
+  font-family: "SF Pro Display", system-ui, -apple-system, sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.28px;
+  color: #1d1d1f;
+  margin: 0 0 16px;
+}
+
+.timeline-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 16px;
+}
+
+.filter-chip {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  border: 1px solid rgba(73, 191, 157, 0.4);
+  background: transparent;
+  color: #49bf9d;
+  font-family: "SF Pro Text", system-ui, -apple-system, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: background 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+
+.filter-chip:hover {
+  background: rgba(73, 191, 157, 0.08);
+}
+
+.filter-chip:focus-visible {
+  outline: 2px solid #49bf9d;
+  outline-offset: 2px;
+}
+
+.filter-chip[aria-pressed="true"] {
+  background: #49bf9d;
+  color: #ffffff;
+  border-color: #49bf9d;
+}
+
+.timeline-year {
+  margin: 32px 0 0;
+  padding: 0 0 6px;
+  border-bottom: 2px solid #49bf9d;
+  font-family: "SF Pro Text", system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1d1d1f;
+}
+
+.timeline-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  color: #1d1d1f;
+  text-decoration: none;
+  transition: background 180ms ease;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.timeline-row:hover {
+  background: rgba(73, 191, 157, 0.06);
+}
+
+.timeline-row:focus-visible {
+  outline: 2px solid #49bf9d;
+  outline-offset: 2px;
+  background: rgba(73, 191, 157, 0.06);
+}
+
+.timeline-row-date {
+  flex: 0 0 44px;
+  font-family: "SF Pro Text", system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #7a7a7a;
+  font-variant-numeric: tabular-nums;
+}
+
+.timeline-row-dot {
+  flex: 0 0 5px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #49bf9d;
+}
+
+.timeline-row-title {
+  flex: 1;
+  font-family: "SF Pro Text", system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #1d1d1f;
+}
+
+.timeline-row-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  background: rgba(73, 191, 157, 0.10);
+  color: #2a8a6e;
+  font-family: "SF Pro Text", system-ui, -apple-system, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Timeline filter — driven by body[data-timeline-filter] (set by blog-timeline.js) */
+
+body[data-timeline-filter="technical"] [data-cat="life"] { display: none; }
+body[data-timeline-filter="life"] [data-cat="technical"] { display: none; }
+
+/* ---------- Write tool (frontmatter form + live preview) ---------- */
+
+.write-tool {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 24px;
+  margin: 48px 0 0;
+  padding: 32px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+.write-tool h2 {
+  grid-column: 1 / -1;
+  margin: 0 0 8px;
+  font-family: "SF Pro Display", system-ui, -apple-system, sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.28px;
+  color: #1d1d1f;
+}
+
+.write-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.write-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.write-form-field label {
+  font-family: "SF Pro Text", system-ui, -apple-system, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #7a7a7a;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.write-form-input,
+.write-form-textarea,
+.write-form-select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.7);
+  font-family: "SF Pro Text", system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  color: #1d1d1f;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+  box-sizing: border-box;
+}
+
+.write-form-input:focus,
+.write-form-textarea:focus,
+.write-form-select:focus {
+  outline: none;
+  border-color: #49bf9d;
+  box-shadow: 0 0 0 3px rgba(73, 191, 157, 0.18);
+}
+
+.write-form-textarea {
+  resize: vertical;
+  min-height: 280px;
+  font-family: "SF Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.write-download {
+  align-self: flex-start;
+  display: inline-block;
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 9999px;
+  background: #49bf9d;
+  color: #ffffff;
+  font-family: "SF Pro Text", system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 200ms ease, transform 200ms ease;
+}
+
+.write-download:hover {
+  background: #2a8a6e;
+  transform: scale(0.98);
+}
+
+.write-download:focus-visible {
+  outline: 2px solid #0071e3;
+  outline-offset: 2px;
+}
+
+.write-preview {
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 16px;
+  min-height: 480px;
+  overflow: auto;
+}
+
+/* Prose styling inside the preview pane */
+
+.write-preview-prose > *:first-child { margin-top: 0; }
+.write-preview-prose > *:last-child { margin-bottom: 0; }
+
+.write-preview-prose h1,
+.write-preview-prose h2,
+.write-preview-prose h3 {
+  margin: 24px 0 12px;
+  font-family: "SF Pro Display", system-ui, -apple-system, sans-serif;
+  color: #1d1d1f;
+  letter-spacing: -0.2px;
+  line-height: 1.25;
+}
+
+.write-preview-prose h1 { font-size: 28px; font-weight: 700; }
+.write-preview-prose h2 { font-size: 22px; font-weight: 600; }
+.write-preview-prose h3 { font-size: 18px; font-weight: 600; }
+
+.write-preview-prose p {
+  margin: 0 0 16px;
+  font-family: "SF Pro Text", system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #333333;
+}
+
+.write-preview-prose a {
+  color: #2a8a6e;
+  text-decoration: none;
+}
+
+.write-preview-prose a:hover {
+  text-decoration: underline;
+}
+
+.write-preview-prose code {
+  padding: 1px 4px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 4px;
+  font-family: "SF Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 13px;
+}
+
+.write-preview-prose pre {
+  margin: 0 0 16px;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  overflow: auto;
+}
+
+.write-preview-prose pre code {
+  padding: 0;
+  background: transparent;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.write-preview-prose ul,
+.write-preview-prose ol {
+  margin: 0 0 16px;
+  padding-left: 20px;
+  font-family: "SF Pro Text", system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333333;
+}
+
+.write-preview-prose blockquote {
+  margin: 0 0 16px;
+  padding-left: 12px;
+  border-left: 3px solid #49bf9d;
+  color: #7a7a7a;
+  font-family: "SF Pro Text", system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.write-preview-prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
 /* ---------- Responsive ---------- */
 
 @media (max-width: 1023px) and (min-width: 640px) {
   .glass-card { padding: 16px; }
   .glass-card h3 { font-size: 18px; }
+  .meta-tiles { gap: 16px; }
+  .meta-tile-overlay { padding: 20px; }
+  .meta-tile-overlay h3 { font-size: 22px; }
+  .write-tool { grid-template-columns: 1fr; padding: 24px; }
+  .timeline h2 { font-size: 24px; }
+  .write-tool h2 { font-size: 24px; }
 }
 
 @media (max-width: 639px) {
@@ -233,4 +683,11 @@ body.no-motion .glass-card::before { opacity: 0; }
   .glass-card .image.fit.thumb { margin: -16px -16px 12px; }
   .glass-card h3 { font-size: 18px; }
   .glass-card p { font-size: 14px; }
+  .meta-tiles { grid-template-columns: 1fr; }
+  .meta-tile-overlay { padding: 16px; }
+  .meta-tile-overlay h3 { font-size: 20px; }
+  .write-tool { grid-template-columns: 1fr; padding: 20px; }
+  .timeline h2 { font-size: 22px; }
+  .write-tool h2 { font-size: 22px; }
+  .write-preview { min-height: 320px; }
 }
