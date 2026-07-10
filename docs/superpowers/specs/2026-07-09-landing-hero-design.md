@@ -154,7 +154,7 @@ On screens < 640px: `.pc-slogan-line1` and `.pc-slogan-line2` drop to 32px.
 ### CTAs
 - Two pill buttons, side by side, equal width.
 - **Primary (`#49bf9d` filled, white text)**: "Read research" → `#two`.
-- **Ghost (transparent, `#49bf9d` border + text)**: "View CV" → `CAO_Yi_CV.pdf`, target=`_blank`.
+- **Ghost (transparent, `#49bf9d` border + text)**: "View GitHub" → `https://github.com/yicao-elina`, target=`_blank`, rel=`noopener`.
 - Padding: `11px 22px`, `border-radius: 9999px`.
 - Hover: `transform: scale(0.95)` on active, shadow softens to `0 4px 16px rgba(73, 191, 157, 0.20)`.
 - Focus: 2px solid `#0071e3` outline.
@@ -196,11 +196,11 @@ On screens < 640px: `.pc-slogan-line1` and `.pc-slogan-line2` drop to 32px.
 ### Grid (desktop ≥ 1024px)
 - 3 columns × 2 rows.
 - Gap: `20px`.
-- Bottom-right cell (row 2, column 3) is intentionally empty — the mesh shows through. This is a deliberate negative-space beat, not a bug.
+- All 6 cells are filled: 5 work tiles + 1 "Explore more" affordance. The grid reads as a complete composition.
 
 ### Grid (tablet 640–1023px)
 - 2 columns × 3 rows.
-- The bottom-right cell (row 3, column 2) is intentionally empty — same as desktop.
+- The "Explore more" affordance sits in row 3, column 2 (the bottom-right cell).
 
 ### Grid (mobile < 640px)
 - 1 column.
@@ -243,18 +243,51 @@ On screens < 640px: `.pc-slogan-line1` and `.pc-slogan-line2` drop to 32px.
 - Decorative; the whole `.tile` is the click target.
 
 ### The five curated tiles
+
+Order matters: the grid is read left-to-right, top-to-bottom. The first tile is the one a visitor sees first, so it should be the strongest single artifact of the recent work.
+
 | # | Title | Subtitle | Href | Thumbnail |
 |---|---|---|---|---|
-| 1 | RepliCan | COLM 2026 · Evaluating LLM agents on scientific reproducibility. | `https://openreview.net/forum?id=SK5NpcSf9f` (target=_blank) | `images/thumbs/replican-paper.png` |
-| 2 | ARIA | KDD 2026 · Causal-aware framework for trustworthy materials discovery. | `#two` (the existing Research section) | `images/thumbs/aria-paper.png` |
-| 3 | GPU Agentic Workflow | Qualcomm · Summer 2026 · Agentic, KG-assisted debugging on GPU stack. | `https://www.linkedin.com/feed/update/urn:li:activity:7437471139364343808/` (target=_blank) | `images/qualcomm-intern.jpeg` |
-| 4 | ML Force Fields (tutorial) | Blog · Hands-on with MACE and ASE — from DFT to production MD. | `blog/mlff-tutorial.html` | (use a generic 2D-material thumb — `images/thumbs/03-2D-material.jpg`) |
-| 5 | DFT Convergence Tips | Blog · Quantum ESPRESSO SCF-convergence strategies that actually work. | `blog/dft-convergence.html` | (use `images/thumbs/02-Thermoelctric-thumb.png` or similar existing thumb) |
+| 1 | **DUAL-X** | AAAI 2026 XAI4Science Spotlight · A dual-level explainability framework for ML force fields. | `https://openreview.net/forum?id=K95Tt6fYud&noteId=K95Tt6fYud` (target=_blank) | `images/thumbs/dualx-teaser.png` *(to be generated from `images/blog/DUALX-teaser.pdf` page 1 — see §5)* |
+| 2 | **RepliCan** | COLM 2026 · Evaluating LLM agents on scientific reproducibility. | `https://openreview.net/forum?id=SK5NpcSf9f` (target=_blank) | `images/thumbs/replican-paper.png` |
+| 3 | **ARIA** | KDD 2026 AI4Sciences · Causal-aware framework for trustworthy materials discovery. | `#two` (the existing Research section) | `images/thumbs/aria-paper.png` |
+| 4 | **GPU Agentic Workflow** | Qualcomm · Summer 2026 · Knowledge-graph-assisted debugging on the GPU stack. | `https://www.linkedin.com/feed/update/urn:li:activity:7437471139364343808/` (target=_blank) | `images/qualcomm-intern.jpeg` |
+| 5 | **Viva Biotech CADD** | Summer 2024 · Co-solvent MD + protein-ligand analysis for drug discovery. | `https://www.vivabiotech.com` (target=_blank) | `images/thumbs/viva-biotech.png` |
 
 If a thumbnail is missing, the tile falls back to a tinted gradient block (teal-to-amber, low opacity) with the title in the center. No broken-image icons.
 
+### The empty cell is now an "Explore more" affordance
+
+The bottom-right cell of the 3×2 grid (row 2, column 3) is no longer empty. It carries a small, deliberately-quieter tile that says **"Explore more →"** and links to `#two` (the full Research section). This converts the previously-empty cell into an entry point — visitors who scan the five tiles and want to see *everything* get a clear "there's more" signal.
+
+DOM:
+```html
+<a class="tile tile-explore" href="#two" aria-label="Explore more of Yi Cao's work">
+  <span class="tile-explore-text">Explore more <span aria-hidden="true">→</span></span>
+  <span class="tile-explore-sub">All papers, blog posts, and talks</span>
+</a>
+```
+
+Style:
+- Same glassmorphic tile shell (`rgba(255,255,255,0.45)`, lighter than the others, to read as "secondary").
+- No thumbnail.
+- Centered text: "Explore more →" in 22px / 600 (SF Pro Display), ink color; "All papers, blog posts, and talks" in 13px / 400, ink-muted-48.
+- Hover: same lift + tilt as the other tiles; the arrow shifts right by 4px on hover (200ms ease).
+- Focus: 2px solid `#49bf9d` outline.
+
+This is the 6th element in the grid. With it, the grid is now 3 cols × 2 rows = 6 cells, all filled. The previous "deliberate negative space" beat is now a deliberate **affordance**. Net: same visual rhythm, more purposeful.
+
 ### Why this mix
-Two papers, two blog posts, one industry build. The papers are the *understanding*, the blog posts are the *teaching*, the Qualcomm build is the *0-to-1*. This mirrors the sub-slogan ("from understanding to 0-to-1") in the tile selection itself.
+
+The new tile mix is **three papers + two industry builds**, ordered by strength of the artifact:
+
+1. **DUAL-X** (AAAI Spotlight) is the headline paper — the explainability framework, the "dreamer" leg of the brand, the most-cited single artifact. It goes first.
+2. **RepliCan** (COLM) — the second headline paper, the agentic-evaluation angle.
+3. **ARIA** (KDD) — the third paper, the causal-aware framework. (Links to `#two` because ARIA's full write-up is the most prominent entry in the existing Research section.)
+4. **Qualcomm GPU Agentic Workflow** (Summer 2026) — the 0-to-1 build at the *system* level (chips, GPUs, agents).
+5. **Viva Biotech CADD** (Summer 2024) — the 0-to-1 build at the *molecular* level (drug discovery, simulations).
+
+Tiles 4 and 5 together answer the implicit question on the hero — *how does coding actually move the atom?* — with two concrete industry cases: one engineering debug pipelines for GPUs, the other running molecular dynamics for drug candidates. The two industry tiles bracket the three research tiles and turn the grid into a story arc: **understand (3 papers) → build (2 industry)**.
 
 ### Accessibility for the tilt
 - The tile is an `<a>` with a real `href`. Keyboard focus shows a 2px solid `#49bf9d` outline and applies the same `translateY(-4px)` lift.
@@ -285,8 +318,13 @@ Two papers, two blog posts, one industry build. The papers are the *understandin
 | `assets/css/hero.css` | New | ~6 KB |
 | `assets/js/hero-tilt.js` | New | ~1.5 KB |
 | `assets/js/hero-mesh.js` | New | ~0.5 KB |
+| `images/thumbs/dualx-teaser.png` | Generated from `images/blog/DUALX-teaser.pdf` page 1 | ~150–300 KB (PNG, 1200px wide) |
 
-No new images, no new fonts, no new dependencies. Total new code: ~8 KB.
+**DUAL-X thumbnail generation.** The DUAL-X tile needs a PNG thumbnail, but the source asset is a single-page PDF (`images/blog/DUALX-teaser.pdf`, 3.2 MB). The implementation plan will include a one-line image-conversion step using `sips` (macOS built-in):
+```
+sips -s format png --resampleWidth 1200 images/blog/DUALX-teaser.pdf --out images/thumbs/dualx-teaser.png
+```
+This produces a 1200px-wide PNG (~150–300 KB) suitable for the 4:3 thumb slot. If `sips` is unavailable on the build environment, `pdftoppm` is the fallback. The original PDF is left in `images/blog/` for reference.
 
 ---
 
