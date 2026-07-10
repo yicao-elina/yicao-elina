@@ -452,13 +452,21 @@ html.no-js .spring-panel {
    Without this rule the .col-3 .image.fit <img> renders at its native
    size inside a 25%-width column, producing the tiny ~32px thumbs
    reported on the presentations page. Force a minimum visible size
-   with object-fit: cover. */
-.image.fit {
+   with object-fit: cover.
+
+   NOTE: scoped to #three (the Strata work gallery) and any section
+   that uses the .col-3 / .col-9 row pattern, NOT the redesigned
+   .recent-work-list .row which has its own thumb rules in Task 4. */
+#three .image.fit,
+.row .col-3 .image.fit,
+.row .col-12-small .image.fit {
   display: block;
-  width: 100%;
-  max-width: 220px;
+  width: 220px;
+  max-width: 100%;
 }
-.image.fit > img {
+#three .image.fit > img,
+.row .col-3 .image.fit > img,
+.row .col-12-small .image.fit > img {
   display: block;
   width: 100%;
   height: 160px;
