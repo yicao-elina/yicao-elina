@@ -1,15 +1,22 @@
 /* ============================================================
    hero-atom-cursor.css
-   Atom-shaped custom cursor for the hero personal-card.
-   Three electrons orbit a mint nucleus; when the pointer
-   reaches the word "dreamer", the electrons heat up (gold)
-   and a dreamy mint-gold spark burst radiates from the nucleus.
+   The "dreaming atom" cursor for the hero personal-card.
 
-   Native cursor is hidden ONLY while body.atom-cursor-ready is
-   set (by hero-atom-cursor.js), so the default cursor is
-   preserved on touch devices, under reduced-motion, or if JS
-   fails. Tokens: --mint / --mint-bright + the gold accent the
-   hero mesh already uses (rgba(245,185,66,*)).
+   Three behaviours, all gated behind body.atom-cursor-ready (set
+   by hero-atom-cursor.js) so the native cursor is preserved on
+   touch devices, under reduced-motion, or if JS is off.
+
+   1. Idle dream-morph — the atom periodically transforms into one
+      of three symbols (chip / folded protein / battery): the
+      infinite possibilities of an atom in dreams.
+   2. Hover "engineer" — the atom crystallises into a lattice and
+      radiates electromagnetic waves.
+   3. Hover "dreamer" — gold excitation + ripple water-waves around
+      the word + slow rising gold dream-motes + the whole card flushes
+      with a shimmering golden afterglow (波光粼粼) that fades over 3s
+      after the pointer leaves.
+
+   Tokens: --mint / --mint-bright + the gold accent the hero mesh uses.
    ============================================================ */
 
 .atom-cursor {
@@ -27,7 +34,25 @@
 }
 .atom-cursor.is-on { opacity: 1; }
 
-/* Nucleus */
+/* ---- Form stack: only one form is visible at a time ---- */
+.atom-form {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.55) rotate(-10deg);
+  transition: opacity 480ms ease, transform 560ms var(--ease-spring);
+  pointer-events: none;
+  color: var(--mint-bright);
+}
+.atom-form.is-active { opacity: 1; transform: scale(1) rotate(0deg); }
+/* Pause the electron orbit while the atom form is hidden (battery) */
+.atom-form:not(.is-active) .atom-electron-track { animation-play-state: paused; }
+.atom-form svg { width: 34px; height: 34px; filter: drop-shadow(0 0 4px rgba(73, 191, 157, 0.55)); }
+
+/* ---- Atom form: nucleus + three tilted orbit rings ---- */
 .atom-nucleus {
   position: absolute;
   top: 50%;
@@ -41,8 +66,6 @@
   transition: transform 300ms var(--ease-spring), box-shadow 300ms ease, background 300ms ease;
   z-index: 3;
 }
-
-/* Orbit rings — three circles fanned 60° apart, tilted to read as a classic atom */
 .atom-orbit {
   position: absolute;
   top: 50%;
@@ -58,8 +81,6 @@
 .atom-orbit-1 { --rot: 0deg; }
 .atom-orbit-2 { --rot: 60deg; }
 .atom-orbit-3 { --rot: 120deg; }
-
-/* Spinning track carries one electron around the ring */
 .atom-electron-track {
   position: absolute;
   inset: 0;
@@ -67,7 +88,6 @@
 }
 .atom-orbit-2 .atom-electron-track { animation-duration: 3.4s; }
 .atom-orbit-3 .atom-electron-track { animation-duration: 4.2s; }
-
 .atom-electron {
   position: absolute;
   top: -3.5px;
@@ -80,12 +100,9 @@
   box-shadow: 0 0 8px 1px rgba(73, 191, 157, 0.85);
   transition: background 280ms ease, box-shadow 280ms ease;
 }
+@keyframes atom-spin { to { transform: rotate(360deg); } }
 
-@keyframes atom-spin {
-  to { transform: rotate(360deg); }
-}
-
-/* Excitation: electrons speed up + heat to gold, nucleus swells, rings glow gold */
+/* ---- Excitation (dreamer): electrons heat to gold, nucleus swells ---- */
 .atom-cursor.is-excited .atom-electron-track { animation-duration: 0.55s !important; }
 .atom-cursor.is-excited .atom-electron {
   background: radial-gradient(circle, #ffffff, #f5b942);
@@ -97,26 +114,36 @@
 }
 .atom-cursor.is-excited .atom-orbit { border-color: rgba(245, 185, 66, 0.4); }
 
-/* Spark burst particle — spawned at the nucleus, eased outward */
-.atom-spark {
+/* ---- Engineer: crystal lattice + electromagnetic waves ---- */
+.atom-cursor.is-engineer .atom-form-crystal svg {
+  filter: drop-shadow(0 0 6px rgba(73, 191, 157, 0.8));
+}
+.atom-emwave { position: absolute; top: 50%; left: 50%; width: 0; height: 0; }
+.atom-emwave span {
   position: absolute;
-  top: 50%;
   left: 50%;
-  width: 6px;
-  height: 6px;
-  margin: -3px 0 0 -3px;
+  top: 50%;
+  width: 22px;
+  height: 22px;
+  margin: -11px 0 0 -11px;
+  border: 1.5px solid rgba(73, 191, 157, 0.75);
   border-radius: 50%;
-  background: radial-gradient(circle, #ffffff, var(--spark, var(--mint-bright)));
-  box-shadow: 0 0 8px 1px var(--spark-glow, rgba(73, 191, 157, 0.8));
-  opacity: 1;
-  transform: translate(0, 0) scale(1);
-  transition: transform 950ms cubic-bezier(.16, 1, .3, 1),
-              opacity 950ms ease-out;
-  pointer-events: none;
+  opacity: 0;
+}
+.atom-cursor.is-engineer .atom-emwave span { animation: atom-emwave 2.2s ease-out infinite; }
+.atom-emwave span:nth-child(2) { animation-delay: 0.73s; border-color: rgba(245, 185, 66, 0.65); }
+.atom-emwave span:nth-child(3) { animation-delay: 1.46s; }
+@keyframes atom-emwave {
+  0%   { transform: scale(0.25); opacity: 0.85; }
+  100% { transform: scale(3.3);  opacity: 0; }
 }
 
-/* The "dreamer" word: subtle reactive glow */
+/* ============================================================
+   "dreamer" — ripples, dream-motes, and the card's golden tide
+   ============================================================ */
+
 .pc-dreamer {
+  position: relative;
   transition: text-shadow 320ms ease, color 320ms ease;
 }
 body.atom-cursor-ready .pc-dreamer.is-excited {
@@ -124,24 +151,105 @@ body.atom-cursor-ready .pc-dreamer.is-excited {
   text-shadow: 0 0 18px rgba(245, 185, 66, 0.55);
 }
 
-/* Hide native cursor inside the card once the atom is armed */
-body.atom-cursor-ready .personal-card,
-body.atom-cursor-ready .personal-card * { cursor: none; }
+/* Expanding water-wave ripple rings emanating from the word */
+.pc-ripple {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0 -12px;
+  border: 1px solid rgba(245, 185, 66, 0.7);
+  border-radius: 50%;
+  opacity: 0.8;
+  transform: scale(0.2);
+  animation: pc-ripple 1.7s ease-out forwards;
+  pointer-events: none;
+}
+@keyframes pc-ripple {
+  0%   { transform: scale(0.2); opacity: 0.85; border-width: 1.5px; }
+  100% { transform: scale(6);   opacity: 0;    border-width: 0.5px; }
+}
+
+/* Slow rising gold dream-motes */
+.pc-mote {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff, #f5b942);
+  box-shadow: 0 0 6px rgba(245, 185, 66, 0.85);
+  opacity: 0;
+  transform: translate(0, 0) scale(0.4);
+  animation: pc-mote 2.6s ease-out forwards;
+  pointer-events: none;
+}
+@keyframes pc-mote {
+  0%   { transform: translate(0, 0) scale(0.4); opacity: 0; }
+  15%  { opacity: 0.9; }
+  100% { transform: translate(var(--mx, 0px), -52px) scale(0.2); opacity: 0; }
+}
+
+/* The card's golden afterglow — concentric golden ripples centred on
+   "dreamer" (--rx/--ry, set in JS), layered with a multi-stop gold
+   wash for depth. Opacity is toggled by .is-on; the out-transition is
+   stretched to 3s in JS when the pointer leaves "dreamer". */
+.pc-gold-tide,
+.pc-gold-ripples {
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 800ms ease;
+  mix-blend-mode: screen;
+  z-index: 0;
+}
+.pc-gold-tide.is-on,
+.pc-gold-ripples.is-on { opacity: 1; }
+
+/* Layered wash: pale-gold core → gold → amber → mint-gold halo → fade.
+   Two stacked radials give the afterglow its depth. */
+.pc-gold-tide {
+  background:
+    radial-gradient(circle at var(--rx, 30%) var(--ry, 22%),
+      rgba(255, 226, 150, 0.42) 0%,
+      rgba(245, 185, 66, 0.30) 16%,
+      rgba(217, 138, 40, 0.18) 32%,
+      rgba(73, 191, 157, 0.10) 46%,
+      transparent 66%),
+    radial-gradient(circle at var(--rx, 30%) var(--ry, 22%),
+      transparent 40%,
+      rgba(245, 185, 66, 0.12) 55%,
+      transparent 72%);
+}
+/* Concentric shimmering rings (波光粼粼) breathing outward from the word */
+.pc-gold-ripples {
+  background: repeating-radial-gradient(circle at var(--rx, 30%) var(--ry, 22%),
+    rgba(245, 185, 66, 0.16) 0px,
+    rgba(245, 185, 66, 0.16) 1.5px,
+    transparent 1.5px,
+    transparent 13px);
+}
+.pc-gold-ripples.is-on {
+  animation: pc-ripple-flow 5s ease-in-out infinite alternate;
+}
+@keyframes pc-ripple-flow {
+  from { background-size: 92% 92%; }
+  to   { background-size: 118% 118%; }
+}
+
+/* Dreamer material forms take on a gold tint while excited */
+.atom-cursor.is-excited .atom-form.is-active { color: #f5b942; }
+.atom-cursor.is-excited .atom-form.is-active svg {
+  filter: drop-shadow(0 0 6px rgba(245, 185, 66, 0.85));
+}
 
 /* ============================================================
    Avatar "light-up" halo + electron rings
-   Triggered by .is-lit on .pc-avatar-wrap (set on hover by
-   hero-atom-cursor.js). Layers, bottom → top:
-     .avatar-aura   — two conic-gradient blobs, slowly rotating
-                      opposite directions + breathing → the soft
-                      flowing halo.
-     .avatar-ring ×3 — faint glowing rings at three radii / tilts;
-                      one gold electron orbits each, and each ring
-                      floats periodically (translate bob, phased).
-     .pc-avatar     — the photo, lifted slightly (brightness +
-                      gold rim) so it reads as "lit up".
-   All decorative layers are pointer-events:none and fade in only
-   while lit, so the resting card looks unchanged.
    ============================================================ */
 
 .pc-avatar-wrap {
@@ -151,7 +259,6 @@ body.atom-cursor-ready .personal-card * { cursor: none; }
   height: fit-content;
   margin: 0 auto 8px;
 }
-
 .pc-avatar-wrap .pc-avatar {
   margin: 0;
   display: block;
@@ -160,7 +267,6 @@ body.atom-cursor-ready .personal-card * { cursor: none; }
   transition: filter 500ms ease, border-color 500ms ease, box-shadow 500ms ease;
 }
 
-/* ---- Soft flowing aura (behind the face) ---- */
 .avatar-aura {
   position: absolute;
   inset: -22px;
@@ -186,8 +292,7 @@ body.atom-cursor-ready .personal-card * { cursor: none; }
     rgba(245, 185, 66, 0.34) 90deg,
     rgba(73, 191, 157, 0.10) 180deg,
     rgba(245, 185, 66, 0.28) 270deg,
-    rgba(73, 191, 157, 0.50) 360deg
-  );
+    rgba(73, 191, 157, 0.50) 360deg);
   animation: avatar-aura-rotate 18s linear infinite;
 }
 .avatar-aura::after {
@@ -197,19 +302,16 @@ body.atom-cursor-ready .personal-card * { cursor: none; }
     rgba(73, 191, 157, 0.42) 90deg,
     rgba(245, 185, 66, 0.08) 200deg,
     rgba(73, 191, 157, 0.30) 300deg,
-    rgba(245, 185, 66, 0.30) 360deg
-  );
+    rgba(245, 185, 66, 0.30) 360deg);
   mix-blend-mode: screen;
   animation: avatar-aura-rotate 26s linear infinite reverse;
 }
-
 @keyframes avatar-aura-rotate {
   0%   { transform: rotate(0deg)   scale(1); }
   50%  { transform: rotate(180deg) scale(1.05); }
   100% { transform: rotate(360deg) scale(1); }
 }
 
-/* ---- Electron orbit rings (around the face) ---- */
 .avatar-ring {
   position: absolute;
   border-radius: 50%;
@@ -218,21 +320,13 @@ body.atom-cursor-ready .personal-card * { cursor: none; }
   opacity: 0;
   transition: opacity 600ms ease, border-color 600ms ease;
   z-index: 1;
-  /* `translate` is animated for the periodic float so it never
-     fights each ring's static `transform` (tilt). */
 }
-.avatar-ring-1 { inset: -8px;  }                       /* 128px on desktop */
+.avatar-ring-1 { inset: -8px; }
 .avatar-ring-2 { inset: -18px; transform: rotateX(56deg) rotateZ(35deg); }
 .avatar-ring-3 { inset: -26px; transform: rotateX(48deg) rotateZ(-30deg); }
-
-.avatar-electron-track {
-  position: absolute;
-  inset: 0;
-  animation: atom-spin 5.5s linear infinite;          /* reuse keyframe */
-}
+.avatar-electron-track { position: absolute; inset: 0; animation: atom-spin 5.5s linear infinite; }
 .avatar-ring-2 .avatar-electron-track { animation-duration: 8s; }
 .avatar-ring-3 .avatar-electron-track { animation-duration: 11s; }
-
 .avatar-electron {
   position: absolute;
   top: -3px;
@@ -245,7 +339,6 @@ body.atom-cursor-ready .personal-card * { cursor: none; }
   box-shadow: 0 0 8px 1px rgba(245, 185, 66, 0.9);
 }
 
-/* ---- Lit state: reveal + animate ---- */
 .pc-avatar-wrap.is-lit .avatar-aura,
 .pc-avatar-wrap.is-lit .avatar-ring { opacity: 1; }
 .pc-avatar-wrap.is-lit .avatar-ring {
@@ -254,23 +347,31 @@ body.atom-cursor-ready .personal-card * { cursor: none; }
 }
 .pc-avatar-wrap.is-lit .avatar-ring-2 { animation-duration: 9s;  animation-delay: -2.5s; }
 .pc-avatar-wrap.is-lit .avatar-ring-3 { animation-duration: 11s; animation-delay: -5s; }
-
 @keyframes avatar-ring-float {
   0%, 100% { translate: 0 0; }
   50%      { translate: 0 -3px; }
 }
-
 .pc-avatar-wrap.is-lit .pc-avatar {
   filter: brightness(1.06) saturate(1.05);
   border-color: rgba(245, 185, 66, 0.7);
-  box-shadow: 0 0 0 3px rgba(73, 191, 157, 0.18),
-              0 0 22px rgba(245, 185, 66, 0.25);
+  box-shadow: 0 0 0 3px rgba(73, 191, 157, 0.18), 0 0 22px rgba(245, 185, 66, 0.25);
 }
 
-/* Reduced motion: show the lit halo statically, no rotation / float / orbit */
+/* Hide native cursor inside the card once the atom is armed */
+body.atom-cursor-ready .personal-card,
+body.atom-cursor-ready .personal-card * { cursor: none; }
+
+/* ---- Reduced motion: show states without motion ---- */
 @media (prefers-reduced-motion: reduce) {
+  .atom-electron-track,
+  .atom-form { transition: none; animation: none !important; }
+  .atom-form:not(.is-active) .atom-electron-track { animation-play-state: paused; }
+  .atom-emwave span,
+  .pc-ripple,
+  .pc-mote { animation: none !important; }
+  .pc-gold-tide.is-on,
+  .pc-gold-ripples.is-on { animation: none; }
   .avatar-aura::before,
   .avatar-aura::after { animation: none; }
-  .avatar-electron-track { animation: none; }
   .pc-avatar-wrap.is-lit .avatar-ring { animation: none; }
 }
