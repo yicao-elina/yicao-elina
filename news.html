@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <title>News — Yi Cao</title>
+  <link rel="stylesheet" href="assets/css/tokens.css" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/main-override.css" />
+  <link rel="stylesheet" href="assets/css/header.css" />
+  <link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+</head>
+<body class="is-preload">
+
+<!-- Floating glass icon-pill header (shared partial; same in all pages) -->
+<header id="app-header" class="app-header" aria-label="Site navigation">
+  <a class="ah-avatar" href="index.html" aria-label="Yi Cao — go to top">
+    <img src="images/avatar.jpeg" alt="Yi Cao" />
+  </a>
+  <a class="ah-icon" href="news.html" data-tooltip="News"><i class="far fa-newspaper"></i><span class="ah-tooltip">News</span></a>
+  <a class="ah-icon" href="index.html#two" data-tooltip="Research"><i class="fas fa-flask"></i><span class="ah-tooltip">Research</span></a>
+  <a class="ah-icon" href="index.html#experience" data-tooltip="Experience"><i class="fas fa-graduation-cap"></i><span class="ah-tooltip">Experience</span></a>
+  <a class="ah-icon" href="index.html#awards" data-tooltip="Awards"><i class="fas fa-trophy"></i><span class="ah-tooltip">Awards</span></a>
+  <a class="ah-icon" href="index.html#vision" data-tooltip="Vision"><i class="far fa-eye"></i><span class="ah-tooltip">Vision</span></a>
+  <a class="ah-icon" href="index.html#four" data-tooltip="Contact"><i class="far fa-envelope"></i><span class="ah-tooltip">Contact</span></a>
+  <a class="ah-icon" href="blog.html" data-tooltip="Blog"><i class="fas fa-edit"></i><span class="ah-tooltip">Blog</span></a>
+  <a class="ah-icon" href="CAO_Yi_CV.pdf" target="_blank" rel="noopener" data-tooltip="CV"><i class="far fa-file-pdf"></i><span class="ah-tooltip">CV</span></a>
+  <a class="ah-icon" href="https://github.com/yicao-elina" target="_blank" rel="noopener" data-tooltip="GitHub"><i class="fab fa-github"></i><span class="ah-tooltip">GitHub</span></a>
+  <a class="ah-icon" href="presentations.html" data-tooltip="Talks"><i class="fas fa-chalkboard-teacher"></i><span class="ah-tooltip">Talks</span></a>
+  <button class="ah-more" type="button" aria-label="More navigation"><i class="fas fa-ellipsis"></i></button>
+  <div class="ah-popover" role="menu" aria-label="More links">
+    <a class="ah-icon" href="index.html#two" role="menuitem"><i class="fas fa-flask"></i>&nbsp;Research</a>
+    <a class="ah-icon" href="index.html#experience" role="menuitem"><i class="fas fa-graduation-cap"></i>&nbsp;Experience</a>
+    <a class="ah-icon" href="index.html#awards" role="menuitem"><i class="fas fa-trophy"></i>&nbsp;Awards</a>
+    <a class="ah-icon" href="index.html#vision" role="menuitem"><i class="far fa-eye"></i>&nbsp;Vision</a>
+    <a class="ah-icon" href="index.html#four" role="menuitem"><i class="far fa-envelope"></i>&nbsp;Contact</a>
+  </div>
+</header>
+
+<main class="news-page">
+  <h1>News</h1>
+  <p class="lead">Talks, papers, milestones, and other updates — grouped by year.</p>
+
+  <div class="news-filters" role="tablist" aria-label="Filter news by year">
+    <button class="news-filter" data-year="all" aria-pressed="true" type="button">All</button>
+    <button class="news-filter" data-year="2026" aria-pressed="false" type="button">2026</button>
+    <button class="news-filter" data-year="2025" aria-pressed="false" type="button">2025</button>
+    <button class="news-filter" data-year="2024" aria-pressed="false" type="button">2024</button>
+  </div>
+
+  <h2 class="news-year" data-year="2026">2026 <span class="news-year-count">4 entries</span></h2>
+  <div class="news-timeline">
+    <div class="news-entry" data-year="2026">
+      <span class="date">08-12</span>
+      <a class="title" href="#kdd-consortium">Invited oral, KDD 2026 PhD Consortium</a>
+      <span class="tag">#KDD</span>
+    </div>
+    <div class="news-entry" data-year="2026">
+      <span class="date">07-22</span>
+      <a class="title" href="https://kdd2026.kdd.org/" target="_blank" rel="noopener">ARIA accepted to KDD 2026 (AI4Sciences Track)</a>
+      <span class="tag">#KDD</span>
+    </div>
+    <div class="news-entry" data-year="2026">
+      <span class="date">07-15</span>
+      <a class="title" href="https://openreview.net/forum?id=SK5NpcSf9f" target="_blank" rel="noopener">RepliCan accepted to COLM 2026</a>
+      <span class="tag">#COLM</span>
+    </div>
+    <div class="news-entry" data-year="2026">
+      <span class="date">05-18</span>
+      <a class="title" href="https://www.linkedin.com/feed/update/urn:li:activity:7437471139364343808/" target="_blank" rel="noopener">Interning at Qualcomm this summer</a>
+      <span class="tag">#News</span>
+    </div>
+  </div>
+
+  <h2 class="news-year" data-year="2025">2025 <span class="news-year-count">2 entries</span></h2>
+  <div class="news-timeline">
+    <div class="news-entry" data-year="2025">
+      <span class="date">12-04</span>
+      <a class="title" href="https://neurips.cc/" target="_blank" rel="noopener">NeurIPS 2025 AI4Mat spotlight</a>
+      <span class="tag">#NeurIPS</span>
+    </div>
+    <div class="news-entry" data-year="2025">
+      <span class="date">09-21</span>
+      <a class="title" href="#">Started PhD at Johns Hopkins</a>
+      <span class="tag">#Life</span>
+    </div>
+  </div>
+</main>
+
+<script src="assets/js/header-tooltip.js" defer></script>
+<script src="assets/js/news.js" defer></script>
+</body>
+</html>
