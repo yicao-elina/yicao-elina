@@ -57,7 +57,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
         border-bottom: none !important;
         font-size: 0.9em !important;
     }
-    
+
     .dropdown-menu a:hover {
         background-color: #f7f7f7;
         color: #49bf9d !important;
@@ -70,10 +70,115 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
     }
 </style>
 
+<!-- News strip: one horizontally-scrolling row, every item the same fixed size -->
+<style>
+    #news {
+        padding: 0 0 2em 0;
+    }
+
+    #news h2 {
+        margin-bottom: 0.75em;
+    }
+
+    .news-strip {
+        display: flex;
+        gap: 1.25em;
+        overflow-x: auto;
+        padding-bottom: 0.75em;
+        scroll-snap-type: x proximity;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .news-strip::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .news-strip::-webkit-scrollbar-thumb {
+        background: #ddd;
+        border-radius: 3px;
+    }
+
+    .news-item {
+        flex: 0 0 260px;
+        width: 260px;
+        height: 210px;
+        box-sizing: border-box;
+        background-color: #fcfcfc;
+        border: 1px solid #efefef;
+        border-radius: 6px;
+        padding: 1.1em 1.25em;
+        scroll-snap-align: start;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    .news-date {
+        display: block;
+        font-size: 0.8em;
+        font-weight: bold;
+        color: #49bf9d;
+        margin-bottom: 0.4em;
+    }
+
+    .news-item h4 {
+        font-size: 1em;
+        margin: 0 0 0.5em 0;
+        color: #555;
+        line-height: 1.3;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .news-item p {
+        font-size: 0.85em;
+        color: #888;
+        line-height: 1.4;
+        margin: 0 0 0.5em 0;
+        flex: 1;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .news-item a {
+        font-size: 0.85em;
+        color: #49bf9d;
+        margin-top: auto;
+    }
+
+    .news-item .news-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6em;
+        margin-top: auto;
+    }
+
+    .news-item .news-links a {
+        margin-top: 0;
+        white-space: nowrap;
+    }
+
+    /* Reusable "Accepted" pill, also used inline in Recent Work (#two) */
+    .news-pill {
+        display: inline-block;
+        font-size: 0.75em;
+        font-weight: bold;
+        color: #049b7d;
+        background-color: rgba(73, 191, 157, 0.12);
+        border-radius: 9999px;
+        padding: 2px 10px;
+    }
+</style>
+
 <!-- Navigation Bar -->
 <nav id="nav">
     <ul class="container">
         <li><a href="#top" class="scrolly">Home</a></li>
+        <li><a href="#news" class="scrolly">News</a></li>
         <li><a href="#two" class="scrolly">Research</a></li>
         <li class="dropdown">
             <a href="#skills-timeline" class="scrolly">Experience <i class="icon solid fa-caret-down"></i></a>
@@ -119,6 +224,46 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 </ul>
 </section>
 
+<!-- News -->
+<section id="news">
+    <h2>Latest News</h2>
+    <div class="news-strip">
+        <div class="news-item">
+            <span class="news-date">May 2026</span>
+            <h4>Interning at Qualcomm this summer</h4>
+            <p>Joined the GPU High-Level Modeling team on-site in San Diego (May 18 &ndash; Aug 23) to build an agentic, knowledge-graph-assisted causal reasoning workflow.</p>
+            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7437471139364343808/" target="_blank" rel="noopener">View LinkedIn Post &rarr;</a>
+        </div>
+        <div class="news-item">
+            <span class="news-date">Jul 2026</span>
+            <h4>RepliCan accepted to COLM 2026</h4>
+            <p>Evaluating LLM agents on scientific reproducibility in computational materials science.</p>
+            <div class="news-links">
+                <a href="https://openreview.net/forum?id=SK5NpcSf9f" target="_blank">OpenReview &rarr;</a>
+                <a href="https://colmweb.org/" target="_blank" rel="noopener">COLM 2026</a>
+            </div>
+        </div>
+        <div class="news-item">
+            <span class="news-date">Jul 2026</span>
+            <h4>ARIA accepted to KDD 2026 (AI4Sciences Track)</h4>
+            <p>A causal-aware framework for rescuing LLM reasoning, grown out of the 2025 LLM Hackathon Visionary Award project.</p>
+            <div class="news-links">
+                <a href="#two" class="scrolly">Read more &darr;</a>
+                <a href="https://kdd2026.kdd.org/" target="_blank" rel="noopener">KDD 2026</a>
+            </div>
+        </div>
+        <div class="news-item">
+            <span class="news-date">Aug 2026</span>
+            <h4>Invited oral, KDD 2026 PhD Consortium</h4>
+            <p>"Toward Trustworthy AI for Materials Discovery: From Causal Knowledge Extraction to Simulation-Guided Experimentation," in person Aug 12.</p>
+            <div class="news-links">
+                <a href="#awards" class="scrolly">See Awards &amp; Honors &darr;</a>
+                <a href="https://kdd2026.kdd.org/" target="_blank" rel="noopener">KDD 2026</a>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Two -->
 <section id="two">
 <h2>Recent Work</h2>
@@ -133,13 +278,14 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
         <div class="col-9 col-12-small">
             <h4 style="margin-bottom: 0.5em;">RepliCan: Evaluating LLM Agents on Scientific Reproducibility in Computational Materials Science</h4>
             <p style="margin-bottom: 0.25em;">
-                Ziyang Huang, Ji Cao, Ali K. Shargh, Jing Luo, Ruidong Mei, Mohd Zaki, Zhan Liu, William Jurayj, Somdatta Goswami, Michael Shields, Jaafar El-Awady, Paulette Clancy, William Gantt Walden, Nicholas Andrews, Benjamin Van Durme, Daniel Khashabi
+                Ziyang Huang, <strong>Yi Cao</strong>, Ali K. Shargh, Jing Luo, Ruidong Mei, Mohd Zaki, Zhan Liu, William Jurayj, Somdatta Goswami, Michael Shields, Jaafar El-Awady, Paulette Clancy, William Gantt Walden, Nicholas Andrews, Benjamin Van Durme, Daniel Khashabi
             </p>
             <p style="margin-bottom: 0.5em; font-size: 0.9em; color: #666;">
-                Submitted to COLM Conference (2026)
+                Accepted to COLM Conference (2026) &nbsp;<span class="news-pill">Accepted</span>
             </p>
             <p style="font-size: 0.9em;">
-                [<a href="#">PDF (Coming Soon)</a>]
+                [<a href="https://openreview.net/forum?id=SK5NpcSf9f" target="_blank">OpenReview</a>]
+                [<a href="https://www.linkedin.com/feed/update/urn:li:activity:7464350390478651392/" target="_blank" rel="noopener">Post</a>]
             </p>
         </div>
     </div>
@@ -153,7 +299,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
             <h4 style="margin-bottom: 0.5em;">ARIA: A Causal-Aware Framework for Rescuing LLM Reasoning in Trustworthy Materials Discovery</h4>
             <p style="margin-bottom: 0.25em;">
                 <strong>Yi Cao</strong>, Liaoyaqi Wang, Jieneng Chen, Benjamin Van Durme, Alan Yuille, Paulette Clancy* <br />
-                <em>Submitted to KDD Conference, AI4Sciences Track (2026)</em>
+                <em>Accepted to KDD Conference, AI4Sciences Track (2026)</em> &nbsp;<span class="news-pill">Accepted</span>
             </p>
             <p style="margin-bottom: 0.5em; font-size: 0.9em; color: #666;">
                 Causal-aware KG-LLM integration framework that mitigates "contextual tunneling" and improves scientific reasoning.
@@ -468,13 +614,14 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 	<div class="row">
 
 	<article class="col-6 col-12-xsmall work-item">
-	<a href="images/fulls/qualcomm-internship.png" target="_blank" class="image fit thumb">
-		<img src="images/thumbs/qualcomm-internship.png" alt="Qualcomm" onerror="this.style.display='none'" />
+	<a href="images/QC_newhire-post_08austin-intern_TW-LI.gif" target="_blank" class="image fit thumb">
+		<img src="images/QC_newhire-post_08austin-intern_TW-LI.gif" alt="Qualcomm" />
 	</a>
-	<h3>Engineering Intern (GPU High-Level Modeling)</h3>
+	<h3>Engineering Intern (GPU High-Level Modeling) &mdash; Summer 2026 Internship Program</h3>
 	<h4>Qualcomm | San Diego, CA, USA | May - Aug 2026</h4>
-	<p>Developing an agentic AI workflow to automate complex debugging processes in GPU high-level modeling (HLM), integrating LLM capabilities with existing diagnostic tools to streamline operations.</p>
+	<p>Currently interning with the GPU High-Level Modeling team, developing an agentic workflow with knowledge-graph-assisted causal reasoning to automate complex debugging processes and serve long-horizon tasks, integrating LLM capabilities with existing diagnostic tools to streamline operations. On-site at the San Diego office from May 18 to August 23, 2026.</p>
 	<a href="https://www.qualcomm.com" target="_blank" class="button small">Company Website</a>
+	<a href="https://www.linkedin.com/feed/update/urn:li:activity:7437471139364343808/" target="_blank" rel="noopener" class="button small">LinkedIn Post</a>
 	</article>
 
 	<article class="col-6 col-12-xsmall work-item">
@@ -534,12 +681,13 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 					<li><strong>2025 Visionary Award</strong> - LLM Hackathon for Materials Science (ranked 6th of 120 teams)</li>
 					<li><strong>Spotlight Talk (Top-tier recognition)</strong> - AAAI XAI4Science Workshop (2026)</li>
 					<li><strong>Spotlight Talk & Travel Grant</strong> - NeurIPS AI4Mat Workshop (2025)</li>
+					<li><strong>Oral Presentation, PhD Consortium</strong> - KDD 2026, in person (Aug 2026)</li>
 				</ul>
 			</div>
 			<div class="col-6 col-12-small">
 				<ul class="alt">
 					<li><strong>Poster Presentation Award Winner</strong> - Women in AI 2025</li>
-					<li><strong>Doctoral Symposium Selectee</strong> - PHM Society (1 of 10 PhD students globally, 2025)</li>
+					<li><strong>Invited Talk & Session Chair, Doctoral Symposium Selectee</strong> - PHM Society (1 of 10 PhD students globally, 2025)</li>
 					<li><strong>Empower Your Pitch Finalist</strong> - JHU (1 of 12 PhD students university-wide, 2025)</li>
 					<li><strong>"Graduate Star" Nomination Award</strong> - Fudan University (2023)</li>
 					<li><strong>Excellent Graduates of Shanghai Colleges</strong> - (2023)</li>
