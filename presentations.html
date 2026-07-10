@@ -1,22 +1,5 @@
 <!DOCTYPE HTML>
 <html>
-
-<!-- Navigation Bar -->
-<nav id="nav">
-    <ul class="container">
-        <li><a href="index.html#top" class="scrolly">Home</a></li>
-        <li><a href="index.html#two" class="scrolly">Research</a></li>
-        <li><a href="index.html#three" class="scrolly">Experience</a></li>
-        <li><a href="presentations.html">Presentations</a></li>
-        <li><a href="index.html#vision" class="scrolly">Vision</a></li>
-        <li><a href="index.html#four" class="scrolly">Contact</a></li>
-		<li><a href="blog.html">Blog</a></li>
-		<li><a href="CAO_Yi_CV.pdf" target="_blank">CV</a></li>
-		<li><a href="https://github.com/yicao-elina" target="_blank">GitHub</a></li>
-    </ul>
-</nav>
-
-
 <head>
     <title>Conference Presentations - Yi Cao</title>
     <meta charset="utf-8" />
@@ -24,14 +7,15 @@
     <link rel="stylesheet" href="assets/css/tokens.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/header.css" />
+    <link rel="stylesheet" href="assets/css/main-override.css" />
+    <link rel="stylesheet" href="assets/css/presentations.css" />
     <!-- Lightbox2 CSS -->
-<link href="https://cdn.jsdelivr.net/npm/lightbox2@2/dist/css/lightbox.min.css" rel="stylesheet" />
-
-<!-- Lightbox2 JS -->
-<script src="https://cdn.jsdelivr.net/npm/lightbox2@2/dist/js/lightbox-plus-jquery.min.js"></script>
-
+    <link href="https://cdn.jsdelivr.net/npm/lightbox2@2/dist/css/lightbox.min.css" rel="stylesheet" />
+    <!-- Lightbox2 JS (bundles jQuery) -->
+    <script src="https://cdn.jsdelivr.net/npm/lightbox2@2/dist/js/lightbox-plus-jquery.min.js"></script>
 </head>
 <body class="is-preload">
+
     <!-- Floating glass icon-pill header (shared partial; same in all pages) -->
     <header id="app-header" class="app-header" aria-label="Site navigation">
       <a class="ah-avatar" href="index.html" aria-label="Yi Cao — go to top">
@@ -43,10 +27,10 @@
       <a class="ah-icon" href="index.html#awards" data-tooltip="Awards"><i class="fas fa-trophy"></i><span class="ah-tooltip">Awards</span></a>
       <a class="ah-icon" href="index.html#vision" data-tooltip="Vision"><i class="far fa-eye"></i><span class="ah-tooltip">Vision</span></a>
       <a class="ah-icon" href="index.html#four" data-tooltip="Contact"><i class="far fa-envelope"></i><span class="ah-tooltip">Contact</span></a>
-      <a class="ah-icon" href="blog.html" data-tooltip="Blog"><i class="fas fa-pen-to-square"></i><span class="ah-tooltip">Blog</span></a>
+      <a class="ah-icon" href="blog.html" data-tooltip="Blog"><i class="fas fa-edit"></i><span class="ah-tooltip">Blog</span></a>
       <a class="ah-icon" href="CAO_Yi_CV.pdf" target="_blank" rel="noopener" data-tooltip="CV"><i class="far fa-file-pdf"></i><span class="ah-tooltip">CV</span></a>
       <a class="ah-icon" href="https://github.com/yicao-elina" target="_blank" rel="noopener" data-tooltip="GitHub"><i class="fab fa-github"></i><span class="ah-tooltip">GitHub</span></a>
-      <a class="ah-icon" href="presentations.html" data-tooltip="Talks"><i class="fas fa-presentation-screen"></i><span class="ah-tooltip">Talks</span></a>
+      <a class="ah-icon" href="presentations.html" aria-current="page" data-tooltip="Talks"><i class="fas fa-chalkboard-teacher"></i><span class="ah-tooltip">Talks</span></a>
       <button class="ah-more" type="button" aria-label="More navigation"><i class="fas fa-ellipsis"></i></button>
       <div class="ah-popover" role="menu" aria-label="More links">
         <a class="ah-icon" href="index.html#two" role="menuitem"><i class="fas fa-flask"></i>&nbsp;Research</a>
@@ -57,253 +41,313 @@
       </div>
     </header>
 
-    <!-- Header -->
-    <header id="header">
-        <div class="inner">
-            <a href="index.html" class="image avatar"><img src="images/avatar.jpeg" alt="" /></a>
-            <h1><strong>Yi Cao</strong><br />
-            Conference Presentations, <br />
-            Teaching & Science Communication</h1>
-        </h1>
-        </div>
-    </header>
+    <!-- Main -->
+    <div id="main">
 
-<!-- Main -->
-<div id="main">
-    <section>
+    <!-- Intro + stats -->
+    <section id="pres-intro">
         <header class="major">
-            <h2>Presentations & Teaching</h2>
+            <h2>Presentations &amp; Teaching</h2>
         </header>
-        
         <p>A comprehensive overview of my conference presentations, teaching experience, and science communication activities showcasing my research in computational materials science and AI-driven materials discovery.</p>
 
-        <hr style="margin: 3em 0;" />
-        <!-- Summary Stats -->
-        <div class="row" style="margin-top: 3em;">
-            <div class="col-3 col-12-small">
-                <h3 style="text-align: center;">13</h3>
-                <p style="text-align: center;">Conference Presentations</p>
+        <div class="stats-grid">
+            <div class="stat-tile reveal">
+                <span class="stat-num">13</span>
+                <span class="stat-label">Conference Presentations</span>
             </div>
-            <div class="col-3 col-12-small">
-                <h3 style="text-align: center;">6</h3>
-                <p style="text-align: center;">Awards & Honors</p>
+            <div class="stat-tile reveal">
+                <span class="stat-num">6</span>
+                <span class="stat-label">Awards &amp; Honors</span>
             </div>
-            <div class="col-3 col-12-small">
-                <h3 style="text-align: center;">5</h3>
-                <p style="text-align: center;">Invited & Spotlight Talks</p>
+            <div class="stat-tile reveal">
+                <span class="stat-num">5</span>
+                <span class="stat-label">Invited &amp; Spotlight Talks</span>
             </div>
-            <div class="col-3 col-12-small">
-                <h3 style="text-align: center;">1</h3>
-                <p style="text-align: center;">Teaching Certificate</p>
+            <div class="stat-tile reveal">
+                <span class="stat-num">1</span>
+                <span class="stat-label">Teaching Certificate</span>
             </div>
         </div>
-        
-        <!-- Conference Presentations Section -->
-        <h3 style="margin-top: 2em;">Conference Presentations</h3>
+    </section>
 
-        <article class="presentation-item">
-            <h4>2026 MRS Spring Meeting & Exhibit</h4>
-            <p class="presentation-details">
-                <span class="icon solid fa-calendar"></span> May 2026 &nbsp;&nbsp;
-                <span class="icon solid fa-map-marker-alt"></span> Honolulu, HI, USA &nbsp;&nbsp;
-                <span class="icon solid fa-microphone"></span> <strong>Oral Presentation</strong> &nbsp;&nbsp;
-                <a href="https://www.linkedin.com/posts/yi-cao-1368ab292_mrsspring26-mrsspring26-ai4materials-ugcPost-7456902541210042368-k-oT/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEb3tPoBgmt_8xQYwQpEY2DbQllFRcSwlU4" target="_blank" rel="noopener">[Post]</a>
-            </p>
-            <p><em>"Migration as a Probe—A Generalizable Benchmark Framework for Specialist vs. Generalist Machine-Learned Force Fields in Doped Materials"</em></p>
-        </article>
+    <!-- Conference Presentations: single-column lvy-style timeline -->
+    <section id="pres-timeline">
+        <h2>Conference Presentations</h2>
 
-        <article class="presentation-item">
-            <h4>2026 MRS Spring Meeting & Exhibit</h4>
-            <p class="presentation-details">
-                <span class="icon solid fa-calendar"></span> May 2026 &nbsp;&nbsp;
-                <span class="icon solid fa-map-marker-alt"></span> Honolulu, HI, USA &nbsp;&nbsp;
-                <span class="icon solid fa-microphone"></span> <strong>Oral Presentation</strong> &nbsp;&nbsp;
-                <a href="https://www.linkedin.com/posts/yi-cao-1368ab292_mrsspring26-mrsspring26-ai4materials-ugcPost-7456902541210042368-k-oT/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEb3tPoBgmt_8xQYwQpEY2DbQllFRcSwlU4" target="_blank" rel="noopener">[Post]</a>
-            </p>
-            <p><em>"What is Your Force Field Really Learning? Gaining Scientific Intuition and Guiding Feature Engineering with A Dual-Level Explainability Framework"</em></p>
-        </article>
+        <div class="timeline-year-group">
+            <h3 class="timeline-year-heading">2026</h3>
+            <div class="timeline-rows">
 
-        <article class="presentation-item">
-            <h4>2026 MRS Spring Meeting & Exhibit</h4>
-            <p class="presentation-details">
-                <span class="icon solid fa-calendar"></span> April 2026 &nbsp;&nbsp;
-                <span class="icon solid fa-map-marker-alt"></span> Honolulu, HI, USA &nbsp;&nbsp;
-                <span class="icon solid fa-microphone"></span> <strong>Oral Presentation</strong> &nbsp;&nbsp;
-                <a href="https://www.linkedin.com/posts/yi-cao-1368ab292_mrsspring26-mrsspring26-ai4materials-ugcPost-7456902541210042368-k-oT/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEb3tPoBgmt_8xQYwQpEY2DbQllFRcSwlU4" target="_blank" rel="noopener">[Post]</a>
-            </p>
-            <p><em>"Overcoming Contextual Tunneling in AI-Driven Materials Discovery: A Causal Framework for Robust Knowledge Integration"</em></p>
-        </article>
+            <div class="timeline-row-wrap reveal" data-spring>
+                <div class="spring-header timeline-row" tabindex="0" role="button" aria-label="Toggle details">
+                    <span class="tl-when"><span class="tl-date">May</span><span class="tl-dot" aria-hidden="true"></span></span>
+                    <span class="tl-body">
+                        <span class="tl-title">MRS Spring Meeting &amp; Exhibit</span>
+                        <span class="tl-talk">"Migration as a Probe—A Generalizable Benchmark Framework for Specialist vs. Generalist Machine-Learned Force Fields in Doped Materials"</span>
+                        <span class="tl-meta"><i class="icon solid fa-map-marker-alt"></i> Honolulu, HI, USA</span>
+                    </span>
+                    <span class="tl-pill tl-pill--talk">Oral</span>
+                    <span class="tl-chev" aria-hidden="true">▸</span>
+                </div>
+                <div class="spring-panel">
+                    <p><a href="https://www.linkedin.com/posts/yi-cao-1368ab292_mrsspring26-mrsspring26-ai4materials-ugcPost-7456902541210042368-k-oT/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEb3tPoBgmt_8xQYwQpEY2DbQllFRcSwlU4" target="_blank" rel="noopener">View LinkedIn Post →</a></p>
+                </div>
+            </div>
 
-        <article class="presentation-item">
-            <h4>Women in Data Science and AI Symposium</h4>
-            <p class="presentation-details">
-                <span class="icon solid fa-calendar"></span> March 2026 &nbsp;&nbsp;
-                <span class="icon solid fa-map-marker-alt"></span> Baltimore, MD, USA &nbsp;&nbsp;
-                <span class="icon solid fa-trophy"></span> <strong>Best Poster Award Winner</strong>
-            </p>
-        </article>
+            <div class="timeline-row-wrap reveal" data-spring>
+                <div class="spring-header timeline-row" tabindex="0" role="button" aria-label="Toggle details">
+                    <span class="tl-when"><span class="tl-date">May</span><span class="tl-dot" aria-hidden="true"></span></span>
+                    <span class="tl-body">
+                        <span class="tl-title">MRS Spring Meeting &amp; Exhibit</span>
+                        <span class="tl-talk">"What is Your Force Field Really Learning? Gaining Scientific Intuition and Guiding Feature Engineering with A Dual-Level Explainability Framework"</span>
+                        <span class="tl-meta"><i class="icon solid fa-map-marker-alt"></i> Honolulu, HI, USA</span>
+                    </span>
+                    <span class="tl-pill tl-pill--talk">Oral</span>
+                    <span class="tl-chev" aria-hidden="true">▸</span>
+                </div>
+                <div class="spring-panel">
+                    <p><a href="https://www.linkedin.com/posts/yi-cao-1368ab292_mrsspring26-mrsspring26-ai4materials-ugcPost-7456902541210042368-k-oT/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEb3tPoBgmt_8xQYwQpEY2DbQllFRcSwlU4" target="_blank" rel="noopener">View LinkedIn Post →</a></p>
+                </div>
+            </div>
 
-        <article class="presentation-item">
-            <h4>Women of Whiting Annual Women in STEM Symposium</h4>
-            <p class="presentation-details">
-                <span class="icon solid fa-calendar"></span> March 2026 &nbsp;&nbsp;
-                <span class="icon solid fa-map-marker-alt"></span> Baltimore, MD, USA &nbsp;&nbsp;
-                <span class="icon solid fa-trophy"></span> <strong>Top 1 Poster Presentation Award</strong>
-            </p>
-        </article>
+            <div class="timeline-row-wrap reveal" data-spring>
+                <div class="spring-header timeline-row" tabindex="0" role="button" aria-label="Toggle details">
+                    <span class="tl-when"><span class="tl-date">Apr</span><span class="tl-dot" aria-hidden="true"></span></span>
+                    <span class="tl-body">
+                        <span class="tl-title">MRS Spring Meeting &amp; Exhibit</span>
+                        <span class="tl-talk">"Overcoming Contextual Tunneling in AI-Driven Materials Discovery: A Causal Framework for Robust Knowledge Integration"</span>
+                        <span class="tl-meta"><i class="icon solid fa-map-marker-alt"></i> Honolulu, HI, USA</span>
+                    </span>
+                    <span class="tl-pill tl-pill--talk">Oral</span>
+                    <span class="tl-chev" aria-hidden="true">▸</span>
+                </div>
+                <div class="spring-panel">
+                    <p><a href="https://www.linkedin.com/posts/yi-cao-1368ab292_mrsspring26-mrsspring26-ai4materials-ugcPost-7456902541210042368-k-oT/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEb3tPoBgmt_8xQYwQpEY2DbQllFRcSwlU4" target="_blank" rel="noopener">View LinkedIn Post →</a></p>
+                </div>
+            </div>
 
-        <article class="presentation-item">
-            <h4>AAAI XAI4Science Workshop</h4>
-            <p class="presentation-details">
-                <span class="icon solid fa-calendar"></span> January 2026 &nbsp;&nbsp;
-                <span class="icon solid fa-map-marker-alt"></span> Singapore Expo &nbsp;&nbsp;
-                <span class="icon solid fa-microphone"></span> <strong>Spotlight Talk (Top-tier recognition)</strong>
-            </p>
-            <p><em>"What is Your Force Field Really Learning? Gaining Scientific Intuition with a Dual-Level Explainability Framework"</em></p>
-        </article>
+            <div class="timeline-row-wrap reveal">
+                <div class="timeline-row">
+                    <span class="tl-when"><span class="tl-date">Mar</span><span class="tl-dot" aria-hidden="true"></span></span>
+                    <span class="tl-body">
+                        <span class="tl-title">Women in Data Science and AI Symposium</span>
+                        <span class="tl-meta"><i class="icon solid fa-map-marker-alt"></i> Baltimore, MD, USA</span>
+                    </span>
+                    <span class="tl-pill tl-pill--award">Best Poster Award</span>
+                </div>
+            </div>
 
-        <article class="presentation-item">
-            <h4>NeurIPS AI4Mat Workshop</h4>
-            <p class="presentation-details">
-                <span class="icon solid fa-calendar"></span> December 2025 &nbsp;&nbsp;
-                <span class="icon solid fa-map-marker-alt"></span> San Diego, CA, USA &nbsp;&nbsp;
-                <span class="icon solid fa-trophy"></span> <strong>Spotlight Talk & Travel Grant Awardee</strong>
-            </p>
-            <p><em>"Migration as a Probe: A Generalizable Benchmark Framework for Specialist vs. Generalist Machine-Learned Force Fields"</em></p>
-        </article>
-       
-        <article class="presentation-item">
-            <h4>AIChE Annual Meeting 2025</h4>
-            <p class="presentation-details">
-                <span class="icon solid fa-calendar"></span> November 5, 2025 &nbsp;&nbsp;
-                <span class="icon solid fa-map-marker-alt"></span> Boston, MA, USA &nbsp;&nbsp;
-                <span class="icon solid fa-presentation"></span> Poster
-            </p>
-            <p><em>"Dissecting Cr-Doped Interfaces: How Diffusion Dynamics Reshape the Van Der Waals Gap and Shift Sb₂Te₃ Thermoelectric Performance"</em></p>
-        </article>
-        
-        <article class="presentation-item">
-            <h4>Prognostics and Health Management (PHM) Society Annual Conference 2025</h4>
-            <p class="presentation-details">
-                <span class="icon solid fa-calendar"></span> October 26-31, 2025 &nbsp;&nbsp;
-                <span class="icon solid fa-map-marker-alt"></span> Bellevue, WA, USA &nbsp;&nbsp;
-                <span class="icon solid fa-microphone"></span> <strong>Invited Talk & Session Chair</strong>
-            </p>
-            <ul>
-                <li><em>Doctoral Symposium - Selected as 1 of 10 PhD students globally; showcased AI applications in predictive maintenance.</em></li>
-                <li><em>Chaired "Advanced AI/ML for PHM" and "Digital Twins and Aviation" sessions.</em></li>
-            </ul>
-        </article>
+            <div class="timeline-row-wrap reveal">
+                <div class="timeline-row">
+                    <span class="tl-when"><span class="tl-date">Mar</span><span class="tl-dot" aria-hidden="true"></span></span>
+                    <span class="tl-body">
+                        <span class="tl-title">Women of Whiting Annual Women in STEM Symposium</span>
+                        <span class="tl-meta"><i class="icon solid fa-map-marker-alt"></i> Baltimore, MD, USA</span>
+                    </span>
+                    <span class="tl-pill tl-pill--award">Top 1 Poster</span>
+                </div>
+            </div>
 
-        <article class="presentation-item">
-            <h4>Artificial Intelligence for Materials Science (AIMS) Workshop, NIST</h4>
-            <p class="presentation-details">
-                <span class="icon solid fa-calendar"></span> July 9-10, 2025 &nbsp;&nbsp;
-                <span class="icon solid fa-map-marker-alt"></span> Rockville, MD, USA &nbsp;&nbsp;
-                <span class="icon solid fa-presentation"></span> Poster
-            </p>
-        </article>
+            <div class="timeline-row-wrap reveal" data-spring>
+                <div class="spring-header timeline-row" tabindex="0" role="button" aria-label="Toggle details">
+                    <span class="tl-when"><span class="tl-date">Jan</span><span class="tl-dot" aria-hidden="true"></span></span>
+                    <span class="tl-body">
+                        <span class="tl-title">AAAI XAI4Science Workshop</span>
+                        <span class="tl-talk">"What is Your Force Field Really Learning? Gaining Scientific Intuition with a Dual-Level Explainability Framework"</span>
+                        <span class="tl-meta"><i class="icon solid fa-map-marker-alt"></i> Singapore Expo</span>
+                    </span>
+                    <span class="tl-pill tl-pill--talk">Spotlight</span>
+                    <span class="tl-chev" aria-hidden="true">▸</span>
+                </div>
+                <div class="spring-panel">
+                    <p><strong>Spotlight Talk (Top-tier recognition).</strong> One of the workshop's spotlighted contributions on explainable AI for scientific machine learning.</p>
+                </div>
+            </div>
+            </div>
+        </div>
 
-        <article class="presentation-item">
-            <h4>Women in AI 2025</h4>
-            <p class="presentation-details">
-                <span class="icon solid fa-calendar"></span> April 9, 2025 &nbsp;&nbsp;
-                <span class="icon solid fa-map-marker-alt"></span> Baltimore, MD, USA &nbsp;&nbsp;
-                <span class="icon solid fa-trophy"></span> <strong>Poster Presentation - Award Winner</strong>
-            </p>
-            <p><em>"Exploring Low-Energy Pathways for Self-Healing Defects in CsPbBr₃—A Computational Study"</em></p>
-        </article>
+        <div class="timeline-year-group">
+            <h3 class="timeline-year-heading">2025</h3>
+            <div class="timeline-rows">
 
-        <article class="presentation-item">
-            <h4>Quantum Matters in Materials Science Workshop, NIST</h4>
-            <p class="presentation-details">
-                <span class="icon solid fa-calendar"></span> February 19-20, 2025 &nbsp;&nbsp;
-                <span class="icon solid fa-map-marker-alt"></span> Rockville, MD, USA &nbsp;&nbsp;
-                <span class="icon solid fa-presentation"></span> Poster
-            </p>
-            <p><em>"Topological Materials Engineering for Next-Generation Thermoelectrics"</em></p>
-        </article>
+            <div class="timeline-row-wrap reveal" data-spring>
+                <div class="spring-header timeline-row" tabindex="0" role="button" aria-label="Toggle details">
+                    <span class="tl-when"><span class="tl-date">Dec</span><span class="tl-dot" aria-hidden="true"></span></span>
+                    <span class="tl-body">
+                        <span class="tl-title">NeurIPS AI4Mat Workshop</span>
+                        <span class="tl-talk">"Migration as a Probe: A Generalizable Benchmark Framework for Specialist vs. Generalist Machine-Learned Force Fields"</span>
+                        <span class="tl-meta"><i class="icon solid fa-map-marker-alt"></i> San Diego, CA, USA</span>
+                    </span>
+                    <span class="tl-pill tl-pill--talk">Spotlight</span>
+                    <span class="tl-chev" aria-hidden="true">▸</span>
+                </div>
+                <div class="spring-panel">
+                    <p><strong>Spotlight Talk &amp; Travel Grant Awardee.</strong></p>
+                </div>
+            </div>
 
-        <article class="presentation-item">
-            <h4>Materials Research Society (MRS) Fall Meeting 2024</h4>
-            <p class="presentation-details">
-                <span class="icon solid fa-calendar"></span> December 1-6, 2024 &nbsp;&nbsp;
-                <span class="icon solid fa-map-marker-alt"></span> Boston, MA, USA &nbsp;&nbsp;
-                <span class="icon solid fa-presentation"></span> 
-                <a href="images/fulls/defect-study-poster.png" target="_blank" rel="noopener">[Poster] </a>
-                <a href="https://doi.org/10.1039/D5CP01641J" target="_blank" rel="noopener">[DOI] </a>
-                <a href="https://www.linkedin.com/posts/yi-cao-1368ab292_mrs2024-materialsscience-solarcells-activity-7270983728636510208-lmQC?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEb3tPoBgmt_8xQYwQpEY2DbQllFRcSwlU4" target="_blank" rel="noopener">[Post]</a>
-            </p>
-            <p><em>"Exploring Low-Energy Pathways for Self-Healing Defects in CsPbBr₃—A Computational Study"</em></p>
-            <div class="photo-gallery">
-                <a href="images/presentation/MRS-poster.jpg" data-lightbox="eyp-gallery" data-title="Yi Cao with her poster at MRS 2024">
-                  <img src="images/presentation/MRS-poster.jpg" alt="Photo 1" width="150" style="margin:5px">
-                </a>
-                <a href="images/presentation/MRS.jpg" data-lightbox="eyp-gallery" data-title="Photoshot with MRS logo at MRS 2024">
-                  <img src="images/presentation/MRS.jpg" alt="Photo 2" width="150" style="margin:5px">
-                </a>
-                <a href="images/presentation/MRS-kara.JPG" data-lightbox="eyp-gallery" data-title="Yi Cao performing PPT kara-oke at MRS 2024">
-                    <img src="images/presentation/MRS-kara.JPG" alt="Photo 3" width="150" style="margin:5px">
-                </a>
-                <!-- Add more images as needed -->
-              </div>
-        </article>
+            <div class="timeline-row-wrap reveal">
+                <div class="timeline-row">
+                    <span class="tl-when"><span class="tl-date">Nov</span><span class="tl-dot" aria-hidden="true"></span></span>
+                    <span class="tl-body">
+                        <span class="tl-title">AIChE Annual Meeting 2025</span>
+                        <span class="tl-talk">"Dissecting Cr-Doped Interfaces: How Diffusion Dynamics Reshape the Van Der Waals Gap and Shift Sb₂Te₃ Thermoelectric Performance"</span>
+                        <span class="tl-meta"><i class="icon solid fa-map-marker-alt"></i> Boston, MA, USA</span>
+                    </span>
+                    <span class="tl-pill tl-pill--poster">Poster</span>
+                </div>
+            </div>
 
+            <div class="timeline-row-wrap reveal" data-spring>
+                <div class="spring-header timeline-row" tabindex="0" role="button" aria-label="Toggle details">
+                    <span class="tl-when"><span class="tl-date">Oct</span><span class="tl-dot" aria-hidden="true"></span></span>
+                    <span class="tl-body">
+                        <span class="tl-title">Prognostics and Health Management (PHM) Society Annual Conference 2025</span>
+                        <span class="tl-meta"><i class="icon solid fa-map-marker-alt"></i> Bellevue, WA, USA</span>
+                    </span>
+                    <span class="tl-pill tl-pill--talk">Invited</span>
+                    <span class="tl-chev" aria-hidden="true">▸</span>
+                </div>
+                <div class="spring-panel">
+                    <ul>
+                        <li><em>Doctoral Symposium</em> — Selected as 1 of 10 PhD students globally; showcased AI applications in predictive maintenance.</li>
+                        <li>Chaired "Advanced AI/ML for PHM" and "Digital Twins and Aviation" sessions.</li>
+                    </ul>
+                </div>
+            </div>
 
-        <hr style="margin: 3em 0;" />
+            <div class="timeline-row-wrap reveal">
+                <div class="timeline-row">
+                    <span class="tl-when"><span class="tl-date">Jul</span><span class="tl-dot" aria-hidden="true"></span></span>
+                    <span class="tl-body">
+                        <span class="tl-title">Artificial Intelligence for Materials Science (AIMS) Workshop, NIST</span>
+                        <span class="tl-meta"><i class="icon solid fa-map-marker-alt"></i> Rockville, MD, USA</span>
+                    </span>
+                    <span class="tl-pill tl-pill--poster">Poster</span>
+                </div>
+            </div>
 
-        <!-- Teaching & Communication Section -->
-        <h3>Teaching & Communication</h3>
-        
-        <article class="presentation-item">
-            <h4>Empower Your Pitch Competition - Finalist</h4>
-            <p class="presentation-details">
-                <span class="icon solid fa-calendar"></span> April 8, 2025 &nbsp;&nbsp;
-                <span class="icon solid fa-university"></span> Johns Hopkins University &nbsp;&nbsp;
-                <span class="icon solid fa-trophy"></span> <strong>Finalist (1 of 12 PhD students university-wide)</strong>
-                
-            </p>
-            <p><em>Selected as a finalist among all JHU PhD competitors to deliver a 3-minute pitch presenting my research on AI-driven materials discovery to a broad, non-specialist audience. This competition emphasized clear science communication and the societal impact of research.</em>
-                <a href="images/presentation/EYP.JPG" rel="noopener">[Flyer] </a>
-                <a href="https://www.linkedin.com/posts/yi-cao-1368ab292_get-ready-for-an-inspiring-showcase-of-academic-activity-7312944371794931712-mhj8?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEb3tPoBgmt_8xQYwQpEY2DbQllFRcSwlU4" target="_blank" rel="noopener">[Post]</a>
-                
-                  <!-- Photo Gallery -->
-                <div class="photo-gallery">
-                    <a href="images/presentation/EYP-20250408_0232.JPG" data-lightbox="eyp-gallery" data-title="Yi Cao delivering her pitch at EYP 2025">
-                      <img src="images/presentation/EYP-20250408_0232.JPG" alt="Photo 1" width="150" style="margin:5px">
-                    </a>
-                    <a href="images/presentation/EYP-group-20250408_0400.JPG" data-lightbox="eyp-gallery" data-title="PhD finalists group photo at EYP 2025">
-                      <img src="images/presentation/EYP-group-20250408_0400.JPG" alt="Photo 2" width="150" style="margin:5px">
-                    </a>
-                    <a href="images/presentation/EYP-mentor-20250408_0262.JPG" data-lightbox="eyp-gallery" data-title="Yi Cao with her mentor, Juliane Liberto, at EYP 2025">
-                      <img src="images/presentation/EYP-mentor-20250408_0262.JPG" alt="Photo 3" width="150" style="margin:5px">
-                    </a>
-                    <!-- Add more images as needed -->
-                  </div>
-                  
-            </p>
-        </article>
+            <div class="timeline-row-wrap reveal">
+                <div class="timeline-row">
+                    <span class="tl-when"><span class="tl-date">Apr</span><span class="tl-dot" aria-hidden="true"></span></span>
+                    <span class="tl-body">
+                        <span class="tl-title">Women in AI 2025</span>
+                        <span class="tl-talk">"Exploring Low-Energy Pathways for Self-Healing Defects in CsPbBr₃—A Computational Study"</span>
+                        <span class="tl-meta"><i class="icon solid fa-map-marker-alt"></i> Baltimore, MD, USA</span>
+                    </span>
+                    <span class="tl-pill tl-pill--award">Award</span>
+                </div>
+            </div>
 
-        <article class="presentation-item">
+            <div class="timeline-row-wrap reveal">
+                <div class="timeline-row">
+                    <span class="tl-when"><span class="tl-date">Feb</span><span class="tl-dot" aria-hidden="true"></span></span>
+                    <span class="tl-body">
+                        <span class="tl-title">Quantum Matters in Materials Science Workshop, NIST</span>
+                        <span class="tl-talk">"Topological Materials Engineering for Next-Generation Thermoelectrics"</span>
+                        <span class="tl-meta"><i class="icon solid fa-map-marker-alt"></i> Rockville, MD, USA</span>
+                    </span>
+                    <span class="tl-pill tl-pill--poster">Poster</span>
+                </div>
+            </div>
+            </div>
+        </div>
 
-            <h4>Johns Hopkins Teaching Institute Certificate</h4>
-            <p class="presentation-details">
-                <span class="icon solid fa-calendar"></span> May 28-30, 2025 &nbsp;&nbsp;
-                <span class="icon solid fa-university"></span> Johns Hopkins University &nbsp;&nbsp;
-                <span class="icon solid fa-certificate"></span> <strong>Teaching Certificate</strong>
-            </p>
-            <p><em>Completed comprehensive pedagogical training through the JHU Teaching Institute, including coursework on evidence-based teaching methods, inclusive classroom practices, and a micro-teaching project. Received official teaching certificate recognizing proficiency in university-level instruction.</em></p>
-        </article>
+        <div class="timeline-year-group">
+            <h3 class="timeline-year-heading">2024</h3>
+            <div class="timeline-rows">
 
+            <div class="timeline-row-wrap reveal" data-spring>
+                <div class="spring-header timeline-row" tabindex="0" role="button" aria-label="Toggle details">
+                    <span class="tl-when"><span class="tl-date">Dec</span><span class="tl-dot" aria-hidden="true"></span></span>
+                    <span class="tl-body">
+                        <span class="tl-title">Materials Research Society (MRS) Fall Meeting 2024</span>
+                        <span class="tl-talk">"Exploring Low-Energy Pathways for Self-Healing Defects in CsPbBr₃—A Computational Study"</span>
+                        <span class="tl-meta"><i class="icon solid fa-map-marker-alt"></i> Boston, MA, USA</span>
+                    </span>
+                    <span class="tl-pill tl-pill--poster">Poster</span>
+                    <span class="tl-chev" aria-hidden="true">▸</span>
+                </div>
+                <div class="spring-panel">
+                    <p>
+                        [<a href="images/fulls/defect-study-poster.png" target="_blank" rel="noopener">Poster</a>]
+                        [<a href="https://doi.org/10.1039/D5CP01641J" target="_blank" rel="noopener">DOI</a>]
+                        [<a href="https://www.linkedin.com/posts/yi-cao-1368ab292_mrs2024-materialsscience-solarcells-activity-7270983728636510208-lmQC?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEb3tPoBgmt_8xQYwQpEY2DbQllFRcSwlU4" target="_blank" rel="noopener">Post</a>]
+                    </p>
+                    <div class="tl-gallery">
+                        <a href="images/presentation/MRS-poster.jpg" data-lightbox="mrs-2024-gallery" data-title="Yi Cao with her poster at MRS 2024">
+                          <img src="images/presentation/MRS-poster.jpg" alt="Yi Cao with her poster at MRS 2024" />
+                        </a>
+                        <a href="images/presentation/MRS.jpg" data-lightbox="mrs-2024-gallery" data-title="Photoshot with MRS logo at MRS 2024">
+                          <img src="images/presentation/MRS.jpg" alt="Photoshot with MRS logo at MRS 2024" />
+                        </a>
+                        <a href="images/presentation/MRS-kara.JPG" data-lightbox="mrs-2024-gallery" data-title="Yi Cao performing PPT kara-oke at MRS 2024">
+                          <img src="images/presentation/MRS-kara.JPG" alt="Yi Cao performing PPT kara-oke at MRS 2024" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Teaching & Communication: glass card grid (richer content → cards, not timeline rows) -->
+    <section id="pres-teaching">
+        <h2>Teaching &amp; Communication</h2>
 
+        <div class="teaching-grid">
+
+            <article class="teaching-card reveal" data-spring>
+                <span class="tc-badge">Finalist</span>
+                <h3>Empower Your Pitch Competition</h3>
+                <p class="tc-meta"><i class="icon solid fa-calendar"></i> April 8, 2025 &nbsp;&middot;&nbsp; <i class="icon solid fa-university"></i> Johns Hopkins University</p>
+                <p>Selected as a finalist among all JHU PhD competitors (1 of 12 university-wide) to deliver a 3-minute pitch presenting my research on AI-driven materials discovery to a broad, non-specialist audience.</p>
+                <button class="row-header-toggle spring-header" type="button" aria-label="Toggle details"><span class="chev">▸</span> Details &amp; photos</button>
+                <div class="spring-panel">
+                    <p><em>This competition emphasized clear science communication and the societal impact of research.</em></p>
+                    <p>
+                        [<a href="images/presentation/EYP.JPG" target="_blank" rel="noopener">Flyer</a>]
+                        [<a href="https://www.linkedin.com/posts/yi-cao-1368ab292_get-ready-for-an-inspiring-showcase-of-academic-activity-7312944371794931712-mhj8?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEb3tPoBgmt_8xQYwQpEY2DbQllFRcSwlU4" target="_blank" rel="noopener">Post</a>]
+                    </p>
+                    <div class="tl-gallery">
+                        <a href="images/presentation/EYP-20250408_0232.JPG" data-lightbox="eyp-gallery" data-title="Yi Cao delivering her pitch at EYP 2025">
+                          <img src="images/presentation/EYP-20250408_0232.JPG" alt="Yi Cao delivering her pitch at EYP 2025" />
+                        </a>
+                        <a href="images/presentation/EYP-group-20250408_0400.JPG" data-lightbox="eyp-gallery" data-title="PhD finalists group photo at EYP 2025">
+                          <img src="images/presentation/EYP-group-20250408_0400.JPG" alt="PhD finalists group photo at EYP 2025" />
+                        </a>
+                        <a href="images/presentation/EYP-mentor-20250408_0262.JPG" data-lightbox="eyp-gallery" data-title="Yi Cao with her mentor, Juliane Liberto, at EYP 2025">
+                          <img src="images/presentation/EYP-mentor-20250408_0262.JPG" alt="Yi Cao with her mentor, Juliane Liberto, at EYP 2025" />
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="teaching-card reveal" data-spring>
+                <span class="tc-badge">Certificate</span>
+                <h3>Johns Hopkins Teaching Institute</h3>
+                <p class="tc-meta"><i class="icon solid fa-calendar"></i> May 28-30, 2025 &nbsp;&middot;&nbsp; <i class="icon solid fa-university"></i> Johns Hopkins University</p>
+                <p>Completed comprehensive pedagogical training through the JHU Teaching Institute, including coursework on evidence-based teaching methods and inclusive classroom practices.</p>
+                <button class="row-header-toggle spring-header" type="button" aria-label="Toggle details"><span class="chev">▸</span> Details</button>
+                <div class="spring-panel">
+                    <p>Completed a micro-teaching project and received an official teaching certificate recognizing proficiency in university-level instruction.</p>
+                </div>
+            </article>
+
+        </div>
 
         <ul class="actions" style="margin-top: 2em;">
             <li><a href="index.html" class="button">Back to Portfolio</a></li>
-            <li><a href="https://scholar.google.com/citations?user=YOUR_ID" class="button">Google Scholar</a></li>
+            <li><a href="https://scholar.google.com/citations?user=t_gDF-EAAAAJ&hl=en" class="button" target="_blank" rel="noopener">Google Scholar</a></li>
         </ul>
+        <p><small>
+            <i class="fas fa-copyright"></i> 2025 Yi Cao.
+            This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>.
+        </small></p>
     </section>
-</div>
+
+    </div>
 
     <!-- Footer -->
     <footer id="footer">
@@ -312,6 +356,7 @@
                 <li><a href="https://www.linkedin.com/in/yi-cao-1368ab292/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
                 <li><a href="https://github.com/yicao-elina" class="icon brands fa-github"><span class="label">Github</span></a></li>
                 <li><a href="mailto:ycao73@jh.edu" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+                <li><a href="https://scholar.google.com/citations?user=t_gDF-EAAAAJ&hl=en" class="icon solid fa-graduation-cap"><span class="label">Google Scholar</span></a></li>
             </ul>
             <ul class="copyright">
                 <li>&copy; 2025 Yi Cao</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
@@ -326,5 +371,7 @@
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/header-tooltip.js" defer></script>
+    <script src="assets/js/spring-card.js" defer></script>
+    <script src="assets/js/reveal-on-scroll.js" defer></script>
 </body>
 </html>
