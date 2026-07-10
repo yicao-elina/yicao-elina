@@ -1,31 +1,14 @@
 <!DOCTYPE HTML>
 <html>
-
-<!-- Navigation Bar -->
-<nav id="nav">
-    <ul class="container">
-        <li><a href="index.html#top" class="scrolly">Home</a></li>
-        <li><a href="index.html#two" class="scrolly">Research</a></li>
-        <li><a href="index.html#three" class="scrolly">Experience</a></li>
-        <li><a href="presentations.html">Presentations</a></li>
-        <li><a href="index.html#vision" class="scrolly">Vision</a></li>
-        <li><a href="index.html#four" class="scrolly">Contact</a></li>
-		<li><a href="blog.html">Blog</a></li>
-		<li><a href="#write" class="scrolly">Write</a></li>
-		<li><a href="CAO_Yi_CV.pdf" target="_blank">CV</a></li>
-		<li><a href="https://github.com/yicao-elina" target="_blank">GitHub</a></li>
-    </ul>
-</nav>
-
-
 <head>
-    <title>Conference Presentations - Yi Cao</title>
+    <title>Blog &amp; Resources - Yi Cao</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/tokens.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
-    <link rel="stylesheet" href="assets/css/blog.css" />
     <link rel="stylesheet" href="assets/css/header.css" />
+    <link rel="stylesheet" href="assets/css/main-override.css" />
+    <link rel="stylesheet" href="assets/css/blog.css" />
 </head>
 <body class="is-preload">
 
@@ -42,10 +25,10 @@
       <a class="ah-icon" href="index.html#awards" data-tooltip="Awards"><i class="fas fa-trophy"></i><span class="ah-tooltip">Awards</span></a>
       <a class="ah-icon" href="index.html#vision" data-tooltip="Vision"><i class="far fa-eye"></i><span class="ah-tooltip">Vision</span></a>
       <a class="ah-icon" href="index.html#four" data-tooltip="Contact"><i class="far fa-envelope"></i><span class="ah-tooltip">Contact</span></a>
-      <a class="ah-icon" href="blog.html" data-tooltip="Blog"><i class="fas fa-pen-to-square"></i><span class="ah-tooltip">Blog</span></a>
+      <a class="ah-icon" href="blog.html" aria-current="page" data-tooltip="Blog"><i class="fas fa-edit"></i><span class="ah-tooltip">Blog</span></a>
       <a class="ah-icon" href="CAO_Yi_CV.pdf" target="_blank" rel="noopener" data-tooltip="CV"><i class="far fa-file-pdf"></i><span class="ah-tooltip">CV</span></a>
       <a class="ah-icon" href="https://github.com/yicao-elina" target="_blank" rel="noopener" data-tooltip="GitHub"><i class="fab fa-github"></i><span class="ah-tooltip">GitHub</span></a>
-      <a class="ah-icon" href="presentations.html" data-tooltip="Talks"><i class="fas fa-presentation-screen"></i><span class="ah-tooltip">Talks</span></a>
+      <a class="ah-icon" href="presentations.html" data-tooltip="Talks"><i class="fas fa-chalkboard-teacher"></i><span class="ah-tooltip">Talks</span></a>
       <button class="ah-more" type="button" aria-label="More navigation"><i class="fas fa-ellipsis"></i></button>
       <div class="ah-popover" role="menu" aria-label="More links">
         <a class="ah-icon" href="index.html#two" role="menuitem"><i class="fas fa-flask"></i>&nbsp;Research</a>
@@ -56,235 +39,219 @@
       </div>
     </header>
 
-    <!-- Header -->
-    <header id="header">
-        <div class="inner">
-            <a href="index.html" class="image avatar"><img src="images/blog/Yi_2024_blossom.jpeg" alt="" /></a>
-            <h1><strong>Yi Cao</strong><br />
-            Blog & Resources</h1>
-        </div>
-    </header>
+    <!-- Main -->
+    <div id="main">
+
+    <!-- Intro -->
+    <section id="blog-intro">
+        <header class="major">
+            <h2>Blog &amp; Resources</h2>
+        </header>
+        <p>Sharing technical insights from my research and glimpses of life beyond the lab — from DFT convergence tricks and ML force field tutorials to table tennis, tennis, and campus photography.</p>
+    </section>
 
     <!-- Meta-tiles: 2 large binary category overview -->
-    <section class="meta-tiles" aria-label="Blog categories">
-        <a href="#technical-tips" class="meta-tile" data-tilt data-spotlight
-           style="background-image: url('images/blog/dft-tips.png');"
-           data-cat="technical">
-            <span class="meta-tile-chevron" aria-hidden="true">→</span>
-            <div class="meta-tile-overlay">
-                <h3>Technical</h3>
-                <p>DFT, ML force fields, Quantum ESPRESSO, and figures.</p>
-                <span class="meta-tile-count">4 posts</span>
-            </div>
+    <section id="blog-categories" aria-label="Blog categories">
+        <div class="meta-tiles">
+            <a href="#technical-tips" class="meta-tile reveal" data-tilt data-spotlight
+               style="background-image: url('images/blog/dft-tips.png');"
+               data-cat="technical">
+                <span class="meta-tile-chevron" aria-hidden="true">→</span>
+                <div class="meta-tile-overlay">
+                    <h3>Technical</h3>
+                    <p>DFT, ML force fields, Quantum ESPRESSO, and figures.</p>
+                    <span class="meta-tile-count">4 posts</span>
+                </div>
+            </a>
+            <a href="#personal-blog" class="meta-tile reveal" data-tilt data-spotlight
+               style="background-image: url('images/blog/Table_Tennis.jpg');"
+               data-cat="life">
+                <span class="meta-tile-chevron" aria-hidden="true">→</span>
+                <div class="meta-tile-overlay">
+                    <h3>Life &amp; Reflections</h3>
+                    <p>Sports, campus, travel — the rest of the story.</p>
+                    <span class="meta-tile-count">4 posts</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Technical Tips Section -->
+    <section class="blog-category" id="technical-tips">
+        <h2>Technical Tips &amp; Tutorials</h2>
+        <div class="row">
+
+            <!-- DFT Calculation Tips -->
+            <article class="col-6 col-12-xsmall glass-card reveal" data-tilt data-spotlight>
+                <a href="blog/dft-convergence.html" class="image fit thumb">
+                    <img src="images/blog/dft-tips.png" alt="DFT Tips" />
+                </a>
+                <h3>DFT Convergence Tips</h3>
+                <p class="blog-meta"><i class="far fa-calendar"></i> January 15, 2025</p>
+                <p>Practical strategies for achieving convergence in challenging DFT calculations, including mixing schemes and initial guess optimization.</p>
+                <a href="blog/dft-convergence.html" class="button small btn-teal">Read More</a>
+            </article>
+
+            <!-- MLFF Tutorial -->
+            <article class="col-6 col-12-xsmall glass-card reveal" data-tilt data-spotlight>
+                <a href="blog/mlff-tutorial.html" class="image fit thumb">
+                    <img src="images/blog/mlff-tutorial.png" alt="MLFF Tutorial" />
+                </a>
+                <h3>Getting Started with ML Force Fields</h3>
+                <p class="blog-meta"><i class="far fa-calendar"></i> December 20, 2024</p>
+                <p>A beginner's guide to implementing machine learning force fields using ASE and MACE for molecular dynamics simulations.</p>
+                <a href="blog/mlff-tutorial.html" class="button small btn-teal">Read More</a>
+            </article>
+
+            <!-- Quantum ESPRESSO Scripts -->
+            <article class="col-6 col-12-xsmall glass-card reveal" data-tilt data-spotlight>
+                <a href="blog/qe-scripts.html" class="image fit thumb">
+                    <img src="images/blog/1200px-Quantum_ESPRESSO_logo.jpg" alt="QE Scripts" />
+                </a>
+                <h3>Useful Quantum ESPRESSO Scripts</h3>
+                <p class="blog-meta"><i class="far fa-calendar"></i> November 10, 2024</p>
+                <p>Collection of Python scripts for automating Quantum ESPRESSO workflows, from input generation to data analysis.</p>
+                <a href="blog/qe-scripts.html" class="button small btn-teal">Read More</a>
+            </article>
+
+            <!-- Data Visualization -->
+            <article class="col-6 col-12-xsmall glass-card reveal" data-tilt data-spotlight>
+                <a href="blog/data-viz.html" class="image fit thumb">
+                    <img src="images/thumbs/01-Defect-thumb.png" alt="Data Visualization" />
+                </a>
+                <h3>Beautiful Plots for Materials Science</h3>
+                <p class="blog-meta"><i class="far fa-calendar"></i> October 5, 2024</p>
+                <p>Creating publication-quality figures for band structures, density of states, and crystal structures using matplotlib and plotly.</p>
+                <a href="blog/data-viz.html" class="button small btn-teal">Read More</a>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- Personal Blog Section -->
+    <section class="blog-category" id="personal-blog">
+        <h2>Life Beyond Research</h2>
+        <div class="row">
+
+            <!-- Table Tennis -->
+            <article class="col-6 col-12-xsmall glass-card reveal" data-tilt data-spotlight>
+                <a href="blog/table-tennis-journey.html" class="image fit thumb">
+                    <img src="images/blog/Table_Tennis.jpg" alt="Table Tennis" />
+                </a>
+                <h3>My Table Tennis Journey</h3>
+                <p class="blog-meta"><i class="far fa-calendar"></i> January 5, 2025</p>
+                <p>From beginner to competitive player - lessons learned on and off the table, and how sports complement research life.</p>
+                <a href="blog/table-tennis-journey.html" class="button small btn-teal">Read More</a>
+            </article>
+
+            <!-- Tennis Learning -->
+            <article class="col-6 col-12-xsmall glass-card reveal" data-tilt data-spotlight>
+                <a href="blog/learning-tennis.html" class="image fit thumb">
+                    <img src="images/blog/tennis.JPG" alt="Learning Tennis" />
+                </a>
+                <h3>Learning Tennis at 24</h3>
+                <p class="blog-meta"><i class="far fa-calendar"></i> March 15, 2025</p>
+                <p>Why I decided to pick up tennis during my PhD and the surprising parallels between mastering a sport and research.</p>
+                <a href="blog/learning-tennis.html" class="button small btn-teal">Read More</a>
+            </article>
+
+            <!-- JHU Campus Photography -->
+            <article class="col-6 col-12-xsmall glass-card reveal" data-tilt data-spotlight>
+                <a href="blog/jhu-seasons.html" class="image fit thumb">
+                    <img src="images/blog/JHU_blossom.jpg" alt="JHU Campus" />
+                </a>
+                <h3>Four Seasons at Hopkins</h3>
+                <p class="blog-meta"><i class="far fa-calendar"></i> November 20, 2024</p>
+                <p>Capturing the beauty of JHU's Homewood campus through the seasons - a photographer's perspective.</p>
+                <a href="blog/jhu-seasons.html" class="button small btn-teal">View Gallery</a>
+            </article>
+
+            <!-- Travel Photography -->
+            <article class="col-6 col-12-xsmall glass-card reveal" data-tilt data-spotlight>
+                <a href="blog/conference-travels.html" class="image fit thumb">
+                    <img src="images/blog/Yi_DC_blossom.JPG" alt="Travel Photography" />
+                </a>
+                <h3>Conference Cities Through My Lens</h3>
+                <p class="blog-meta"><i class="far fa-calendar"></i> October 25, 2024</p>
+                <p>Exploring DC, Boston, Bellevue, and beyond - combining conference attendance with street photography.</p>
+                <a href="blog/conference-travels.html" class="button small btn-teal">View Gallery</a>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- Timeline (chronological post list) -->
+    <section class="blog-category timeline" id="timeline">
+        <h2>Timeline</h2>
+        <div class="timeline-filters" role="group" aria-label="Filter posts by category">
+            <button type="button" class="filter-chip" data-filter-chip data-filter="all" aria-pressed="true">All</button>
+            <button type="button" class="filter-chip" data-filter-chip data-filter="technical" aria-pressed="false">Technical</button>
+            <button type="button" class="filter-chip" data-filter-chip data-filter="life" aria-pressed="false">Life</button>
+        </div>
+
+        <h3 class="timeline-year">2025</h3>
+        <a href="blog/learning-tennis.html" class="timeline-row" data-cat="life">
+            <span class="timeline-row-date">03-15</span>
+            <span class="timeline-row-dot" aria-hidden="true"></span>
+            <span class="timeline-row-title">Learning Tennis at 24</span>
+            <span class="timeline-row-tag" aria-hidden="true">Life</span>
         </a>
-        <a href="#personal-blog" class="meta-tile" data-tilt data-spotlight
-           style="background-image: url('images/blog/Table_Tennis.jpg');"
-           data-cat="life">
-            <span class="meta-tile-chevron" aria-hidden="true">→</span>
-            <div class="meta-tile-overlay">
-                <h3>Life &amp; Reflections</h3>
-                <p>Sports, campus, travel — the rest of the story.</p>
-                <span class="meta-tile-count">4 posts</span>
-            </div>
+        <a href="blog/dft-convergence.html" class="timeline-row" data-cat="technical">
+            <span class="timeline-row-date">01-15</span>
+            <span class="timeline-row-dot" aria-hidden="true"></span>
+            <span class="timeline-row-title">DFT Convergence Tips</span>
+            <span class="timeline-row-tag" aria-hidden="true">Tech</span>
+        </a>
+        <a href="blog/table-tennis-journey.html" class="timeline-row" data-cat="life">
+            <span class="timeline-row-date">01-05</span>
+            <span class="timeline-row-dot" aria-hidden="true"></span>
+            <span class="timeline-row-title">My Table Tennis Journey</span>
+            <span class="timeline-row-tag" aria-hidden="true">Life</span>
+        </a>
+
+        <h3 class="timeline-year">2024</h3>
+        <a href="blog/jhu-seasons.html" class="timeline-row" data-cat="life">
+            <span class="timeline-row-date">11-20</span>
+            <span class="timeline-row-dot" aria-hidden="true"></span>
+            <span class="timeline-row-title">Four Seasons at Hopkins</span>
+            <span class="timeline-row-tag" aria-hidden="true">Life</span>
+        </a>
+        <a href="blog/mlff-tutorial.html" class="timeline-row" data-cat="technical">
+            <span class="timeline-row-date">12-20</span>
+            <span class="timeline-row-dot" aria-hidden="true"></span>
+            <span class="timeline-row-title">Getting Started with ML Force Fields</span>
+            <span class="timeline-row-tag" aria-hidden="true">Tech</span>
+        </a>
+        <a href="blog/conference-travels.html" class="timeline-row" data-cat="life">
+            <span class="timeline-row-date">10-25</span>
+            <span class="timeline-row-dot" aria-hidden="true"></span>
+            <span class="timeline-row-title">Conference Cities Through My Lens</span>
+            <span class="timeline-row-tag" aria-hidden="true">Life</span>
+        </a>
+        <a href="blog/qe-scripts.html" class="timeline-row" data-cat="technical">
+            <span class="timeline-row-date">11-10</span>
+            <span class="timeline-row-dot" aria-hidden="true"></span>
+            <span class="timeline-row-title">Useful Quantum ESPRESSO Scripts</span>
+            <span class="timeline-row-tag" aria-hidden="true">Tech</span>
+        </a>
+        <a href="blog/data-viz.html" class="timeline-row" data-cat="technical">
+            <span class="timeline-row-date">10-05</span>
+            <span class="timeline-row-dot" aria-hidden="true"></span>
+            <span class="timeline-row-title">Beautiful Plots for Materials Science</span>
+            <span class="timeline-row-tag" aria-hidden="true">Tech</span>
         </a>
     </section>
 
-    <!-- Main -->
-    <div id="main">
-        
-        <!-- Introduction -->
-        <section id="intro">
-            <header class="major">
-                <h2>Sharing Knowledge & Life</h2>
-            </header>
-            <p>Welcome to my blog where I share technical insights from my research and glimpses of life beyond the lab. From DFT calculations to table tennis strategies, this is where science meets personal interests.</p>
-        </section>
-		<a href="#technical-tips" class="button">Technical Tips</a>
-        <a href="#personal-blog" class="button">Life Beyond Research</a>
-        
-        <!-- Technical Tips Section -->
-        <section class="blog-category", id="technical-tips">
-            <h2>Technical Tips & Tutorials</h2>
-            <div class="row">
-                
-                <!-- DFT Calculation Tips -->
-                <article class="col-6 col-12-xsmall glass-card" data-tilt data-spotlight>
-                    <a href="blog/dft-convergence.html" class="image fit thumb">
-                        <img src="images/blog/dft-tips.png" alt="DFT Tips" />
-                    </a>
-                    <h3>DFT Convergence Tips</h3>
-                    <p class="blog-meta"><i class="far fa-calendar"></i> January 15, 2025</p>
-                    <p>Practical strategies for achieving convergence in challenging DFT calculations, including mixing schemes and initial guess optimization.</p>
-                    <a href="blog/dft-convergence.html" class="button small btn-teal">Read More</a>
-                </article>
+    <!-- Code Snippets Section -->
+    <section class="blog-category" id="code-snippets">
+        <h2>Quick Code Snippets</h2>
+        <div class="row">
+            <div class="col-12">
 
-                <!-- MLFF Tutorial -->
-                <article class="col-6 col-12-xsmall glass-card" data-tilt data-spotlight>
-                    <a href="blog/mlff-tutorial.html" class="image fit thumb">
-                        <img src="images/blog/mlff-tutorial.png" alt="MLFF Tutorial" />
-                    </a>
-                    <h3>Getting Started with ML Force Fields</h3>
-                    <p class="blog-meta"><i class="far fa-calendar"></i> December 20, 2024</p>
-                    <p>A beginner's guide to implementing machine learning force fields using ASE and MACE for molecular dynamics simulations.</p>
-                    <a href="blog/mlff-tutorial.html" class="button small btn-teal">Read More</a>
-                </article>
-
-                <!-- Quantum ESPRESSO Scripts -->
-                <article class="col-6 col-12-xsmall glass-card" data-tilt data-spotlight>
-                    <a href="blog/qe-scripts.html" class="image fit thumb">
-                        <img src="images/blog/1200px-Quantum_ESPRESSO_logo.jpg" alt="QE Scripts" />
-                    </a>
-                    <h3>Useful Quantum ESPRESSO Scripts</h3>
-                    <p class="blog-meta"><i class="far fa-calendar"></i> November 10, 2024</p>
-                    <p>Collection of Python scripts for automating Quantum ESPRESSO workflows, from input generation to data analysis.</p>
-                    <a href="blog/qe-scripts.html" class="button small btn-teal">Read More</a>
-                </article>
-
-                <!-- Data Visualization -->
-                <article class="col-6 col-12-xsmall glass-card" data-tilt data-spotlight>
-                    <a href="blog/data-viz.html" class="image fit thumb">
-                        <img src="images/thumbs/01-Defect-thumb.png" alt="Data Visualization" />
-                    </a>
-                    <h3>Beautiful Plots for Materials Science</h3>
-                    <p class="blog-meta"><i class="far fa-calendar"></i> October 5, 2024</p>
-                    <p>Creating publication-quality figures for band structures, density of states, and crystal structures using matplotlib and plotly.</p>
-                    <a href="blog/data-viz.html" class="button small btn-teal">Read More</a>
-                </article>
-
-            </div>
-            <!-- Add this before the closing </section> tag on project pages -->
-    <p><small>
-        <i class="fas fa-copyright"></i> 2025 Yi Cao. 
-        This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
-        	CC BY-NC-SA 4.0</a>.
-    </small></p>
-        </section>
-
-        <!-- Personal Blog Section -->
-        <section class="blog-category", id="personal-blog">
-            <h2>Life Beyond Research</h2>
-            <div class="row">
-                
-                <!-- Table Tennis -->
-                <article class="col-6 col-12-xsmall glass-card" data-tilt data-spotlight>
-                    <a href="blog/table-tennis-journey.html" class="image fit thumb">
-                        <img src="images/blog/Table_Tennis.jpg" alt="Table Tennis" />
-                    </a>
-                    <h3>My Table Tennis Journey</h3>
-                    <p class="blog-meta"><i class="far fa-calendar"></i> January 5, 2025</p>
-                    <p>From beginner to competitive player - lessons learned on and off the table, and how sports complement research life.</p>
-                    <a href="blog/table-tennis-journey.html" class="button small btn-teal">Read More</a>
-                </article>
-
-                <!-- Tennis Learning -->
-                <article class="col-6 col-12-xsmall glass-card" data-tilt data-spotlight>
-                    <a href="blog/learning-tennis.html" class="image fit thumb">
-                        <img src="images/blog/tennis.JPG" alt="Learning Tennis" />
-                    </a>
-                    <h3>Learning Tennis at 24</h3>
-                    <p class="blog-meta"><i class="far fa-calendar"></i> March 15, 2025</p>
-                    <p>Why I decided to pick up tennis during my PhD and the surprising parallels between mastering a sport and research.</p>
-                    <a href="blog/learning-tennis.html" class="button small btn-teal">Read More</a>
-                </article>
-
-                <!-- JHU Campus Photography -->
-                <article class="col-6 col-12-xsmall glass-card" data-tilt data-spotlight>
-                    <a href="blog/jhu-seasons.html" class="image fit thumb">
-                        <img src="images/blog/JHU_blossom.jpg" alt="JHU Campus" />
-                    </a>
-                    <h3>Four Seasons at Hopkins</h3>
-                    <p class="blog-meta"><i class="far fa-calendar"></i> November 20, 2024</p>
-                    <p>Capturing the beauty of JHU's Homewood campus through the seasons - a photographer's perspective.</p>
-                    <a href="blog/jhu-seasons.html" class="button small btn-teal">View Gallery</a>
-                </article>
-
-                <!-- Travel Photography -->
-                <article class="col-6 col-12-xsmall glass-card" data-tilt data-spotlight>
-                    <a href="blog/conference-travels.html" class="image fit thumb">
-                        <img src="images/blog/Yi_DC_blossom.JPG" alt="Travel Photography" />
-                    </a>
-                    <h3>Conference Cities Through My Lens</h3>
-                    <p class="blog-meta"><i class="far fa-calendar"></i> October 25, 2024</p>
-                    <p>Exploring DC, Boston, Bellevue, and beyond - combining conference attendance with street photography.</p>
-                    <a href="blog/conference-travels.html" class="button small btn-teal">View Gallery</a>
-                </article>
-
-            </div>
-        </section>
-
-        <!-- Timeline (chronological post list) -->
-        <section class="blog-category timeline" id="timeline">
-            <h2>Timeline</h2>
-            <div class="timeline-filters" role="group" aria-label="Filter posts by category">
-                <button type="button" class="filter-chip" data-filter-chip data-filter="all" aria-pressed="true">All</button>
-                <button type="button" class="filter-chip" data-filter-chip data-filter="technical" aria-pressed="false">Technical</button>
-                <button type="button" class="filter-chip" data-filter-chip data-filter="life" aria-pressed="false">Life</button>
-            </div>
-
-            <h3 class="timeline-year">2025</h3>
-            <a href="blog/learning-tennis.html" class="timeline-row" data-cat="life">
-                <span class="timeline-row-date">03-15</span>
-                <span class="timeline-row-dot" aria-hidden="true"></span>
-                <span class="timeline-row-title">Learning Tennis at 24</span>
-                <span class="timeline-row-tag" aria-hidden="true">Life</span>
-            </a>
-            <a href="blog/dft-convergence.html" class="timeline-row" data-cat="technical">
-                <span class="timeline-row-date">01-15</span>
-                <span class="timeline-row-dot" aria-hidden="true"></span>
-                <span class="timeline-row-title">DFT Convergence Tips</span>
-                <span class="timeline-row-tag" aria-hidden="true">Tech</span>
-            </a>
-            <a href="blog/table-tennis-journey.html" class="timeline-row" data-cat="life">
-                <span class="timeline-row-date">01-05</span>
-                <span class="timeline-row-dot" aria-hidden="true"></span>
-                <span class="timeline-row-title">My Table Tennis Journey</span>
-                <span class="timeline-row-tag" aria-hidden="true">Life</span>
-            </a>
-
-            <h3 class="timeline-year">2024</h3>
-            <a href="blog/jhu-seasons.html" class="timeline-row" data-cat="life">
-                <span class="timeline-row-date">11-20</span>
-                <span class="timeline-row-dot" aria-hidden="true"></span>
-                <span class="timeline-row-title">Four Seasons at Hopkins</span>
-                <span class="timeline-row-tag" aria-hidden="true">Life</span>
-            </a>
-            <a href="blog/mlff-tutorial.html" class="timeline-row" data-cat="technical">
-                <span class="timeline-row-date">12-20</span>
-                <span class="timeline-row-dot" aria-hidden="true"></span>
-                <span class="timeline-row-title">Getting Started with ML Force Fields</span>
-                <span class="timeline-row-tag" aria-hidden="true">Tech</span>
-            </a>
-            <a href="blog/conference-travels.html" class="timeline-row" data-cat="life">
-                <span class="timeline-row-date">10-25</span>
-                <span class="timeline-row-dot" aria-hidden="true"></span>
-                <span class="timeline-row-title">Conference Cities Through My Lens</span>
-                <span class="timeline-row-tag" aria-hidden="true">Life</span>
-            </a>
-            <a href="blog/qe-scripts.html" class="timeline-row" data-cat="technical">
-                <span class="timeline-row-date">11-10</span>
-                <span class="timeline-row-dot" aria-hidden="true"></span>
-                <span class="timeline-row-title">Useful Quantum ESPRESSO Scripts</span>
-                <span class="timeline-row-tag" aria-hidden="true">Tech</span>
-            </a>
-            <a href="blog/data-viz.html" class="timeline-row" data-cat="technical">
-                <span class="timeline-row-date">10-05</span>
-                <span class="timeline-row-dot" aria-hidden="true"></span>
-                <span class="timeline-row-title">Beautiful Plots for Materials Science</span>
-                <span class="timeline-row-tag" aria-hidden="true">Tech</span>
-            </a>
-        </section>
-
-        <!-- Code Snippets Section -->
-        <section class="blog-category">
-            <h2>Quick Code Snippets</h2>
-            <div class="row">
-                <div class="col-12">
-                    <h3>Recent Snippets</h3>
-                    
-                    <!-- Snippet 1 -->
-                    <div style="background: #f5f5f5; padding: 1em; margin-bottom: 1em; border-left: 3px solid #0079FF;">
-                        <h4>Parse QE `relax.out` for energies</h4>
-                        <pre><code>import re
+                <!-- Snippet 1 -->
+                <article class="glass-card snippet-card reveal" data-tilt data-spotlight>
+                    <h3>Parse QE <code>relax.out</code> for energies</h3>
+                    <pre><code>import re
 from ase.io import read
 
 # Read the last structure from Quantum ESPRESSO output
@@ -298,19 +265,16 @@ cell = atoms.get_cell()
 a, b, c = cell.lengths()  # in Ångstrom
 alpha, beta, gamma = cell.angles()  # in degrees
 
-# Print results
 print(f"Total Energy: {energy_eV:.6f} eV")
 print(f"Lattice Parameters (a, b, c): {a:.6f}, {b:.6f}, {c:.6f} Å")
-print(f"Lattice Angles (α, β, γ): {alpha:.2f}°, {beta:.2f}°, {gamma:.2f}°")
-                            
-    return energies</code></pre>
-                        <p><small>Posted: January 10, 2025 | <a href="https://github.com/pclancy-lab/perovskite_defect_study.git">View on GitHub</a></small></p>
-                    </div>
+print(f"Lattice Angles (α, β, γ): {alpha:.2f}°, {beta:.2f}°, {gamma:.2f}°")</code></pre>
+                    <p class="blog-meta snippet-meta">Posted: January 10, 2025 &middot; <a href="https://github.com/pclancy-lab/perovskite_defect_study.git" target="_blank" rel="noopener">View on GitHub</a></p>
+                </article>
 
-                    <!-- Snippet 2 -->
-                    <div style="background: #f5f5f5; padding: 1em; margin-bottom: 1em; border-left: 3px solid #0079FF;">
-                        <h4>Quick band gap extraction</h4>
-                        <pre><code>import numpy as np
+                <!-- Snippet 2 -->
+                <article class="glass-card snippet-card reveal" data-tilt data-spotlight>
+                    <h3>Quick band gap extraction</h3>
+                    <pre><code>import numpy as np
 
 def extract_bandgap_from_qe_output(filename='bands.out'):
     with open(filename, 'r') as f:
@@ -324,7 +288,6 @@ def extract_bandgap_from_qe_output(filename='bands.out'):
     for line in lines:
         if 'the Fermi energy is' in line:
             fermi_energy = float(line.split()[-2])  # in eV
-
         elif 'k =' in line:
             if current_kpoint_bands:
                 band_energies.append(current_kpoint_bands)
@@ -332,7 +295,6 @@ def extract_bandgap_from_qe_output(filename='bands.out'):
             k_line = line.strip().split()
             kpt = list(map(float, [k_line[2], k_line[3], k_line[4]]))
             kpoints.append(kpt)
-
         elif line.strip() and len(line.split()) == 2:
             band_energy = float(line.split()[1])
             current_kpoint_bands.append(band_energy)
@@ -340,16 +302,11 @@ def extract_bandgap_from_qe_output(filename='bands.out'):
     if current_kpoint_bands:
         band_energies.append(current_kpoint_bands)
 
-    # Convert to numpy array: shape (n_kpoints, n_bands)
     band_energies = np.array(band_energies)
-
     if fermi_energy is None:
         raise ValueError("Fermi energy not found in file.")
 
-    # Shift energies relative to Fermi level
     shifted_energies = band_energies - fermi_energy
-
-    # Find VBM and CBM
     vbm = np.max(shifted_energies[shifted_energies <= 0])
     cbm = np.min(shifted_energies[shifted_energies >= 0])
     band_gap = cbm - vbm if cbm > vbm else 0.0
@@ -362,80 +319,74 @@ def extract_bandgap_from_qe_output(filename='bands.out'):
     if band_gap == 0.0:
         print("This material is metallic.")
     else:
-        # Check direct vs indirect band gap
         vbm_k = np.where(shifted_energies == vbm)[0][0]
         cbm_k = np.where(shifted_energies == cbm)[0][0]
-        if vbm_k == cbm_k:
-            print("Direct band gap.")
-        else:
-            print("Indirect band gap.")
-# Run it
-extract_bandgap_from_qe_output('bands.out')
-                            </code></pre>
-                        <p><small>Posted: January 8, 2025 | Tags: Quantum ESPRESSO, ASE, band structure</small></p>
-                    </div>
+        print("Direct band gap." if vbm_k == cbm_k else "Indirect band gap.")
 
+extract_bandgap_from_qe_output('bands.out')</code></pre>
+                    <p class="blog-meta snippet-meta">Posted: January 8, 2025 &middot; Tags: Quantum ESPRESSO, ASE, band structure</p>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Write tool: frontmatter form + live preview + .md download -->
+    <section class="blog-category" id="write-section">
+        <div class="write-tool" id="write">
+            <h2>Write a Post</h2>
+            <form class="write-form" onsubmit="return false;">
+                <div class="write-form-field">
+                    <label for="write-title">Title</label>
+                    <input type="text" id="write-title" class="write-form-input" placeholder="My new post" />
+                </div>
+                <div class="write-form-field">
+                    <label for="write-date">Date</label>
+                    <input type="date" id="write-date" class="write-form-input" />
+                </div>
+                <div class="write-form-field">
+                    <label for="write-category">Category</label>
+                    <select id="write-category" class="write-form-select">
+                        <option value="technical">Technical</option>
+                        <option value="life">Life</option>
+                    </select>
+                </div>
+                <div class="write-form-field">
+                    <label for="write-tags">Tags (comma-separated)</label>
+                    <input type="text" id="write-tags" class="write-form-input" placeholder="dft, qe" />
+                </div>
+                <div class="write-form-field">
+                    <label for="write-summary">Summary</label>
+                    <textarea id="write-summary" class="write-form-textarea" rows="2" placeholder="One-sentence summary"></textarea>
+                </div>
+                <div class="write-form-field">
+                    <label for="write-body">Body (Markdown)</label>
+                    <textarea id="write-body" class="write-form-textarea" rows="16" placeholder="# Heading&#10;&#10;Write your post in Markdown."></textarea>
+                </div>
+                <button type="button" class="write-download" data-write-download>Download .md</button>
+            </form>
+            <div class="write-preview" id="write-preview" aria-live="polite">
+                <div class="preview-content write-preview-prose">
+                    <p style="color:#7a7a7a;font-style:italic;">Live preview appears here as you type.</p>
                 </div>
             </div>
-                        <!-- Add this before the closing </section> tag on project pages -->
-    <p><small>
-        <i class="fas fa-copyright"></i> 2025 Yi Cao. 
-        This work is licensed under  <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>.
-    </small></p>
-        </section>
+        </div>
+    </section>
 
-        <!-- Write tool: frontmatter form + live preview + .md download -->
-        <section class="blog-category">
-            <div class="write-tool" id="write">
-                <h2>Write a Post</h2>
-                <form class="write-form" onsubmit="return false;">
-                    <div class="write-form-field">
-                        <label for="write-title">Title</label>
-                        <input type="text" id="write-title" class="write-form-input" placeholder="My new post" />
-                    </div>
-                    <div class="write-form-field">
-                        <label for="write-date">Date</label>
-                        <input type="date" id="write-date" class="write-form-input" />
-                    </div>
-                    <div class="write-form-field">
-                        <label for="write-category">Category</label>
-                        <select id="write-category" class="write-form-select">
-                            <option value="technical">Technical</option>
-                            <option value="life">Life</option>
-                        </select>
-                    </div>
-                    <div class="write-form-field">
-                        <label for="write-tags">Tags (comma-separated)</label>
-                        <input type="text" id="write-tags" class="write-form-input" placeholder="dft, qe" />
-                    </div>
-                    <div class="write-form-field">
-                        <label for="write-summary">Summary</label>
-                        <textarea id="write-summary" class="write-form-textarea" rows="2" placeholder="One-sentence summary"></textarea>
-                    </div>
-                    <div class="write-form-field">
-                        <label for="write-body">Body (Markdown)</label>
-                        <textarea id="write-body" class="write-form-textarea" rows="16" placeholder="# Heading&#10;&#10;Write your post in Markdown."></textarea>
-                    </div>
-                    <button type="button" class="write-download" data-write-download>Download .md</button>
-                </form>
-                <div class="write-preview" id="write-preview" aria-live="polite">
-                    <div class="preview-content write-preview-prose">
-                        <p style="color:#7a7a7a;font-style:italic;">Live preview appears here as you type.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Subscribe/Follow Section -->
-        <section>
-            <h2>Stay Connected</h2>
-            <p>Get updates when I post new content:</p>
-            <ul class="actions">
-                <li><a href="https://github.com/yicao-elina" class="button"><i class="fab fa-github"></i> Follow on GitHub</a></li>
-                <li><a href="https://www.linkedin.com/in/yi-cao-1368ab292/" class="button"><i class="fab fa-linkedin"></i> Connect on LinkedIn</a></li>
-                <li><a href="index.html" class="button">Back to Home</a></li>
-            </ul>
-        </section>
+    <!-- Stay Connected Section -->
+    <section id="blog-connect">
+        <h2>Stay Connected</h2>
+        <p>Get updates when I post new content:</p>
+        <ul class="actions">
+            <li><a href="https://github.com/yicao-elina" class="button"><i class="fab fa-github"></i> Follow on GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/yi-cao-1368ab292/" class="button"><i class="fab fa-linkedin"></i> Connect on LinkedIn</a></li>
+            <li><a href="index.html" class="button">Back to Home</a></li>
+        </ul>
+        <p><small>
+            <i class="fas fa-copyright"></i> 2025 Yi Cao.
+            This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>.
+        </small></p>
+    </section>
 
     </div>
 
@@ -468,5 +419,6 @@ extract_bandgap_from_qe_output('bands.out')
     <script src="assets/js/blog-spotlight.js" defer></script>
     <script src="assets/js/blog-mesh.js" defer></script>
     <script src="assets/js/header-tooltip.js" defer></script>
+    <script src="assets/js/reveal-on-scroll.js" defer></script>
 </body>
 </html>

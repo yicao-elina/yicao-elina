@@ -223,24 +223,12 @@ body.no-motion .glass-card::before { opacity: 0; }
   .write-preview { background: rgba(255, 255, 255, 0.88); }
 }
 
-/* ---------- Section header typography refresh ---------- */
-
-#technical-tips > h2,
-#personal-blog > h2 {
-  font-family: "SF Pro Display", system-ui, -apple-system, sans-serif;
-  font-size: 28px;
-  font-weight: 600;
-  letter-spacing: -0.28px;
-  color: #1d1d1f;
-}
-
 /* ---------- Meta-tiles (binary category overview) ---------- */
 
 .meta-tiles {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
-  margin: 32px 0 24px;
 }
 
 .meta-tile {
@@ -351,11 +339,6 @@ body.no-motion .glass-card::before { opacity: 0; }
 }
 
 .timeline h2 {
-  font-family: "SF Pro Display", system-ui, -apple-system, sans-serif;
-  font-size: 28px;
-  font-weight: 600;
-  letter-spacing: -0.28px;
-  color: #1d1d1f;
   margin: 0 0 16px;
 }
 
@@ -487,11 +470,6 @@ body[data-timeline-filter="life"] [data-cat="technical"] { display: none; }
 .write-tool h2 {
   grid-column: 1 / -1;
   margin: 0 0 8px;
-  font-family: "SF Pro Display", system-ui, -apple-system, sans-serif;
-  font-size: 28px;
-  font-weight: 600;
-  letter-spacing: -0.28px;
-  color: #1d1d1f;
 }
 
 .write-form {
@@ -665,6 +643,33 @@ body[data-timeline-filter="life"] [data-cat="technical"] { display: none; }
   border-radius: 8px;
 }
 
+/* ---------- Code snippet cards (Quick Code Snippets) ---------- */
+
+.snippet-card pre {
+  margin: 0 0 12px;
+  padding: 16px;
+  background: rgba(20, 30, 45, 0.04);
+  border-left: 3px solid #49bf9d;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+.snippet-card pre code {
+  font-family: "SF Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #1d1d1f;
+  background: transparent;
+}
+
+.snippet-card .snippet-meta {
+  margin: 0;
+}
+
+.snippet-card + .snippet-card {
+  margin-top: 20px;
+}
+
 /* ---------- Responsive ---------- */
 
 @media (max-width: 1023px) and (min-width: 640px) {
@@ -674,8 +679,6 @@ body[data-timeline-filter="life"] [data-cat="technical"] { display: none; }
   .meta-tile-overlay { padding: 20px; }
   .meta-tile-overlay h3 { font-size: 22px; }
   .write-tool { grid-template-columns: 1fr; padding: 24px; }
-  .timeline h2 { font-size: 24px; }
-  .write-tool h2 { font-size: 24px; }
 }
 
 @media (max-width: 639px) {
@@ -687,7 +690,5 @@ body[data-timeline-filter="life"] [data-cat="technical"] { display: none; }
   .meta-tile-overlay { padding: 16px; }
   .meta-tile-overlay h3 { font-size: 20px; }
   .write-tool { grid-template-columns: 1fr; padding: 20px; }
-  .timeline h2 { font-size: 22px; }
-  .write-tool h2 { font-size: 22px; }
   .write-preview { min-height: 320px; }
 }

@@ -111,7 +111,7 @@ test("news.html returns 200 and has a year filter", async () => {
 
 test("news.html has 6+ timeline entries", async () => {
   const html = await (await fetch(BASE + "/news.html")).text();
-  const entries = (html.match(/class="news-entry"/g) || []).length;
+  const entries = (html.match(/class="[^"]*\bnews-entry\b[^"]*"/g) || []).length;
   assert.ok(entries >= 6, `expected >=6 news-entry elements, got ${entries}`);
 });
 

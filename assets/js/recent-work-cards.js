@@ -1,13 +1,14 @@
 /* ============================================================
    recent-work-cards.js
    Behavior for the #two "Recent Work" glass-card list:
-   - Whole-card click/Enter opens the card's primary paper link
-     (data-href), except when the click lands on a real <a>/<button>
-     inside it (icon links, the Details toggle).
+   - Only the thumbnail (.rw-thumb) opens the card's primary paper
+     link (data-href) on click/Enter. The body text on the right is
+     NOT a navigation target — clicking it does nothing, so readers
+     can select text / click the Details toggle without jumping away.
    - The Details toggle expands/collapses its sibling .spring-panel
      with the same spring easing as spring-card.js, but decoupled
      from it since these cards don't use the click-header-to-toggle
-     pattern (the header IS the card-level navigation target here).
+     pattern (the thumbnail IS the navigation target here).
    Idempotent.
    ============================================================ */
 (function () {
@@ -57,18 +58,25 @@
 
   function initCardNav() {
     document.querySelectorAll('.recent-work-list .rw-card[data-href]').forEach(function (card) {
-      card.setAttribute('role', 'link');
+      var href = card.getAttribute('data-href');
+      var thumb = card.querySelector('.rw-thumb');
+      if (!thumb) return;
+
+      // The thumbnail is the sole navigation affordance; the body text
+      // is inert. Move focus/role onto the thumb, off the whole card.
+      thumb.setAttribute('role', 'link');
+      thumb.setAttribute('tabindex', '0');
+      thumb.setAttribute('aria-label', 'Open original paper');
 
       var go = function () {
-        window.open(card.getAttribute('data-href'), '_blank', 'noopener');
+        window.open(href, '_blank', 'noopener');
       };
 
-      card.addEventListener('click', function (e) {
-        if (e.target.closest('a, button')) return;
+      thumb.addEventListener('click', function (e) {
+        e.stopPropagation();
         go();
       });
-      card.addEventListener('keydown', function (e) {
-        if (e.target !== card) return;
+      thumb.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           go();

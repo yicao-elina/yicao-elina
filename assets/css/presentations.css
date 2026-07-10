@@ -389,25 +389,6 @@ a.timeline-row,
   height: 100px;
 }
 
-/* ---------- Scroll-reveal entrance (assets/js/reveal-on-scroll.js) ---------- */
-
-.reveal {
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 520ms ease, transform 520ms var(--ease-spring);
-}
-
-.reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .reveal {
-    transition: none;
-  }
-}
-
 /* ---------- Responsive ---------- */
 
 @media screen and (max-width: 768px) {
