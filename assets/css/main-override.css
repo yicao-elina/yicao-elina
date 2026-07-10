@@ -213,7 +213,7 @@ body {
 }
 
 .recent-work-list .rw-thumb {
-  align-self: stretch;
+  align-self: start;
   margin: -20px 0 -20px -20px;
   border-radius: 24px 0 0 24px;
   overflow: hidden;
@@ -222,8 +222,7 @@ body {
 .recent-work-list .rw-thumb img {
   display: block;
   width: 100%;
-  height: 100%;
-  min-height: 200px;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
 }
 
@@ -507,70 +506,6 @@ body {
 .spring-panel a { color: var(--mint); }
 .spring-panel a:hover { color: var(--mint-bright); }
 
-/* No-JS fallback: panels are always open */
-html.no-js .spring-panel {
-  max-height: none !important;
-  opacity: 1 !important;
-  overflow: visible !important;
-}
-
-/* ---------- Recent Work (#two): bumped thumbs + spring header ---------- */
-
-.recent-work-list .row {
-  cursor: pointer;
-}
-.recent-work-list .row.spring-open {
-  background: rgba(255, 255, 255, 0.82);   /* slightly stronger glass when open */
-}
-.recent-work-list .row > a:first-child img,
-.recent-work-list .row .col-3 a img,
-.recent-work-list .row .col-3 .image.fit > img {
-  width: 220px;
-  height: 160px;
-  object-fit: cover;
-  display: block;
-  border-radius: 12px;
-}
-.recent-work-list .row > .row-body {
-  min-width: 0;       /* allow flex/grid child to shrink */
-}
-.recent-work-list .row .row-header-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-text);
-  font-size: 13px;
-  color: var(--mint);
-  margin-top: 12px;
-  text-decoration: none;
-  border: 0;
-  background: none;
-  cursor: pointer;
-  padding: 0;
-}
-.recent-work-list .row .row-header-toggle:hover { color: var(--mint-bright); }
-.recent-work-list .row .row-header-toggle .chev {
-  display: inline-block;
-  transition: transform 200ms var(--ease-spring);
-}
-.recent-work-list .row[aria-expanded="true"] .row-header-toggle .chev { transform: rotate(90deg); }
-.recent-work-list .row .spring-panel {
-  grid-column: 1 / -1;        /* span the full grid width inside the row */
-  margin-top: 12px;
-  padding-top: 16px;
-  border-top: 1px solid var(--glass-border-strong);
-  color: var(--graphite);
-  font-size: 16px;
-  line-height: 1.6;
-}
-.recent-work-list .row .spring-panel p { margin: 0 0 12px; }
-.recent-work-list .row .spring-panel .panel-links {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin-top: 8px;
-}
-
 /* ---------- Publications / Work Gallery thumbs (Strata .image.fit) ----------
    Without this rule the .col-3 .image.fit <img> renders at its native
    size inside a 25%-width column, producing the tiny ~32px thumbs
@@ -578,8 +513,8 @@ html.no-js .spring-panel {
    with object-fit: cover.
 
    NOTE: scoped to #three (the Strata work gallery) and any section
-   that uses the .col-3 / .col-9 row pattern, NOT the redesigned
-   .recent-work-list .row which has its own thumb rules in Task 4. */
+   that uses the .col-3 / .col-9 row pattern. #two (.recent-work-list)
+   now uses .rw-card, styled above, not this pattern. */
 #three .image.fit,
 .row .col-3 .image.fit,
 .row .col-12-small .image.fit {

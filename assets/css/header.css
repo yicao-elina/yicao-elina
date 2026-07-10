@@ -24,6 +24,13 @@
   font-family: var(--font-text);
 }
 
+/* On the landing page, start hidden; header-tooltip.js fades the pill in
+   as the user scrolls through #hero, so it has no opacity before JS runs. */
+body:has(#hero) .app-header {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .ah-avatar {
   width: 40px;
   height: 40px;

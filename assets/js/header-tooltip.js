@@ -59,6 +59,31 @@
       });
     }
 
+    // Hero-linked reveal: on the landing page the pill starts invisible
+    // (see header.css) and fades in 1:1 with scroll progress through
+    // #hero, landing at full opacity once the hero is fully scrolled past.
+    var hero = document.getElementById('hero');
+    if (hero) {
+      var ticking = false;
+      var updateHeaderVisibility = function () {
+        var heroHeight = hero.offsetHeight || 1;
+        var scrollY = window.scrollY || window.pageYOffset;
+        var progress = Math.min(Math.max(scrollY / heroHeight, 0), 1);
+        header.style.opacity = String(progress);
+        header.style.pointerEvents = progress > 0.05 ? 'auto' : 'none';
+        ticking = false;
+      };
+      var onScroll = function () {
+        if (!ticking) {
+          ticking = true;
+          window.requestAnimationFrame(updateHeaderVisibility);
+        }
+      };
+      updateHeaderVisibility();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+    }
+
     // Touch: tap an icon to show its tooltip for 2s
     if ('ontouchstart' in window) {
       header.querySelectorAll('.ah-icon').forEach(function (a) {
