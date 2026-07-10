@@ -30,7 +30,7 @@
 /* ---------- Mesh backdrop ---------- */
 
 .hero-mesh {
-  position: fixed;
+  position: absolute;             /* scroll with the hero so it doesn't overlay content below */
   inset: 0;
   z-index: 0;
   pointer-events: none;
@@ -230,7 +230,7 @@ body.no-motion .hero-mesh::after {
 .portfolio-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 240px);
+  grid-template-rows: repeat(2, 260px);
   gap: 20px;
 }
 
