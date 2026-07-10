@@ -29,7 +29,7 @@ test("index.html has the hero section", async () => {
 test("index.html has the 5 curated tiles + 1 explore tile", async () => {
   const html = await getHtml();
   // The five work tiles
-  for (const title of ["DUAL-X", "RepliCan", "ARIA", "GPU Agentic Workflow", "Viva Biotech CADD"]) {
+  for (const title of ["DUAL-X", "AutoMat", "ARIA", "GPU Agentic Workflow", "Viva Biotech CADD"]) {
     assert.ok(find(html, title), `tile title "${title}" present`);
   }
   // The explore-more affordance

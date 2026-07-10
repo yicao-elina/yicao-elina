@@ -239,7 +239,7 @@ body:not(:has(#hero)) {
 }
 
 /* Teaser figures have wildly different aspect ratios (portrait ARIA,
-   banner RepliCan, near-4:3 DUAL-X). `contain` + center shows the
+   banner AutoMat, near-4:3 DUAL-X). `contain` + center shows the
    whole figure; the flex parent above centers the 4:3 image box
    vertically inside the full-height column. */
 .recent-work-list .rw-thumb img {
