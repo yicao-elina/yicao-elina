@@ -11,6 +11,7 @@
         <li><a href="index.html#vision" class="scrolly">Vision</a></li>
         <li><a href="index.html#four" class="scrolly">Contact</a></li>
 		<li><a href="blog.html">Blog</a></li>
+		<li><a href="#write" class="scrolly">Write</a></li>
 		<li><a href="CAO_Yi_CV.pdf" target="_blank">CV</a></li>
 		<li><a href="https://github.com/yicao-elina" target="_blank">GitHub</a></li>
     </ul>
@@ -63,6 +64,30 @@
             Blog & Resources</h1>
         </div>
     </header>
+
+    <!-- Meta-tiles: 2 large binary category overview -->
+    <section class="meta-tiles" aria-label="Blog categories">
+        <a href="#technical-tips" class="meta-tile" data-tilt data-spotlight
+           style="background-image: url('images/blog/dft-tips.png');"
+           data-cat="technical">
+            <span class="meta-tile-chevron" aria-hidden="true">→</span>
+            <div class="meta-tile-overlay">
+                <h3>Technical</h3>
+                <p>DFT, ML force fields, Quantum ESPRESSO, and figures.</p>
+                <span class="meta-tile-count">4 posts</span>
+            </div>
+        </a>
+        <a href="#personal-blog" class="meta-tile" data-tilt data-spotlight
+           style="background-image: url('images/blog/Table_Tennis.jpg');"
+           data-cat="life">
+            <span class="meta-tile-chevron" aria-hidden="true">→</span>
+            <div class="meta-tile-overlay">
+                <h3>Life &amp; Reflections</h3>
+                <p>Sports, campus, travel — the rest of the story.</p>
+                <span class="meta-tile-count">4 posts</span>
+            </div>
+        </a>
+    </section>
 
     <!-- Main -->
     <div id="main">
@@ -187,6 +212,68 @@
             </div>
         </section>
 
+        <!-- Timeline (chronological post list) -->
+        <section class="blog-category timeline" id="timeline">
+            <h2>Timeline</h2>
+            <div class="timeline-filters" role="group" aria-label="Filter posts by category">
+                <button type="button" class="filter-chip" data-filter-chip data-filter="all" aria-pressed="true">All</button>
+                <button type="button" class="filter-chip" data-filter-chip data-filter="technical" aria-pressed="false">Technical</button>
+                <button type="button" class="filter-chip" data-filter-chip data-filter="life" aria-pressed="false">Life</button>
+            </div>
+
+            <h3 class="timeline-year">2025</h3>
+            <a href="blog/learning-tennis.html" class="timeline-row" data-cat="life">
+                <span class="timeline-row-date">03-15</span>
+                <span class="timeline-row-dot" aria-hidden="true"></span>
+                <span class="timeline-row-title">Learning Tennis at 24</span>
+                <span class="timeline-row-tag" aria-hidden="true">Life</span>
+            </a>
+            <a href="blog/dft-convergence.html" class="timeline-row" data-cat="technical">
+                <span class="timeline-row-date">01-15</span>
+                <span class="timeline-row-dot" aria-hidden="true"></span>
+                <span class="timeline-row-title">DFT Convergence Tips</span>
+                <span class="timeline-row-tag" aria-hidden="true">Tech</span>
+            </a>
+            <a href="blog/table-tennis-journey.html" class="timeline-row" data-cat="life">
+                <span class="timeline-row-date">01-05</span>
+                <span class="timeline-row-dot" aria-hidden="true"></span>
+                <span class="timeline-row-title">My Table Tennis Journey</span>
+                <span class="timeline-row-tag" aria-hidden="true">Life</span>
+            </a>
+
+            <h3 class="timeline-year">2024</h3>
+            <a href="blog/jhu-seasons.html" class="timeline-row" data-cat="life">
+                <span class="timeline-row-date">11-20</span>
+                <span class="timeline-row-dot" aria-hidden="true"></span>
+                <span class="timeline-row-title">Four Seasons at Hopkins</span>
+                <span class="timeline-row-tag" aria-hidden="true">Life</span>
+            </a>
+            <a href="blog/mlff-tutorial.html" class="timeline-row" data-cat="technical">
+                <span class="timeline-row-date">12-20</span>
+                <span class="timeline-row-dot" aria-hidden="true"></span>
+                <span class="timeline-row-title">Getting Started with ML Force Fields</span>
+                <span class="timeline-row-tag" aria-hidden="true">Tech</span>
+            </a>
+            <a href="blog/conference-travels.html" class="timeline-row" data-cat="life">
+                <span class="timeline-row-date">10-25</span>
+                <span class="timeline-row-dot" aria-hidden="true"></span>
+                <span class="timeline-row-title">Conference Cities Through My Lens</span>
+                <span class="timeline-row-tag" aria-hidden="true">Life</span>
+            </a>
+            <a href="blog/qe-scripts.html" class="timeline-row" data-cat="technical">
+                <span class="timeline-row-date">11-10</span>
+                <span class="timeline-row-dot" aria-hidden="true"></span>
+                <span class="timeline-row-title">Useful Quantum ESPRESSO Scripts</span>
+                <span class="timeline-row-tag" aria-hidden="true">Tech</span>
+            </a>
+            <a href="blog/data-viz.html" class="timeline-row" data-cat="technical">
+                <span class="timeline-row-date">10-05</span>
+                <span class="timeline-row-dot" aria-hidden="true"></span>
+                <span class="timeline-row-title">Beautiful Plots for Materials Science</span>
+                <span class="timeline-row-tag" aria-hidden="true">Tech</span>
+            </a>
+        </section>
+
         <!-- Code Snippets Section -->
         <section class="blog-category">
             <h2>Quick Code Snippets</h2>
@@ -297,6 +384,48 @@ extract_bandgap_from_qe_output('bands.out')
     </small></p>
         </section>
 
+        <!-- Write tool: frontmatter form + live preview + .md download -->
+        <section class="blog-category">
+            <div class="write-tool" id="write">
+                <h2>Write a Post</h2>
+                <form class="write-form" onsubmit="return false;">
+                    <div class="write-form-field">
+                        <label for="write-title">Title</label>
+                        <input type="text" id="write-title" class="write-form-input" placeholder="My new post" />
+                    </div>
+                    <div class="write-form-field">
+                        <label for="write-date">Date</label>
+                        <input type="date" id="write-date" class="write-form-input" />
+                    </div>
+                    <div class="write-form-field">
+                        <label for="write-category">Category</label>
+                        <select id="write-category" class="write-form-select">
+                            <option value="technical">Technical</option>
+                            <option value="life">Life</option>
+                        </select>
+                    </div>
+                    <div class="write-form-field">
+                        <label for="write-tags">Tags (comma-separated)</label>
+                        <input type="text" id="write-tags" class="write-form-input" placeholder="dft, qe" />
+                    </div>
+                    <div class="write-form-field">
+                        <label for="write-summary">Summary</label>
+                        <textarea id="write-summary" class="write-form-textarea" rows="2" placeholder="One-sentence summary"></textarea>
+                    </div>
+                    <div class="write-form-field">
+                        <label for="write-body">Body (Markdown)</label>
+                        <textarea id="write-body" class="write-form-textarea" rows="16" placeholder="# Heading&#10;&#10;Write your post in Markdown."></textarea>
+                    </div>
+                    <button type="button" class="write-download" data-write-download>Download .md</button>
+                </form>
+                <div class="write-preview" id="write-preview" aria-live="polite">
+                    <div class="preview-content write-preview-prose">
+                        <p style="color:#7a7a7a;font-style:italic;">Live preview appears here as you type.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Subscribe/Follow Section -->
         <section>
             <h2>Stay Connected</h2>
@@ -331,6 +460,10 @@ extract_bandgap_from_qe_output('bands.out')
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
+    <!-- marked v12 (MIT) -->
+    <script src="assets/js/marked.min.js" defer></script>
+    <script src="assets/js/blog-timeline.js" defer></script>
+    <script src="assets/js/blog-write.js" defer></script>
     <script src="assets/js/blog-tilt.js" defer></script>
     <script src="assets/js/blog-spotlight.js" defer></script>
     <script src="assets/js/blog-mesh.js" defer></script>
