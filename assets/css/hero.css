@@ -215,6 +215,7 @@ body.no-motion .hero-mesh::after {
   justify-content: center;
   padding: 11px 22px;
   border-radius: 9999px;
+  border-bottom: none;
   font-family: "SF Pro Text", system-ui, -apple-system, sans-serif;
   font-size: 16px;
   font-weight: 500;
@@ -227,7 +228,15 @@ body.no-motion .hero-mesh::after {
   background: #49bf9d;
   color: #ffffff;
 }
-.pc-cta-primary:hover { transform: scale(0.95); box-shadow: 0 4px 16px rgba(73, 191, 157, 0.20); }
+/* The global a:hover { color: #49bf9d !important } (main.css) would turn the
+   white label mint on hover, making it invisible on the mint fill. Override
+   with !important so the label stays white. */
+.pc-cta-primary:hover {
+  transform: scale(0.95);
+  box-shadow: 0 4px 16px rgba(73, 191, 157, 0.20);
+  color: #ffffff !important;
+  border-bottom-color: transparent !important;
+}
 .pc-cta-primary:focus-visible { outline: 2px solid #0071e3; outline-offset: 2px; }
 
 .pc-cta-ghost {
