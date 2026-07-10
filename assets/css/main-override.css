@@ -192,7 +192,11 @@ body {
   flex-wrap: wrap;
 }
 
-/* ---------- Recent work (#two): paper entries ---------- */
+/* ---------- Recent work (#two): glass-card research entries.
+   Reuses blog.css's .glass-card (blur, spotlight, tilt) recipe;
+   the .recent-work-list .rw-card selectors below only override the
+   internal layout (horizontal thumb + body instead of blog's vertical
+   card) and specificity-beat .glass-card's own rules where needed. ---------- */
 
 .recent-work-list {
   display: grid;
@@ -200,46 +204,106 @@ body {
   margin-top: 1.5em;
 }
 
-.recent-work-list .row {
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(20, 30, 45, 0.08);
-  border-radius: 18px;
-  padding: 28px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 4px 24px -12px rgba(20, 30, 45, 0.12);
+.recent-work-list .rw-card {
   display: grid;
   grid-template-columns: 220px 1fr;
-  gap: 28px;
+  column-gap: 28px;
   align-items: start;
+  cursor: pointer;
 }
 
-.recent-work-list .row > a:first-child {
-  display: block;
-  border-radius: 12px;
+.recent-work-list .rw-thumb {
+  align-self: stretch;
+  margin: -20px 0 -20px -20px;
+  border-radius: 24px 0 0 24px;
   overflow: hidden;
-  border: 0;
 }
 
-.recent-work-list .row > a:first-child img {
-  width: 100%;
+.recent-work-list .rw-thumb img {
   display: block;
-  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  object-fit: cover;
 }
 
-.recent-work-list h3 {
-  margin: 0 0 6px;
-  color: #141e2d;
-  font-size: 1.3em;
+.recent-work-list .rw-body {
+  min-width: 0;
 }
 
-.recent-work-list h4 {
-  margin: 0 0 12px;
-  color: #2a8a6e;
+.recent-work-list .rw-card h3 {
+  margin: 0 0 8px;
+}
+
+.recent-work-list .rw-card .blog-meta {
+  margin: 0 0 10px;
+}
+
+.recent-work-list .rw-links {
+  display: flex;
+  gap: 8px;
+  margin: 4px 0 12px;
+}
+
+.recent-work-list .rw-link {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(20, 30, 45, 0.08);
+  color: var(--mint);
   font-size: 0.95em;
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
+
+.recent-work-list .rw-link:hover,
+.recent-work-list .rw-link:focus-visible {
+  background: var(--mint);
+  color: #fff;
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.recent-work-list .rw-card .row-header-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-text);
+  font-size: 13px;
+  color: var(--mint);
+  margin: 0;
+  text-decoration: none;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.recent-work-list .rw-card .row-header-toggle:hover { color: var(--mint-bright); }
+
+.recent-work-list .rw-card .row-header-toggle .chev {
+  display: inline-block;
+  transition: transform 200ms var(--ease-spring);
+}
+
+.recent-work-list .rw-card .row-header-toggle[aria-expanded="true"] .chev { transform: rotate(90deg); }
+
+.recent-work-list .rw-card .spring-panel {
+  grid-column: 1 / -1;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--glass-border-strong);
+  color: var(--graphite);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.recent-work-list .rw-card .spring-panel p { margin: 0 0 10px; }
+.recent-work-list .rw-card .spring-panel p:last-child { margin-bottom: 0; }
 
 /* ---------- Awards section: keep existing inline bg, fix text contrast ---------- */
 
@@ -354,6 +418,52 @@ body {
   margin: 0;
 }
 
+/* ---------- Three: blog-style glass cards (reuses blog.css's .glass-card
+   + .btn-teal recipe so Work Experience matches blog.html's cards).
+   Scoped with #three so these win over #main's generic a/h3/p rules and
+   the older #three .image.fit thumb-sizing rule below. ---------- */
+
+#three .row {
+  text-align: left;
+}
+
+#three .glass-card .image.fit.thumb {
+  width: auto;
+  max-width: none;
+  border: 0;
+}
+
+#three .glass-card .image.fit.thumb img {
+  height: auto;
+  aspect-ratio: 16 / 10;
+  border-radius: 0;
+}
+
+#three .glass-card h3 {
+  margin: 0 0 6px;
+}
+
+#three .glass-card .blog-meta {
+  font-size: 0.8em;
+  color: var(--graphite);
+  margin: 0 0 10px;
+}
+
+#three .glass-card .btn-teal {
+  background: transparent;
+  border-color: var(--mint-bright);
+  border-bottom: 1px solid var(--mint-bright);
+  color: var(--mint-bright) !important;
+  box-shadow: none;
+}
+
+#three .glass-card .btn-teal:hover,
+#three .glass-card .btn-teal:focus-visible {
+  background: var(--mint-bright);
+  color: #fff !important;
+  border-bottom-color: var(--mint-bright);
+}
+
 /* ---------- Mobile ---------- */
 
 @media screen and (max-width: 768px) {
@@ -366,9 +476,16 @@ body {
   #main h2,
   #main header.major h2 { font-size: 1.7em; }
 
-  .recent-work-list .row {
+  .recent-work-list .rw-card {
     grid-template-columns: 1fr;
-    padding: 20px;
+  }
+  .recent-work-list .rw-thumb {
+    margin: -20px -20px 16px;
+    border-radius: 24px 24px 0 0;
+  }
+  .recent-work-list .rw-thumb img {
+    min-height: 0;
+    aspect-ratio: 16 / 10;
   }
 }
 
@@ -699,3 +816,15 @@ html.no-js .spring-panel {
   .news-entry { grid-template-columns: 80px 1fr; }
   .news-entry .tag { grid-column: 1 / -1; justify-self: start; }
 }
+
+/* ---------- Section card wrapper (Awards/Vision/Contact) ---------- */
+
+.section-card {
+  margin-top: 1.5em;
+  padding: 32px 36px;
+  color: var(--graphite);
+}
+.section-card h2 { margin-top: 0; }
+#awards .section-card { padding: 28px 32px; }
+#vision .section-card p { color: var(--graphite); font-size: 18px; line-height: 1.6; }
+#four .section-card p { color: var(--graphite); font-size: 16px; line-height: 1.5; margin: 0 0 16px; }
