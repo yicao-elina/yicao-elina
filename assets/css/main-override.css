@@ -97,7 +97,11 @@ body {
 }
 
 #main a.button {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  line-height: 1.2;
   background: #2a8a6e;
   color: #fff !important;
   border: 0;
@@ -401,7 +405,9 @@ html.no-js .spring-panel {
 .recent-work-list .row.spring-open {
   background: rgba(255, 255, 255, 0.82);   /* slightly stronger glass when open */
 }
-.recent-work-list .row > a:first-child img {
+.recent-work-list .row > a:first-child img,
+.recent-work-list .row .col-3 a img,
+.recent-work-list .row .col-3 .image.fit > img {
   width: 220px;
   height: 160px;
   object-fit: cover;
