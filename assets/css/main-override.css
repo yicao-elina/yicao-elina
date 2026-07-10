@@ -11,6 +11,10 @@
    poptrox, etc.) intact.
    ============================================================ */
 
+body {
+  padding-top: 88px;                /* was 60px — clears the new 60px header pill + 16px top offset + air */
+}
+
 /* ---------- Page container ---------- */
 
 #main {

@@ -13,6 +13,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 <link rel="stylesheet" href="assets/css/main.css" />
 <link rel="stylesheet" href="assets/css/hero.css" />
 <link rel="stylesheet" href="assets/css/main-override.css" />
+<link rel="stylesheet" href="assets/css/header.css" />
 </head>
 <body class="is-preload">
 
@@ -273,28 +274,30 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
     }
 </style>
 
-<!-- Navigation Bar -->
-<nav id="nav">
-    <ul class="container">
-        <li><a href="#top" class="scrolly">Home</a></li>
-        <li><a href="#news" class="scrolly">News</a></li>
-        <li><a href="#two" class="scrolly">Research</a></li>
-        <li class="dropdown">
-            <a href="#skills-timeline" class="scrolly">Experience <i class="icon solid fa-caret-down"></i></a>
-            <ul class="dropdown-menu">
-                <li><a href="#skills-timeline" class="scrolly">Education</a></li>
-                <li><a href="#three" class="scrolly">Work Gallery</a></li>
-            </ul>
-        </li>
-        <li><a href="presentations.html">Presentations</a></li>
-        <li><a href="#awards" class="scrolly">Awards</a></li>
-        <li><a href="#vision" class="scrolly">Vision</a></li>
-        <li><a href="#four" class="scrolly">Contact</a></li>
-		<li><a href="blog.html">Blog</a></li>
-		<li><a href="CAO_Yi_CV.pdf" target="_blank">CV</a></li>
-		<li><a href="https://github.com/yicao-elina" target="_blank">GitHub</a></li>
-    </ul>
-</nav>
+<!-- Floating glass icon-pill header (shared partial; same in all pages) -->
+<header id="app-header" class="app-header" aria-label="Site navigation">
+  <a class="ah-avatar" href="index.html" aria-label="Yi Cao — go to top">
+    <img src="images/avatar.jpeg" alt="Yi Cao" />
+  </a>
+  <a class="ah-icon" href="news.html" data-tooltip="News"><i class="far fa-newspaper"></i><span class="ah-tooltip">News</span></a>
+  <a class="ah-icon" href="index.html#two" data-tooltip="Research"><i class="fas fa-flask"></i><span class="ah-tooltip">Research</span></a>
+  <a class="ah-icon" href="index.html#experience" data-tooltip="Experience"><i class="fas fa-graduation-cap"></i><span class="ah-tooltip">Experience</span></a>
+  <a class="ah-icon" href="index.html#awards" data-tooltip="Awards"><i class="fas fa-trophy"></i><span class="ah-tooltip">Awards</span></a>
+  <a class="ah-icon" href="index.html#vision" data-tooltip="Vision"><i class="far fa-eye"></i><span class="ah-tooltip">Vision</span></a>
+  <a class="ah-icon" href="index.html#four" data-tooltip="Contact"><i class="far fa-envelope"></i><span class="ah-tooltip">Contact</span></a>
+  <a class="ah-icon" href="blog.html" data-tooltip="Blog"><i class="fas fa-pen-to-square"></i><span class="ah-tooltip">Blog</span></a>
+  <a class="ah-icon" href="CAO_Yi_CV.pdf" target="_blank" rel="noopener" data-tooltip="CV"><i class="far fa-file-pdf"></i><span class="ah-tooltip">CV</span></a>
+  <a class="ah-icon" href="https://github.com/yicao-elina" target="_blank" rel="noopener" data-tooltip="GitHub"><i class="fab fa-github"></i><span class="ah-tooltip">GitHub</span></a>
+  <a class="ah-icon" href="presentations.html" data-tooltip="Talks"><i class="fas fa-presentation-screen"></i><span class="ah-tooltip">Talks</span></a>
+  <button class="ah-more" type="button" aria-label="More navigation"><i class="fas fa-ellipsis"></i></button>
+  <div class="ah-popover" role="menu" aria-label="More links">
+    <a class="ah-icon" href="index.html#two" role="menuitem"><i class="fas fa-flask"></i>&nbsp;Research</a>
+    <a class="ah-icon" href="index.html#experience" role="menuitem"><i class="fas fa-graduation-cap"></i>&nbsp;Experience</a>
+    <a class="ah-icon" href="index.html#awards" role="menuitem"><i class="fas fa-trophy"></i>&nbsp;Awards</a>
+    <a class="ah-icon" href="index.html#vision" role="menuitem"><i class="far fa-eye"></i>&nbsp;Vision</a>
+    <a class="ah-icon" href="index.html#four" role="menuitem"><i class="far fa-envelope"></i>&nbsp;Contact</a>
+  </div>
+</header>
 
 
 <!-- Main -->
@@ -912,6 +915,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 <script src="assets/js/main.js"></script>
 <script src="assets/js/hero-tilt.js" defer></script>
 <script src="assets/js/hero-mesh.js" defer></script>
+<script src="assets/js/header-tooltip.js" defer></script>
 
 <script>
 	document.querySelectorAll('.expand-card').forEach(card => {
