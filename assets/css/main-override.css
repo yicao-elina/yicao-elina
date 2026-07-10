@@ -11,7 +11,12 @@
    poptrox, etc.) intact.
    ============================================================ */
 
-body {
+/* Only non-hero pages need body padding-top to clear the floating header.
+   The hero page (#hero) handles its own top padding internally, so adding
+   body padding-top there would (a) paint an 88px white strip above the
+   #fafafc hero surface and (b) push min-height:100vh content below the
+   fold. Scope this to pages WITHOUT a #hero. */
+body:not(:has(#hero)) {
   padding-top: 88px;                /* was 60px — clears the new 60px header pill + 16px top offset + air */
 }
 
@@ -209,21 +214,40 @@ body {
   grid-template-columns: 220px 1fr;
   column-gap: 28px;
   align-items: start;
-  cursor: pointer;
 }
 
+/* The thumbnail is the click target (opens the original); the body
+   text is not. Pointer + focus affordance live on the thumb, not the
+   whole card. The thumb stretches to the card's full height (negative
+   margins bleed it to the card's top/bottom/left edges) and centers
+   the figure vertically within that column. */
 .recent-work-list .rw-thumb {
-  align-self: start;
+  align-self: stretch;
   margin: -20px 0 -20px -20px;
   border-radius: 24px 0 0 24px;
   overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
 }
 
+.recent-work-list .rw-thumb:focus-visible {
+  outline: 2px solid var(--mint);
+  outline-offset: -2px;
+}
+
+/* Teaser figures have wildly different aspect ratios (portrait ARIA,
+   banner RepliCan, near-4:3 DUAL-X). `contain` + center shows the
+   whole figure; the flex parent above centers the 4:3 image box
+   vertically inside the full-height column. */
 .recent-work-list .rw-thumb img {
   display: block;
   width: 100%;
   aspect-ratio: 4 / 3;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
 }
 
 .recent-work-list .rw-body {
@@ -485,6 +509,29 @@ body {
   .recent-work-list .rw-thumb img {
     min-height: 0;
     aspect-ratio: 16 / 10;
+  }
+}
+
+/* ---------- Scroll-reveal entrance (assets/js/reveal-on-scroll.js) ----------
+   Shared primitive: elements with .reveal start faded + nudged down,
+   then transition in when scrolled into view. Honors
+   prefers-reduced-motion (JS reveals instantly + this kills the
+   transition). Page-specific stylesheets defer to this. ---------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 520ms ease, transform 520ms var(--ease-spring);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transition: none;
   }
 }
 

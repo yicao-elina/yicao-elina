@@ -3263,8 +3263,11 @@ input, select, textarea {
     border-bottom: 2px solid #0079FF;
 }
 
-/* Adjust body padding to account for fixed nav */
-body {
+/* Adjust body padding to account for fixed nav.
+   Skip the hero page — #hero manages its own top padding, and adding
+   body padding-top there paints a white strip above the hero and
+   pushes its 100vh content off-screen. */
+body:not(:has(#hero)) {
     padding-top: 60px;
 }
 

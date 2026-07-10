@@ -135,7 +135,7 @@ body:has(#hero) .app-header {
   .app-header .ah-icon:nth-child(n+6):not(.ah-avatar) { display: none; }
   .ah-more { display: inline-flex; }
   .app-header { position: relative; top: 0; transform: none; left: 0; max-width: 100%; margin: 12px auto; }
-  body { padding-top: 12px !important; }
+  body:not(:has(#hero)) { padding-top: 12px !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
