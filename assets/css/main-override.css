@@ -479,3 +479,69 @@ html.no-js .spring-panel {
   object-fit: cover;
   border-radius: 12px;
 }
+
+/* ---------- Experience (#experience): 2-col Work + 3-col Skills ---------- */
+
+.experience-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 8px;
+}
+.skills-grid { grid-template-columns: repeat(3, 1fr); margin-top: 8px; }
+
+.exp-card { padding: 24px; }
+.exp-header { display: flex; align-items: center; gap: 16px; cursor: pointer; }
+.exp-logo {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--mint), var(--mint-bright));
+  color: #fff; font: 700 20px/1 var(--font-display);
+  display: inline-flex; align-items: center; justify-content: center;
+  flex: 0 0 48px;
+}
+.exp-meta { min-width: 0; }
+.exp-role { margin: 0 0 4px; color: var(--ink); font: 600 18px/1.2 var(--font-display); }
+.exp-org { margin: 0 0 4px; color: var(--graphite); font: 500 14px/1.3 var(--font-text); }
+.exp-when { margin: 0; color: var(--graphite); font: 400 13px/1.3 var(--font-text); }
+.exp-card .spring-panel { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--glass-border-strong); color: var(--graphite); font-size: 15px; line-height: 1.6; }
+.exp-card .spring-panel p { margin: 0 0 10px; }
+.exp-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.exp-tag {
+  display: inline-block;
+  background: rgba(42, 138, 110, 0.1);
+  color: var(--mint);
+  font: 600 12px/1 var(--font-text);
+  padding: 5px 10px;
+  border-radius: 999px;
+}
+
+.skill-card { padding: 24px; }
+.skill-card h3 { margin: 0 0 12px; color: var(--ink); font: 600 18px/1.2 var(--font-display); }
+.skill-card ul { margin: 0; padding: 0 0 0 20px; color: var(--graphite); font-size: 15px; line-height: 1.7; }
+
+@media (max-width: 768px) {
+  .experience-grid, .skills-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- Skills-timeline: glass cards on the date rail ---------- */
+
+#skills-timeline .timeline-container::after {
+  background: var(--mint) !important;
+  opacity: 0.3;
+}
+#skills-timeline .t-item {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-card);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  padding: 16px 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  color: var(--graphite);
+  font-family: var(--font-text);
+}
+#skills-timeline .t-item h3, #skills-timeline .t-item h4 { color: var(--ink); }
+#skills-timeline .t-item::before {
+  background: var(--mint) !important;
+  border-color: #fff !important;
+}

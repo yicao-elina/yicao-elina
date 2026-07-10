@@ -315,6 +315,84 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 </ul>
 </section>
 
+<!-- Experience: 2-col Work cards + 3-col Skill clusters -->
+<section id="experience">
+  <h2>Experience & Skills</h2>
+  <h3 style="color: var(--mint); font-size: 0.95em; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; margin: 0 0 12px;">Work</h3>
+  <div class="experience-grid">
+    <article class="glass exp-card" data-spring>
+      <header class="spring-header exp-header">
+        <div class="exp-logo" aria-hidden="true">Q</div>
+        <div class="exp-meta">
+          <h3 class="exp-role">GPU Agentic Workflow</h3>
+          <p class="exp-org">Qualcomm &middot; High-Level Modeling</p>
+          <p class="exp-when">May &ndash; Aug 2026 &middot; San Diego</p>
+        </div>
+      </header>
+      <div class="spring-panel">
+        <p>Built a knowledge-graph-assisted, agentic causal reasoning workflow for the GPU High-Level Modeling team. Ingested heterogeneous sources (papers, design docs, internal wikis), extracted a typed causal graph, and answered engineering questions with explainable evidence paths.</p>
+        <p><strong>Stack.</strong> Python, LangGraph, NetworkX, a custom entity-resolution layer over our internal docs index, and a ReAct-style agent that ranks candidate evidence paths by causal distance to the question.</p>
+        <div class="exp-tags">
+          <span class="exp-tag">#Agent</span>
+          <span class="exp-tag">#CUDA</span>
+          <span class="exp-tag">#KG</span>
+          <span class="exp-tag">#ReAct</span>
+        </div>
+      </div>
+    </article>
+    <article class="glass exp-card" data-spring>
+      <header class="spring-header exp-header">
+        <div class="exp-logo" aria-hidden="true">V</div>
+        <div class="exp-meta">
+          <h3 class="exp-role">CADD Researcher</h3>
+          <p class="exp-org">Viva Biotech</p>
+          <p class="exp-when">Summer 2024 &middot; Shanghai</p>
+        </div>
+      </header>
+      <div class="spring-panel">
+        <p>A co-solvent MD + protein-ligand analysis pipeline for early-stage drug discovery. Screened co-solvent choices by predicted binding-affinity shifts, with a parallel workflow for ADMET-style property checks on the candidate ligands.</p>
+        <p><strong>Stack.</strong> GROMACS, MDAnalysis, scikit-learn for the affinity-shift predictor, and an internal dashboard for chemists to inspect MD trajectories and binding-pocket hotspots.</p>
+        <div class="exp-tags">
+          <span class="exp-tag">#MD</span>
+          <span class="exp-tag">#Drug</span>
+          <span class="exp-tag">#Biology</span>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <h3 style="color: var(--mint); font-size: 0.95em; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; margin: 48px 0 12px;">Technical Skills</h3>
+  <div class="experience-grid skills-grid">
+    <article class="glass skill-card">
+      <h3><i class="icon solid fa-brain" style="color: var(--mint)"></i> Machine Learning & AI</h3>
+      <ul>
+        <li>Deep Learning (PyTorch, TensorFlow)</li>
+        <li>Large Language Models (fine-tuning, prompt engineering)</li>
+        <li>Causal Inference, Graph Neural Networks</li>
+        <li>Transfer Learning, Explainable AI</li>
+      </ul>
+    </article>
+    <article class="glass skill-card">
+      <h3><i class="icon solid fa-atom" style="color: var(--mint)"></i> Scientific Computing</h3>
+      <ul>
+        <li>Molecular Dynamics (LAMMPS, GROMACS)</li>
+        <li>Density Functional Theory (Quantum ESPRESSO)</li>
+        <li>High-Performance Computing (MPI, CUDA)</li>
+        <li>Materials Informatics, Scientific AI</li>
+      </ul>
+    </article>
+    <article class="glass skill-card">
+      <h3><i class="icon solid fa-code" style="color: var(--mint)"></i> Programming & Tools</h3>
+      <ul>
+        <li>Python, MATLAB, R, Git</li>
+        <li>Docker, Linux/Unix</li>
+        <li>SQL, Database Management</li>
+        <li>Distributed Computing, Large-scale Data Processing</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
 <!-- News -->
 <section id="news">
     <h2>Latest News</h2>
@@ -523,46 +601,11 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 
 <!-- Section: Skills & Timeline -->
 <section id="skills-timeline">
-    <h2>Background & Expertise</h2>
-    
-    <!-- Technical Skills -->
-    <div class="row">
-        <div class="col-12">
-            <h3>Technical Portfolio</h3>
-        </div>
-        <div class="col-4 col-12-medium">
-            <h4 style="font-size: 0.9em;"> <i class="icon solid fa-brain"></i> Machine Learning & AI</h4>
-            <ul class="alt" style="font-size: 0.85em;">
-                <li>Deep Learning (PyTorch, TensorFlow)</li>
-                <li>Large Language Models (fine-tuning, prompt engineering)</li>
-                <li>Causal Inference, Graph Neural Networks</li>
-                <li>Transfer Learning, Explainable AI</li>
-            </ul>
-        </div>
-        <div class="col-4 col-12-medium">
-            <h4 style="font-size: 0.9em;"> <i class="icon solid fa-atom"></i> Scientific Computing</h4>
-            <ul class="alt" style="font-size: 0.85em;">
-                <li>Molecular Dynamics (LAMMPS, GROMACS)</li>
-                <li>Density Functional Theory (Quantum ESPRESSO)</li>
-                <li>High-Performance Computing (MPI, CUDA)</li>
-                <li>Materials Informatics, Scientific AI</li>
-            </ul>
-        </div>
-        <div class="col-4 col-12-medium">
-            <h4 style="font-size: 0.9em;"> <i class="icon solid fa-code"></i> Programming & Tools</h4>
-            <ul class="alt" style="font-size: 0.85em;">
-                <li>Python, MATLAB, R, Git</li>
-                <li>Docker, Linux/Unix</li>
-                <li>SQL, Database Management</li>
-                <li>Distributed Computing, Large-scale Data Processing</li>
-            </ul>
-        </div>
-    </div>
+    <h2>Education & Research Timeline</h2>
 
     <hr />
 
     <!-- Visual Timeline -->
-    <h3>Education & Research Timeline</h3>
     <style>
         .timeline-container {
             position: relative;
