@@ -1,0 +1,259 @@
+/* ============================================================
+   Blog Glassmorphic Styles
+   Self-contained styles for blog.html — mesh backdrop,
+   glass cards, cursor spotlight, header refresh, responsive.
+   Color/type/motion tokens are documented in
+   docs/superpowers/specs/2026-07-09-blog-glassmorphic-design.md
+   ============================================================ */
+
+/* ---------- Mesh backdrop (CSS-only, same shape as hero) ---------- */
+
+.blog-mesh {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: #fafafc;
+}
+
+.blog-mesh::before,
+.blog-mesh::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  will-change: transform;
+}
+
+.blog-mesh::before {
+  top: -10%;
+  left: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, rgba(73, 191, 157, 0.14) 0%, rgba(73, 191, 157, 0) 70%);
+  animation: blog-mesh-drift-a 32s ease-in-out infinite alternate;
+}
+
+.blog-mesh::after {
+  bottom: -15%;
+  right: -15%;
+  width: 70vw;
+  height: 70vw;
+  background: radial-gradient(circle, rgba(245, 185, 66, 0.12) 0%, rgba(245, 185, 66, 0) 70%);
+  filter: blur(100px);
+  animation: blog-mesh-drift-b 40s ease-in-out infinite alternate;
+}
+
+@keyframes blog-mesh-drift-a {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(40px, 20px); }
+}
+
+@keyframes blog-mesh-drift-b {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(-50px, 30px); }
+}
+
+/* Pause mesh drift when tab is hidden (battery) */
+.blog-mesh.is-paused::before,
+.blog-mesh.is-paused::after {
+  animation-play-state: paused;
+}
+
+/* Disable mesh drift when reduced motion is set via JS (.no-motion on <body>) */
+body.no-motion .blog-mesh::before,
+body.no-motion .blog-mesh::after {
+  animation: none;
+}
+
+/* ---------- Glass card ---------- */
+
+.glass-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  transform: perspective(800px) rotateX(0) rotateY(0) translateY(0);
+  transform-style: preserve-3d;
+  transition: transform 220ms ease-out, box-shadow 220ms ease;
+  will-change: transform;
+  overflow: hidden;
+}
+
+.glass-card:hover,
+.glass-card:focus-within {
+  transform: perspective(800px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg)) translateY(-6px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.10);
+}
+
+.glass-card:focus-within { outline: 2px solid #49bf9d; outline-offset: 2px; }
+
+/* Spotlight glow — follows the cursor via --mx / --my (set by blog-spotlight.js) */
+
+.glass-card::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  border-radius: inherit;
+  background: radial-gradient(
+    360px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(73, 191, 157, 0.18),
+    transparent 50%
+  );
+  opacity: 0;
+  transition: opacity 220ms ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glass-card:hover::before,
+.glass-card:focus-within::before { opacity: 1; }
+
+/* Disable spotlight when reduced motion is set via JS */
+body.no-motion .glass-card::before { opacity: 0; }
+
+/* Card children sit above the spotlight glow */
+
+.glass-card > * { position: relative; z-index: 1; }
+
+/* ---------- Card internals ---------- */
+
+.glass-card .image.fit.thumb {
+  display: block;
+  margin: -20px -20px 16px;     /* bleed to card edges */
+}
+
+.glass-card .image.fit.thumb img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border: 0;
+}
+
+.glass-card h3 {
+  margin: 0 0 4px;
+  font-family: "SF Pro Display", system-ui, -apple-system, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.224px;
+  line-height: 1.24;
+  color: #1d1d1f;
+}
+
+.glass-card .blog-meta {
+  margin: 0 0 10px;
+  font-family: "SF Pro Text", system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.43;
+  color: #7a7a7a;
+}
+
+.glass-card p {
+  margin: 0 0 16px;
+  font-family: "SF Pro Text", system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #333333;
+}
+
+/* Teal "Read More" button variant — sits at the bottom of the card */
+
+.btn-teal {
+  align-self: flex-start;
+  display: inline-block;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  border: 1px solid #49bf9d;
+  background: transparent;
+  color: #49bf9d;
+  font-family: "SF Pro Text", system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.0;
+  text-decoration: none;
+  transition: background 200ms ease, color 200ms ease, transform 200ms ease;
+  margin-top: auto;
+}
+
+.btn-teal:hover,
+.btn-teal:focus-visible {
+  background: #49bf9d;
+  color: #ffffff;
+  transform: scale(0.97);
+}
+
+.btn-teal:focus-visible { outline: 2px solid #0071e3; outline-offset: 2px; }
+
+/* ---------- Header refresh (glass treatment on the existing #header) ---------- */
+
+#header.glass-header {
+  position: relative;
+  z-index: 1;
+  margin: 32px auto 0;
+  max-width: 1100px;
+  padding: 48px 32px;
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+}
+
+#header.glass-header .image.avatar img {
+  border: 2px solid rgba(73, 191, 157, 0.6);
+}
+
+/* ---------- Reduced motion (CSS-side fallback) ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .blog-mesh::before,
+  .blog-mesh::after { animation: none; }
+  .glass-card,
+  .btn-teal,
+  .glass-card::before { transition: none; }
+}
+
+/* ---------- Browser fallback for missing backdrop-filter ---------- */
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass-card { background: rgba(255, 255, 255, 0.92); }
+  #header.glass-header { background: rgba(255, 255, 255, 0.88); }
+}
+
+/* ---------- Section header typography refresh ---------- */
+
+#technical-tips > h2,
+#personal-blog > h2 {
+  font-family: "SF Pro Display", system-ui, -apple-system, sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.28px;
+  color: #1d1d1f;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1023px) and (min-width: 640px) {
+  #header.glass-header { margin: 24px 24px 0; padding: 40px 28px; }
+  .glass-card { padding: 16px; }
+  .glass-card h3 { font-size: 18px; }
+}
+
+@media (max-width: 639px) {
+  #header.glass-header { margin: 16px 16px 0; padding: 32px 20px; }
+  .glass-card { padding: 16px; }
+  .glass-card .image.fit.thumb { margin: -16px -16px 12px; }
+  .glass-card h3 { font-size: 18px; }
+  .glass-card p { font-size: 14px; }
+}
