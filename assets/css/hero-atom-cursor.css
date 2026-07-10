@@ -1,0 +1,276 @@
+/* ============================================================
+   hero-atom-cursor.css
+   Atom-shaped custom cursor for the hero personal-card.
+   Three electrons orbit a mint nucleus; when the pointer
+   reaches the word "dreamer", the electrons heat up (gold)
+   and a dreamy mint-gold spark burst radiates from the nucleus.
+
+   Native cursor is hidden ONLY while body.atom-cursor-ready is
+   set (by hero-atom-cursor.js), so the default cursor is
+   preserved on touch devices, under reduced-motion, or if JS
+   fails. Tokens: --mint / --mint-bright + the gold accent the
+   hero mesh already uses (rgba(245,185,66,*)).
+   ============================================================ */
+
+.atom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 56px;
+  height: 56px;
+  z-index: 99999;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(-200px, -200px, 0) translate(-50%, -50%);
+  transition: opacity 220ms ease;
+  will-change: transform;
+}
+.atom-cursor.is-on { opacity: 1; }
+
+/* Nucleus */
+.atom-nucleus {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 9px;
+  height: 9px;
+  margin: -4.5px 0 0 -4.5px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 0%, var(--mint-bright) 55%, var(--mint) 100%);
+  box-shadow: 0 0 10px 2px rgba(73, 191, 157, 0.65);
+  transition: transform 300ms var(--ease-spring), box-shadow 300ms ease, background 300ms ease;
+  z-index: 3;
+}
+
+/* Orbit rings — three circles fanned 60° apart, tilted to read as a classic atom */
+.atom-orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+  border: 1px solid rgba(73, 191, 157, 0.28);
+  border-radius: 50%;
+  transform: rotateX(70deg) rotateZ(var(--rot, 0deg));
+  transition: border-color 300ms ease;
+}
+.atom-orbit-1 { --rot: 0deg; }
+.atom-orbit-2 { --rot: 60deg; }
+.atom-orbit-3 { --rot: 120deg; }
+
+/* Spinning track carries one electron around the ring */
+.atom-electron-track {
+  position: absolute;
+  inset: 0;
+  animation: atom-spin 2.6s linear infinite;
+}
+.atom-orbit-2 .atom-electron-track { animation-duration: 3.4s; }
+.atom-orbit-3 .atom-electron-track { animation-duration: 4.2s; }
+
+.atom-electron {
+  position: absolute;
+  top: -3.5px;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  margin-left: -3.5px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff, var(--mint-bright));
+  box-shadow: 0 0 8px 1px rgba(73, 191, 157, 0.85);
+  transition: background 280ms ease, box-shadow 280ms ease;
+}
+
+@keyframes atom-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Excitation: electrons speed up + heat to gold, nucleus swells, rings glow gold */
+.atom-cursor.is-excited .atom-electron-track { animation-duration: 0.55s !important; }
+.atom-cursor.is-excited .atom-electron {
+  background: radial-gradient(circle, #ffffff, #f5b942);
+  box-shadow: 0 0 10px 2px rgba(245, 185, 66, 0.95);
+}
+.atom-cursor.is-excited .atom-nucleus {
+  transform: scale(1.45);
+  box-shadow: 0 0 16px 4px rgba(245, 185, 66, 0.7);
+}
+.atom-cursor.is-excited .atom-orbit { border-color: rgba(245, 185, 66, 0.4); }
+
+/* Spark burst particle — spawned at the nucleus, eased outward */
+.atom-spark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff, var(--spark, var(--mint-bright)));
+  box-shadow: 0 0 8px 1px var(--spark-glow, rgba(73, 191, 157, 0.8));
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+  transition: transform 950ms cubic-bezier(.16, 1, .3, 1),
+              opacity 950ms ease-out;
+  pointer-events: none;
+}
+
+/* The "dreamer" word: subtle reactive glow */
+.pc-dreamer {
+  transition: text-shadow 320ms ease, color 320ms ease;
+}
+body.atom-cursor-ready .pc-dreamer.is-excited {
+  color: #f5b942;
+  text-shadow: 0 0 18px rgba(245, 185, 66, 0.55);
+}
+
+/* Hide native cursor inside the card once the atom is armed */
+body.atom-cursor-ready .personal-card,
+body.atom-cursor-ready .personal-card * { cursor: none; }
+
+/* ============================================================
+   Avatar "light-up" halo + electron rings
+   Triggered by .is-lit on .pc-avatar-wrap (set on hover by
+   hero-atom-cursor.js). Layers, bottom → top:
+     .avatar-aura   — two conic-gradient blobs, slowly rotating
+                      opposite directions + breathing → the soft
+                      flowing halo.
+     .avatar-ring ×3 — faint glowing rings at three radii / tilts;
+                      one gold electron orbits each, and each ring
+                      floats periodically (translate bob, phased).
+     .pc-avatar     — the photo, lifted slightly (brightness +
+                      gold rim) so it reads as "lit up".
+   All decorative layers are pointer-events:none and fade in only
+   while lit, so the resting card looks unchanged.
+   ============================================================ */
+
+.pc-avatar-wrap {
+  position: relative;
+  display: block;
+  width: fit-content;
+  height: fit-content;
+  margin: 0 auto 8px;
+}
+
+.pc-avatar-wrap .pc-avatar {
+  margin: 0;
+  display: block;
+  position: relative;
+  z-index: 2;
+  transition: filter 500ms ease, border-color 500ms ease, box-shadow 500ms ease;
+}
+
+/* ---- Soft flowing aura (behind the face) ---- */
+.avatar-aura {
+  position: absolute;
+  inset: -22px;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 800ms ease;
+  z-index: 0;
+}
+.avatar-aura::before,
+.avatar-aura::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  filter: blur(18px);
+  will-change: transform;
+}
+.avatar-aura::before {
+  background: conic-gradient(
+    from 0deg,
+    rgba(73, 191, 157, 0.50) 0deg,
+    rgba(245, 185, 66, 0.34) 90deg,
+    rgba(73, 191, 157, 0.10) 180deg,
+    rgba(245, 185, 66, 0.28) 270deg,
+    rgba(73, 191, 157, 0.50) 360deg
+  );
+  animation: avatar-aura-rotate 18s linear infinite;
+}
+.avatar-aura::after {
+  background: conic-gradient(
+    from 180deg,
+    rgba(245, 185, 66, 0.30) 0deg,
+    rgba(73, 191, 157, 0.42) 90deg,
+    rgba(245, 185, 66, 0.08) 200deg,
+    rgba(73, 191, 157, 0.30) 300deg,
+    rgba(245, 185, 66, 0.30) 360deg
+  );
+  mix-blend-mode: screen;
+  animation: avatar-aura-rotate 26s linear infinite reverse;
+}
+
+@keyframes avatar-aura-rotate {
+  0%   { transform: rotate(0deg)   scale(1); }
+  50%  { transform: rotate(180deg) scale(1.05); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+/* ---- Electron orbit rings (around the face) ---- */
+.avatar-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(73, 191, 157, 0.22);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 600ms ease, border-color 600ms ease;
+  z-index: 1;
+  /* `translate` is animated for the periodic float so it never
+     fights each ring's static `transform` (tilt). */
+}
+.avatar-ring-1 { inset: -8px;  }                       /* 128px on desktop */
+.avatar-ring-2 { inset: -18px; transform: rotateX(56deg) rotateZ(35deg); }
+.avatar-ring-3 { inset: -26px; transform: rotateX(48deg) rotateZ(-30deg); }
+
+.avatar-electron-track {
+  position: absolute;
+  inset: 0;
+  animation: atom-spin 5.5s linear infinite;          /* reuse keyframe */
+}
+.avatar-ring-2 .avatar-electron-track { animation-duration: 8s; }
+.avatar-ring-3 .avatar-electron-track { animation-duration: 11s; }
+
+.avatar-electron {
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff, #f5b942);
+  box-shadow: 0 0 8px 1px rgba(245, 185, 66, 0.9);
+}
+
+/* ---- Lit state: reveal + animate ---- */
+.pc-avatar-wrap.is-lit .avatar-aura,
+.pc-avatar-wrap.is-lit .avatar-ring { opacity: 1; }
+.pc-avatar-wrap.is-lit .avatar-ring {
+  border-color: rgba(245, 185, 66, 0.30);
+  animation: avatar-ring-float 7s ease-in-out infinite;
+}
+.pc-avatar-wrap.is-lit .avatar-ring-2 { animation-duration: 9s;  animation-delay: -2.5s; }
+.pc-avatar-wrap.is-lit .avatar-ring-3 { animation-duration: 11s; animation-delay: -5s; }
+
+@keyframes avatar-ring-float {
+  0%, 100% { translate: 0 0; }
+  50%      { translate: 0 -3px; }
+}
+
+.pc-avatar-wrap.is-lit .pc-avatar {
+  filter: brightness(1.06) saturate(1.05);
+  border-color: rgba(245, 185, 66, 0.7);
+  box-shadow: 0 0 0 3px rgba(73, 191, 157, 0.18),
+              0 0 22px rgba(245, 185, 66, 0.25);
+}
+
+/* Reduced motion: show the lit halo statically, no rotation / float / orbit */
+@media (prefers-reduced-motion: reduce) {
+  .avatar-aura::before,
+  .avatar-aura::after { animation: none; }
+  .avatar-electron-track { animation: none; }
+  .pc-avatar-wrap.is-lit .avatar-ring { animation: none; }
+}

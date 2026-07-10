@@ -12,6 +12,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 <link rel="stylesheet" href="assets/css/tokens.css" />
 <link rel="stylesheet" href="assets/css/main.css" />
 <link rel="stylesheet" href="assets/css/hero.css" />
+<link rel="stylesheet" href="assets/css/hero-atom-cursor.css" />
 <link rel="stylesheet" href="assets/css/main-override.css" />
 <link rel="stylesheet" href="assets/css/header.css" />
 <link rel="stylesheet" href="assets/css/blog.css" />
@@ -24,11 +25,13 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
   <div class="hero-content">
 
     <aside class="personal-card" aria-label="About Yi Cao">
-      <img class="pc-avatar" src="images/avatar.jpeg" alt="" />
+      <span class="pc-avatar-wrap">
+        <img class="pc-avatar" src="images/avatar.jpeg" alt="" />
+      </span>
       <h1 class="pc-name">Yi Cao</h1>
       <p class="pc-slogan">
         <span class="pc-slogan-line1">An engineer of atoms.</span>
-        <span class="pc-slogan-line2">A dreamer in code.</span>
+        <span class="pc-slogan-line2">A <span class="pc-dreamer">dreamer</span> in code.</span>
       </p>
       <p class="pc-sub">Coding for materials, from understanding to 0-to-1.</p>
       <p class="pc-byline">PhD researcher, ChemBE &middot; Johns Hopkins</p>
@@ -455,7 +458,135 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
         </div>
     </article>
 
+    <!-- Item 4: Migration as a Probe (NeurIPS AI4Mat 2025) -->
+    <article class="glass-card rw-card" data-tilt data-spotlight data-href="https://openreview.net/forum?id=RnITjvwxke">
+        <div class="rw-thumb">
+            <img src="images/thumbs/migration-probe.png" alt="Migration as a Probe" onerror="this.style.display='none'" />
+        </div>
+        <div class="rw-body">
+            <h3>Migration as a Probe: A Generalizable Benchmark Framework for Specialist vs. Generalist Machine-Learned Force Fields</h3>
+            <p class="blog-meta">
+                <strong>Yi Cao</strong>, Paulette Clancy*<br />
+                NeurIPS Conference Workshop (AI4Mat), Spotlight Talk (2025)
+            </p>
+            <p>Benchmark that uses migration pathways as diagnostic probes to compare specialist vs. generalist MLFFs, revealing task-specific fine-tuning trade-offs.</p>
+            <div class="rw-links">
+                <a class="rw-link" href="https://openreview.net/forum?id=RnITjvwxke" target="_blank" rel="noopener" title="OpenReview" aria-label="Read on OpenReview"><i class="fas fa-book"></i></a>
+                <a class="rw-link" href="https://github.com/yicao-elina/MigrationBench" target="_blank" rel="noopener" title="Code" aria-label="View code on GitHub"><i class="fab fa-github"></i></a>
+                <a class="rw-link" href="https://www.linkedin.com/posts/yi-cao-1368ab292_neurips2025-ai4science-ai4mat-activity-7403636953461719040-FNeY" target="_blank" rel="noopener" title="LinkedIn Post" aria-label="LinkedIn post"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <button class="row-header-toggle" type="button" aria-label="Toggle paper details" aria-expanded="false"><span class="chev">▸</span> Details</button>
+        </div>
+        <div class="spring-panel">
+            <p><strong>Abstract.</strong> We use migration pathways as diagnostic probes to benchmark specialist vs. generalist machine-learned force fields (MLFFs), exposing where task-specific fine-tuning helps or hurts generalization across chemistries.</p>
+            <p><strong>Why it matters.</strong> Spotlight talk &amp; travel grant at NeurIPS AI4Mat 2025; a physically meaningful, generalizable probe for MLFF generalization in materials science.</p>
+        </div>
+    </article>
+
+    <!-- Item 5: CsPbBr3 self-healing (PCCP 2025) -->
+    <article class="glass-card rw-card" data-tilt data-spotlight data-href="https://doi.org/10.1039/D5CP01641J">
+        <div class="rw-thumb">
+            <img src="images/thumbs/cspbbr3-selfhealing.png" alt="CsPbBr3 self-healing defects" onerror="this.style.display='none'" />
+        </div>
+        <div class="rw-body">
+            <h3>Low-energy Pathways Lead to Self-Healing Defects in CsPbBr<sub>3</sub></h3>
+            <p class="blog-meta">
+                Kumar Miskin, <strong>Yi Cao</strong>, Madaline Marland, Farhan Shaikh, David T. Moore, John Marohn, Paulette Clancy*<br />
+                Phys. Chem. Chem. Phys., 27(29), 15446&ndash;15459 (2025)
+            </p>
+            <p>Computational discovery of low-energy pathways that enable self-healing of defects in the CsPbBr3 perovskite, with implications for rational material design.</p>
+            <div class="rw-links">
+                <a class="rw-link" href="https://doi.org/10.1039/D5CP01641J" target="_blank" rel="noopener" title="DOI" aria-label="Read via DOI"><i class="fas fa-book"></i></a>
+                <a class="rw-link" href="https://github.com/pclancy-lab/perovskites_space" target="_blank" rel="noopener" title="Code" aria-label="View code on GitHub"><i class="fab fa-github"></i></a>
+            </div>
+            <button class="row-header-toggle" type="button" aria-label="Toggle paper details" aria-expanded="false"><span class="chev">▸</span> Details</button>
+        </div>
+        <div class="spring-panel">
+            <p><strong>Abstract.</strong> We identify low-energy pathways by which point defects in the CsPbBr3 perovskite self-heal, pointing to design rules for more robust lead-halide perovskites.</p>
+            <p><strong>Why it matters.</strong> Connects an atomistic self-healing mechanism to rational material design for stable perovskite devices.</p>
+        </div>
+    </article>
+
+    <!-- Item 6: Atomic Switch (npj 2D Mater. Appl., under review 2025) -->
+    <article class="glass-card rw-card" data-tilt data-spotlight>
+        <div class="rw-thumb">
+            <img src="images/thumbs/atomic-switch.png" alt="Atomic Switch Control" onerror="this.style.display='none'" />
+        </div>
+        <div class="rw-body">
+            <h3>Atomic Switch Control via Two-Mode Intercalation for Tunable 2D Materials</h3>
+            <p class="blog-meta">
+                <strong>Yi Cao</strong>, Victor Wu, Paulette Clancy*<br />
+                npj 2D Materials and Applications, under review (2025)
+            </p>
+            <p>A two-mode intercalation mechanism that acts as an atomic switch for reversibly tuning the properties of 2D materials.</p>
+            <button class="row-header-toggle" type="button" aria-label="Toggle paper details" aria-expanded="false"><span class="chev">▸</span> Details</button>
+        </div>
+        <div class="spring-panel">
+            <p><strong>Summary.</strong> A two-mode intercalation mechanism functions as an atomic switch, reversibly modulating the interlayer structure and properties of 2D materials.</p>
+            <p><strong>Why it matters.</strong> Offers a controllable, switchable route to tune 2D material behavior for device applications.</p>
+        </div>
+    </article>
+
+    <!-- Item 7: Brain-targeted nanoparticle review (2022) — folded behind "Read more" -->
 </div>
+
+<style>
+    /* "Read more" reveal for the older brain-targeted nanoparticle review
+       (no teaser figure), kept behind a button so Recent Work stays focused
+       on recent work. Reuses the .button pill + spring chev idiom. */
+    .rw-more-wrap { text-align: center; margin: 28px 0 8px; }
+    .rw-more-toggle { display: inline-flex; align-items: center; gap: 8px; }
+    .rw-more-toggle .chev { display: inline-block; transition: transform 200ms var(--ease-spring, ease); }
+    .rw-more-toggle[aria-expanded="true"] .chev { transform: rotate(90deg); }
+</style>
+<div class="rw-more-wrap">
+    <button class="button rw-more-toggle" id="rw-more-btn" type="button" aria-expanded="false" aria-controls="rw-more-list">
+        <span class="rw-more-label">Read more</span><span class="chev" aria-hidden="true">▸</span>
+    </button>
+</div>
+<div class="recent-work-list" id="rw-more-list" hidden>
+    <article class="glass-card rw-card" data-tilt data-spotlight data-href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=t_gDF-EAAAAJ&amp;citation_for_view=t_gDF-EAAAAJ:d1gkVwhDpl0C">
+        <div class="rw-thumb" style="background: linear-gradient(135deg, var(--mint), var(--mint-bright));">
+            <span style="color:#fff; font: 700 40px/1 var(--font-display); letter-spacing:0.02em;">BN</span>
+        </div>
+        <div class="rw-body">
+            <h3>Brain-targeted Nanoparticle Drug Delivery Systems: Research Advances</h3>
+            <p class="blog-meta">
+                <strong>Yi Cao</strong>, Chen Jiang*<br />
+                Basic and Clinical Medicine, 42(1), 2&ndash;14 (2022)
+            </p>
+            <p>A review of strategies and recent advances in engineering nanoparticles for brain-targeted drug delivery.</p>
+            <div class="rw-links">
+                <a class="rw-link" href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=t_gDF-EAAAAJ&amp;citation_for_view=t_gDF-EAAAAJ:d1gkVwhDpl0C" target="_blank" rel="noopener" title="Google Scholar" aria-label="View on Google Scholar"><i class="fas fa-book"></i></a>
+            </div>
+            <button class="row-header-toggle" type="button" aria-label="Toggle paper details" aria-expanded="false"><span class="chev">▸</span> Details</button>
+        </div>
+        <div class="spring-panel">
+            <p><strong>Summary.</strong> A review of strategies and recent advances in engineering nanoparticles for brain-targeted drug delivery.</p>
+            <p><strong>Why it matters.</strong> Surveys the landscape of delivery approaches to inform nanoparticle design for neurological disease.</p>
+        </div>
+    </article>
+</div>
+<script>
+  (function () {
+    var btn = document.getElementById('rw-more-btn');
+    var list = document.getElementById('rw-more-list');
+    if (!btn || !list) return;
+    var label = btn.querySelector('.rw-more-label');
+    btn.addEventListener('click', function () {
+      var open = list.hasAttribute('hidden');
+      if (open) {
+        list.removeAttribute('hidden');
+        btn.setAttribute('aria-expanded', 'true');
+        if (label) label.textContent = 'Show less';
+      } else {
+        list.setAttribute('hidden', '');
+        btn.setAttribute('aria-expanded', 'false');
+        if (label) label.textContent = 'Read more';
+      }
+    });
+  })();
+</script>
 
 <ul class="actions">
     <!-- <li><a href="https://github.com/yicao-elina" class="button">View GitHub</a></li> -->
@@ -568,7 +699,16 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
     </style>
 
     <div class="timeline-container">
-        <!-- Present: PhD (Right) & Research (Left) -->
+        <!-- Summer 2026: Qualcomm Intern (Left) -->
+        <div class="t-item left">
+            <div class="t-content">
+                <span class="t-date">May 2026 - Aug 2026</span>
+                <div class="t-title">Engineering Intern, GPU High-Level Modeling</div>
+                <div class="t-place">Qualcomm, San Diego</div>
+            </div>
+        </div>
+
+        <!-- Present: MS (Right) & PhD (Right) -->
         <div class="t-item right">
             <div class="t-content">
                 <span class="t-date">Aug. 2026 - May 2028 (Expected)</span>
@@ -578,7 +718,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
         </div>
         <div class="t-item right">
             <div class="t-content">
-                <span class="t-date">Sept 2023 - May 2028 (Expected)</span>
+                <span class="t-date">Aug. 2023 - May 2028 (Expected)</span>
                 <div class="t-title">PhD in ChemBE</div>
                 <div class="t-place">Johns Hopkins University</div>
             </div>
@@ -603,7 +743,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
         <!-- 2023: BS Grad (Right) -->
         <div class="t-item right">
             <div class="t-content">
-                <span class="t-date">2019 - 2023</span>
+                <span class="t-date">Sept 2019 - Jul 2023</span>
                 <div class="t-title">B.S. Pharmaceutical Sci.</div>
                 <div class="t-place">Fudan University</div>
             </div>
@@ -622,6 +762,15 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
                 <span class="t-date">Feb 2022 - Jun 2023</span>
                 <div class="t-title">Undergrad Researcher</div>
                 <div class="t-place">ISTBI, Fudan University</div>
+            </div>
+        </div>
+
+        <!-- Summer 2022: Westlake Research (Left) -->
+        <div class="t-item left">
+            <div class="t-content">
+                <span class="t-date">Jul 2022 - Aug 2022</span>
+                <div class="t-title">Summer Research</div>
+                <div class="t-place">Westlake University, Hangzhou</div>
             </div>
         </div>
 
@@ -858,6 +1007,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 <script src="assets/js/hero-tilt.js" defer></script>
 <script src="assets/js/hero-mesh.js" defer></script>
 <script src="assets/js/hero-entrance.js" defer></script>
+<script src="assets/js/hero-atom-cursor.js" defer></script>
 <script src="assets/js/header-tooltip.js" defer></script>
 <script src="assets/js/spring-card.js" defer></script>
 <script src="assets/js/blog-tilt.js" defer></script>
