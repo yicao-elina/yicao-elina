@@ -1,0 +1,399 @@
+/* ============================================================
+   Landing Hero
+   Self-contained styles for the top-of-page hero on index.html.
+   Tokens (colors, type, motion) are documented in
+   docs/superpowers/specs/2026-07-09-landing-hero-design.md.
+   ============================================================ */
+
+/* ---------- Section & layout ---------- */
+
+.hero {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  padding: 88px 48px 64px;          /* top padding clears the 44px nav + air */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fafafc;             /* surface-pearl, base under the mesh */
+}
+
+.hero-content {
+  width: 100%;
+  max-width: 1280px;
+  display: grid;
+  grid-template-columns: minmax(420px, 1fr) 1.4fr;   /* 42% / 58% ratio */
+  gap: 64px;
+  align-items: center;
+}
+
+/* ---------- Mesh backdrop ---------- */
+
+.hero-mesh {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: #fafafc;
+}
+
+.hero-mesh::before,
+.hero-mesh::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  will-change: transform;
+}
+
+.hero-mesh::before {
+  top: -10%;
+  left: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, rgba(73, 191, 157, 0.14) 0%, rgba(73, 191, 157, 0) 70%);
+  animation: mesh-drift-a 32s ease-in-out infinite alternate;
+}
+
+.hero-mesh::after {
+  bottom: -15%;
+  right: -15%;
+  width: 70vw;
+  height: 70vw;
+  background: radial-gradient(circle, rgba(245, 185, 66, 0.12) 0%, rgba(245, 185, 66, 0) 70%);
+  filter: blur(100px);
+  animation: mesh-drift-b 40s ease-in-out infinite alternate;
+}
+
+@keyframes mesh-drift-a {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(40px, 20px); }
+}
+
+@keyframes mesh-drift-b {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(-50px, 30px); }
+}
+
+/* Pause mesh drift when tab is hidden (battery) */
+.hero-mesh.is-paused::before,
+.hero-mesh.is-paused::after {
+  animation-play-state: paused;
+}
+
+/* Disable mesh drift when reduced motion is set via JS (.no-motion on <body>) */
+body.no-motion .hero-mesh::before,
+body.no-motion .hero-mesh::after {
+  animation: none;
+}
+
+/* ---------- Personal card ---------- */
+
+.personal-card {
+  position: relative;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 24px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.10);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pc-avatar {
+  display: block;
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(73, 191, 157, 0.6);
+  margin: 0 auto 8px;
+}
+
+.pc-name {
+  margin: 0;
+  font-family: "SF Pro Display", system-ui, -apple-system, sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.28px;
+  line-height: 1.15;
+  color: #1d1d1f;
+  text-align: center;
+}
+
+.pc-slogan {
+  margin: 12px 0 0;
+  font-family: "SF Pro Display", system-ui, -apple-system, sans-serif;
+  font-size: 44px;
+  font-weight: 600;
+  letter-spacing: -0.28px;
+  line-height: 1.05;
+  display: flex;
+  flex-direction: column;
+}
+
+.pc-slogan-line1 { color: #1d1d1f; }
+.pc-slogan-line2 { color: #49bf9d; }
+
+.pc-sub {
+  margin: 12px 0 0;
+  max-width: 32ch;
+  font-family: "SF Pro Text", system-ui, -apple-system, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.47;
+  color: #7a7a7a;
+}
+
+.pc-byline {
+  margin: 4px 0 0;
+  font-family: "SF Pro Text", system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.43;
+  color: #333333;
+}
+
+.pc-social {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  gap: 8px;
+}
+
+.pc-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.04);
+  color: #1d1d1f;
+  text-decoration: none;
+  transition: background 200ms ease;
+}
+
+.pc-social a:hover { background: rgba(73, 191, 157, 0.10); }
+.pc-social a:focus-visible {
+  outline: 2px solid #49bf9d;
+  outline-offset: 2px;
+}
+
+.pc-social svg { width: 18px; height: 18px; display: block; }
+
+.pc-ctas {
+  margin: 20px 0 0;
+  display: flex;
+  gap: 12px;
+}
+
+.pc-cta {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 22px;
+  border-radius: 9999px;
+  font-family: "SF Pro Text", system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.0;
+  text-decoration: none;
+  transition: transform 200ms ease, box-shadow 200ms ease, background 200ms ease;
+}
+
+.pc-cta-primary {
+  background: #49bf9d;
+  color: #ffffff;
+}
+.pc-cta-primary:hover { transform: scale(0.95); box-shadow: 0 4px 16px rgba(73, 191, 157, 0.20); }
+.pc-cta-primary:focus-visible { outline: 2px solid #0071e3; outline-offset: 2px; }
+
+.pc-cta-ghost {
+  background: transparent;
+  color: #49bf9d;
+  border: 1px solid #49bf9d;
+}
+.pc-cta-ghost:hover { transform: scale(0.95); box-shadow: 0 4px 16px rgba(73, 191, 157, 0.20); }
+.pc-cta-ghost:focus-visible { outline: 2px solid #0071e3; outline-offset: 2px; }
+
+/* ---------- Portfolio grid ---------- */
+
+.portfolio { width: 100%; }
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 240px);
+  gap: 20px;
+}
+
+.tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  transform: perspective(800px) rotateX(0) rotateY(0) translateY(0);
+  transform-style: preserve-3d;
+  transition: transform 200ms ease-out, box-shadow 200ms ease;
+  will-change: transform;
+}
+
+.tile:hover,
+.tile:focus-visible {
+  transform: perspective(800px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg)) translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+.tile:focus-visible { outline: 2px solid #49bf9d; outline-offset: 2px; }
+
+.tile-img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 16px 16px 0 0;
+}
+
+.tile-body {
+  flex: 1;
+  padding: 20px;
+  position: relative;
+}
+
+.tile-title {
+  margin: 0 0 4px;
+  font-family: "SF Pro Text", system-ui, -apple-system, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.224px;
+  line-height: 1.24;
+  color: #1d1d1f;
+}
+
+.tile-sub {
+  margin: 0;
+  font-family: "SF Pro Text", system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.43;
+  color: #7a7a7a;
+  /* Subtitle can be 2 lines; clamp to 2 */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tile-arrow {
+  position: absolute;
+  right: 16px;
+  bottom: 14px;
+  font-size: 18px;
+  color: #49bf9d;
+  opacity: 0;
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.tile:hover .tile-arrow,
+.tile:focus-visible .tile-arrow {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+/* Explore-more tile: lighter glass, no thumbnail, centered text */
+.tile-explore {
+  background: rgba(255, 255, 255, 0.45);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+}
+
+.tile-explore-text {
+  display: block;
+  font-family: "SF Pro Display", system-ui, -apple-system, sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #1d1d1f;
+  letter-spacing: -0.224px;
+  transition: transform 200ms ease;
+}
+
+.tile:hover .tile-explore-text,
+.tile:focus-visible .tile-explore-text {
+  transform: translateX(4px);
+}
+
+.tile-explore-sub {
+  display: block;
+  margin-top: 6px;
+  font-family: "SF Pro Text", system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.43;
+  color: #7a7a7a;
+}
+
+/* ---------- Reduced motion (CSS-side fallback) ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-mesh::before,
+  .hero-mesh::after { animation: none; }
+  .tile,
+  .pc-cta,
+  .tile-arrow,
+  .tile-explore-text,
+  .pc-social a { transition: none; }
+}
+
+/* ---------- Browser fallback for missing backdrop-filter ---------- */
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .personal-card,
+  .tile { background: rgba(255, 255, 255, 0.92); }
+  .tile-explore { background: rgba(255, 255, 255, 0.85); }
+}
+
+/* ---------- Responsive: tablet 640–1023px ---------- */
+
+@media (max-width: 1023px) and (min-width: 640px) {
+  .hero-content { grid-template-columns: 1fr; gap: 48px; }
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 220px);
+  }
+  .personal-card { padding: 32px; }
+  .pc-slogan { font-size: 36px; }
+}
+
+/* ---------- Responsive: phone < 640px ---------- */
+
+@media (max-width: 639px) {
+  .hero { padding: 72px 24px 48px; }
+  .hero-content { grid-template-columns: 1fr; gap: 40px; }
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, auto);
+  }
+  .personal-card { padding: 28px; }
+  .pc-avatar { width: 88px; height: 88px; }
+  .pc-slogan { font-size: 32px; }
+  .pc-sub { font-size: 16px; }
+  .pc-ctas { flex-direction: column; }
+}
