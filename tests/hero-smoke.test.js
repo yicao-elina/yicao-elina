@@ -61,3 +61,73 @@ test("DUAL-X thumbnail exists and is non-empty", async () => {
   assert.equal(buf[2], 0x4e, "PNG magic byte 2");
   assert.equal(buf[3], 0x47, "PNG magic byte 3");
 });
+
+// --- New assertions for the redesigned structure (Tasks 1-7) ---
+
+test("index has app-header with 10 icons", async () => {
+  const html = await (await fetch(BASE + "/")).text();
+  assert.match(html, /<header[^>]*id="app-header"/);
+  const icons = (html.match(/class="ah-icon"/g) || []).length;
+  assert.ok(icons >= 10, `expected >=10 ah-icon elements, got ${icons}`);
+});
+
+test("index no longer has the old <nav id=\"nav\">", async () => {
+  const html = await (await fetch(BASE + "/")).text();
+  assert.doesNotMatch(html, /<nav id="nav">/);
+});
+
+test("index links header.css and tokens.css", async () => {
+  const html = await (await fetch(BASE + "/")).text();
+  assert.match(html, /href="assets\/css\/header\.css"/);
+  assert.match(html, /href="assets\/css\/tokens\.css"/);
+});
+
+test("index has 2+ experience rows with data-spring", async () => {
+  const html = await (await fetch(BASE + "/")).text();
+  const rows = (html.match(/data-spring/g) || []).length;
+  assert.ok(rows >= 2, `expected >=2 data-spring occurrences, got ${rows}`);
+});
+
+test("index has an #experience section with 2-col grid", async () => {
+  const html = await (await fetch(BASE + "/")).text();
+  assert.match(html, /id="experience"/);
+  assert.match(html, /class="experience-grid"/);
+});
+
+test("index news strip has 3 news items + 1 read-more link to news.html", async () => {
+  const html = await (await fetch(BASE + "/")).text();
+  const items = (html.match(/class="news-item"/g) || []).length;
+  assert.ok(items >= 3, `expected >=3 news-item elements, got ${items}`);
+  assert.match(html, /href="news\.html"/);
+});
+
+test("news.html returns 200 and has a year filter", async () => {
+  const res = await fetch(BASE + "/news.html");
+  assert.equal(res.status, 200);
+  const html = await res.text();
+  const filters = (html.match(/class="news-filter"/g) || []).length;
+  assert.ok(filters >= 3, `expected >=3 news-filter pills, got ${filters}`);
+});
+
+test("news.html has 6+ timeline entries", async () => {
+  const html = await (await fetch(BASE + "/news.html")).text();
+  const entries = (html.match(/class="news-entry"/g) || []).length;
+  assert.ok(entries >= 6, `expected >=6 news-entry elements, got ${entries}`);
+});
+
+test("spring-card.js is served", async () => {
+  const res = await fetch(BASE + "/assets/js/spring-card.js");
+  assert.equal(res.status, 200);
+  const body = await res.text();
+  assert.match(body, /data-spring/);
+});
+
+test("header-tooltip.js is served", async () => {
+  const res = await fetch(BASE + "/assets/js/header-tooltip.js");
+  assert.equal(res.status, 200);
+});
+
+test("tokens.css is served", async () => {
+  const res = await fetch(BASE + "/assets/css/tokens.css");
+  assert.equal(res.status, 200);
+});
