@@ -1,0 +1,507 @@
+
+\documentclass[10pt, letterpaper]{article}
+
+% Packages:
+\usepackage{mhchem}
+\usepackage[
+    ignoreheadfoot, % set margins without considering header and footer
+    top=2 cm, % seperation between body and page edge from the top
+    bottom=2 cm, % seperation between body and page edge from the bottom
+    left=2 cm, % seperation between body and page edge from the left
+    right=2 cm, % seperation between body and page edge from the right
+    footskip=1.0 cm, % seperation between body and footer
+    % showframe % for debugging 
+]{geometry} % for adjusting page geometry
+\usepackage[explicit]{titlesec} % for customizing section titles
+\usepackage{tabularx} % for making tables with fixed width columns
+\usepackage{array} % tabularx requires this
+\usepackage[dvipsnames]{xcolor} % for coloring text
+\definecolor{primaryColor}{RGB}{0, 79, 144} % define primary color
+\usepackage{enumitem} % for customizing lists
+\usepackage{fontawesome5} % for using icons
+\usepackage{amsmath} % for math
+\usepackage[
+    pdftitle={Yi Cao's CV},
+    pdfauthor={Yi Cao},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref} % for links, metadata and bookmarks
+\usepackage[pscoord]{eso-pic} % for floating text on the page
+\usepackage{calc} % for calculating lengths
+\usepackage{bookmark} % for bookmarks
+\usepackage{lastpage} % for getting the total number of pages
+\usepackage{changepage} % for one column entries (adjustwidth environment)
+\usepackage{paracol} % for two and three column entries
+\usepackage{ifthen} % for conditional statements
+\usepackage{needspace} % for avoiding page brake right after the section title
+\usepackage{iftex} % check if engine is pdflatex, xetex or luatex
+
+\usepackage{fontawesome5}   % icons (solid + brands)
+\usepackage{hyperref}       % hyperlinks
+
+% Ensure that generate pdf is machine readable/ATS parsable:
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+    \usepackage{lmodern}
+\fi
+
+\usepackage[default, type1]{sourcesanspro} 
+
+% Some settings:
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt} % remove space before adjustwidth environment
+\pagestyle{empty} % no header or footer
+\setcounter{secnumdepth}{0} % no section numbering
+\setlength{\parindent}{0pt} % no indentation
+\setlength{\topskip}{0pt} % no top skip
+\setlength{\columnsep}{0.15cm} % set column seperation
+\makeatletter
+\let\ps@customFooterStyle\ps@plain % Copy the plain style to customFooterStyle
+\patchcmd{\ps@customFooterStyle}{\thepage}{
+    \color{gray}\textit{\small Yi Cao - Page \thepage{} of \pageref*{LastPage}}
+}{}{} % replace number by desired string
+\makeatother
+\pagestyle{customFooterStyle}
+
+\titleformat{\section}{
+    % avoid page braking right after the section title
+    \needspace{4\baselineskip}
+    % make the font size of the section title large and color it with the primary color
+    \Large\color{primaryColor}
+}{
+}{
+}{
+    % print bold title, give 0.15 cm space and draw a line of 0.8 pt thickness
+    % from the end of the title to the end of the body
+    \textbf{#1}\hspace{0.15cm}\titlerule[0.8pt]\hspace{-0.1cm}
+}[] % section title formatting
+
+\titlespacing{\section}{
+    % left space:
+    -1pt
+}{
+    % top space:
+    0.3 cm
+}{
+    % bottom space:
+    0.2 cm
+} % section title spacing
+
+% \renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$} % custom bullet points
+\newenvironment{highlights}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0.4 cm + 10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights
+
+\newenvironment{highlightsforbulletentries}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights for bullet entries
+
+
+\newenvironment{onecolentry}{
+    \begin{adjustwidth}{
+        0.2 cm + 0.00001 cm
+    }{
+        0.2 cm + 0.00001 cm
+    }
+}{
+    \end{adjustwidth}
+} % new environment for one column entries
+
+\newenvironment{twocolentry}[2][]{
+    \onecolentry
+    \def\secondColumn{#2}
+    \setcolumnwidth{\fill, 4.5 cm}
+    \begin{paracol}{2}
+}{
+    \switchcolumn \raggedleft \secondColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for two column entries
+
+\newenvironment{threecolentry}[3][]{
+    \onecolentry
+    \def\thirdColumn{#3}
+    \setcolumnwidth{1 cm, \fill, 4.5 cm}
+    \begin{paracol}{3}
+    {\raggedright #2} \switchcolumn
+}{
+    \switchcolumn \raggedleft \thirdColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for three column entries
+
+\newenvironment{header}{
+    \setlength{\topsep}{0pt}\par\kern\topsep\centering\color{primaryColor}\linespread{1.5}
+}{
+    \par\kern\topsep
+} % new environment for the header
+
+\newcommand{\placelastupdatedtext}{% \placetextbox{<horizontal pos>}{<vertical pos>}{<stuff>}
+  \AddToShipoutPictureFG*{% Add <stuff> to current page foreground
+    \put(
+        \LenToUnit{\paperwidth-2 cm-0.2 cm+0.05cm},
+        \LenToUnit{\paperheight-1.0 cm}
+    ){\vtop{{\null}\makebox[0pt][c]{
+        \small\color{gray}\textit{Last updated in March 2026}\hspace{\widthof{Last updated in June 2024}}
+    }}}%
+  }%
+}%
+
+% save the original href command in a new command:
+\let\hrefWithoutArrow\href
+
+% new command for external links:
+\renewcommand{\href}[2]{\hrefWithoutArrow{#1}{\mbox{\ifthenelse{\equal{#2}{}}{ }{#2 }\raisebox{.15ex}{\footnotesize \faExternalLink*}}}}
+
+
+\begin{document}
+    \placelastupdatedtext
+    \begin{header}
+        \fontsize{30 pt}{30 pt}
+        \textbf{Yi Cao}
+
+        \vspace{0.3 cm}
+
+        \normalsize
+               \textit{AI4Science | Computer-Aided Material Design | Machine Learning | LLMs | Explainable AI | Scientific Computing }\\
+
+        \mbox{{\footnotesize\faMapMarker*}\hspace*{0.13cm}3400 N. Charles Street, Baltimore, MD 21218}
+        \kern 0.5 cm
+        \mbox{\hrefWithoutArrow{mailto:ycao73@jh.edu}{{\footnotesize\faEnvelope[regular]}\hspace*{0.13cm}ycao73@jh.edu}}
+        \kern 0.5 cm
+        % \mbox{\hrefWithoutArrow{tel:+1-443-278-3766}{{\footnotesize\faPhone*}\hspace*{0.13cm}+1 443-278-3766}}
+        % \kern 0.5 cm
+    \mbox{\hrefWithoutArrow{https://www.linkedin.com/in/yi-cao-1368ab292/}{{\footnotesize\faLinkedinIn}\hspace*{0.13cm}Yi Cao}}
+\kern 0.5 cm
+\mbox{\hrefWithoutArrow{https://scholar.google.com/citations?user=t_gDF-EAAAAJ&hl=en}{{\footnotesize\faGraduationCap}\hspace*{0.13cm}Google Scholar}}
+\kern 0.5 cm
+\mbox{\hrefWithoutArrow{https://yicao-elina.github.io/yicao-elina/}{{\footnotesize\faGlobe}\hspace*{0.13cm}Personal Website}}
+\kern 0.5 cm
+\mbox{\hrefWithoutArrow{https://github.com/yicao-elina}{{\footnotesize\faGithub}\hspace*{0.13cm}yicao-elina}}
+
+    \end{header}
+
+    \vspace{0.3 cm - 0.3 cm}
+
+
+\section{Professional Summary}
+
+\begin{onecolentry}
+I am a PhD researcher building trustworthy, physics-grounded AI for materials discovery. I develop frameworks that bridge large scale molecular dynamics with first-principles simulations by machine-learned force fields, spanning explainable AI (AAAI 2026 XAI4Science), generalization benchmarking (non-equilibrium probes revealing specialist vs.\ generalist trade-offs, NeurIPS 2025 AI4Mat spotlight), and causal reasoning (KDD 2026). Recognized with Best Poster awards across multiple venues; invited as session chair at PHM 2025. Strong foundation in both AI/ML methodology and computational materials science, with demonstrated experience translating research into industry applications.
+\end{onecolentry}
+
+    \section{Education}
+
+\begin{threecolentry}{\textbf{PhD}}{Aug. 2023 to May 2028 (Expected)}
+    \textbf{Johns Hopkins University}, Chemical and Biomolecular Engineering (ChemBE)
+    \begin{highlights}
+        \item GPA: 4.0/4.0
+        \item \textbf{Advisor:} Paulette Clancy
+        % \item \textbf{Research Focus:} AI4Science, Machine Learning for Scientific Discovery, Causal Reasoning, LLMs
+        \item \textbf{Relevant Coursework:} Machine Learning, Artificial Intelligence, Modern Data Analysis, Databases, Algorithms, Computing for Applied Mathematics, Statistical Mechanics
+    \end{highlights}
+\end{threecolentry}
+\begin{threecolentry}{\textbf{MS}}{Aug. 2026 to May 2028 (Expected)}
+    \textbf{Johns Hopkins University}, Computer Science
+    \begin{highlights}
+        % \item GPA: 4.0/4.0; 
+        \item \textbf{Focus:} Machine learning, AI4Science, Agentic AI
+    \end{highlights}
+\end{threecolentry}
+\begin{threecolentry}{\textbf{BS}}{Sept. 2019 to July 2023}
+    \textbf{Fudan University}, Pharmaceutical Sciences
+    \begin{highlights}
+        \item GPA: 3.7/4.0 (Rank: 2/112)
+        % \item \textbf{Relevant Coursework:} Chemistry, Physics, Mathematics, Data Analysis
+        \item \textbf{Awards:} "Graduate Star" Nomination Award (2023), Excellent graduates of Shanghai Colleges and Universities (2023), 1st Class Scholarship (2021), Shanghai Scholarship (2020)
+    \end{highlights}
+\end{threecolentry}
+
+\begin{threecolentry}{\textbf{}}{Aug. 2021 to Dec. 2021}
+    \textbf{University of California, Berkeley}, Visiting Scholar
+    % \begin{highlights}
+    %     \item GPA: 3.78/4.0
+    %     \item  \textbf{Awards}: Inter-School Exchange Program Returning Grant (2022)
+    %     % \item \textbf{Coursework:} Principle of Drug Delivery, Biotechnology, Molecular Biology, Biophysical Neuroscience
+    % \end{highlights}
+\end{threecolentry}
+
+        % \begin{threecolentry}{\textbf{BS}}{
+        %     Sept. 2000 to June 2005
+        % }
+        %     \textbf{University of Pennsylvania}, Computer Science
+        %     \begin{highlights}
+        %         \item GPA: 3.9/4.0 (\href{https://example.com}{Transcript})
+        %         \item \textbf{Coursework:} Software Foundations, Computer Architecture, Algorithms, Artificial Intelligence, Comparison of Learning Algorithms, Computational Theory.
+        %     \end{highlights}
+        % \end{threecolentry}
+
+
+    \section{Research Experiences}
+
+\begin{twocolentry}{
+MD, USA
+
+Nov. 2023 to present
+
+}
+\textbf{Johns Hopkins University}, Ph.D. Research under Advisor Paulette Clancy
+\begin{highlights}
+\item Developing AI frameworks that integrate molecular simulation (DFT, MD) with machine learning and LLMs for 2D materials discovery and design
+\item Created \textbf{dual explainability }framework for machine-learned force fields (MLFFs), bridging model reasoning with human understanding (\textit{XAI4Science-AAAI-2026}).
+\item Developed a \textbf{causal-aware KG–LLM }integration framework that mitigates “contextual tunneling” and improves scientific reasoning (\textit{ICLR 2026 submission}).
+\item Benchmarked specialist vs. generalist\textbf{ MLFFs} using migration pathways as diagnostic probes, revealing task-specific fine-tuning trade-offs (\textit{AI4Mat-NeurIPS-2025, spotlight talk}).
+
+\item \textbf{Skill set}: Machine Learning (MLFFs, LLMs, causal reasoning, transfer learning), Molecular Simulation (DFT, MD), Scientific Computing 
+\end{highlights}
+\end{twocolentry}
+\vspace{0.2 cm}
+
+\begin{twocolentry}{
+Shanghai, China
+
+Feb. 2022 to Jun. 2023
+
+16 months
+
+
+}
+\textbf{Institute of Science and Technology for Brain-inspired Intelligence, Fudan University}, Undergraduate Research
+\begin{highlights}
+\item Utilized \textbf{data mining and signal processing} on large-scale brain recordings to uncover disease-related patterns, improving diagnostic interpretation.
+\item \textbf{Skill set}: Data mining, Brain-signal processing, Neuropharmacology
+\end{highlights}
+\end{twocolentry}
+\vspace{0.2 cm}
+
+
+\begin{twocolentry}{
+Hangzhou, China
+
+July 2022 to Aug. 2022
+
+2 months
+
+
+}
+\textbf{School of Engineering, Westlake University}, Summer Research
+\begin{highlights}
+\item Applied \textbf{ML-driven polymer screening} to guide nanoparticle design for brain-targeted drug delivery, linking material optimization with experimental validation.
+\item \textbf{Skill set}: Machine Learning for materials design, Nanoparticle characterization
+\end{highlights}
+\end{twocolentry}
+
+\section{Technical Skills}
+\begin{onecolentry}
+\textbf{Machine Learning \& AI:} Deep Learning (PyTorch, TensorFlow), Large Language Models (fine-tuning, prompt engineering), Causal Inference, Graph Neural Networks, Transfer Learning, Explainable AI\\
+\textbf{Scientific Computing:} Molecular Dynamics (LAMMPS, GROMACS), Density Functional Theory (Quantum ESPRESSO), High-Performance Computing (MPI, CUDA)\\
+\textbf{Programming \& Tools:} Python, MATLAB, R, Git, Docker, Linux/Unix\\
+\textbf{Data Science:} Large-scale data processing, Statistical analysis, Knowledge graphs, Database management (SQL), Distributed computing\\
+\textbf{Specialized:} Materials informatics, Scientific AI
+\end{onecolentry}
+
+
+\section{Publications}
+
+\begin{enumerate}
+    \item \textbf{RepliCan: Evaluating LLM Agents on Scientific Reproducibility in Computational Materials Science} \\
+    Ziyang Huang, \textbf{\textit{Yi Cao}}, Ali K. Shargh, Jing Luo, Ruidong Mei, Mohd Zaki, Zhan Liu, William Jurayj, Somdatta Goswami, Michael Shields, Jaafar El-Awady, Paulette Clancy, William Gantt Walden, Nicholas Andrews, Benjamin Van Durme, Daniel Khashabi \\
+    \textit{Accepted to COLM Conference (2026)} \quad \href{https://arxiv.org/abs/2605.00803}{\faBook\ }
+    \quad \href{https://github.com/JHU-CLSP/AutoMat}{\faGithub\ }
+    \quad \href{https://jhu-clsp.github.io/AutoMat/}{\faGlobe}
+    % \textit{*First benchmark evaluating LLM agents on their ability to reproduce complex computational materials science workflows.}
+    \item \textbf{Atomic Switch Control via Two-Mode Intercalation for Tunable 2D Materials} \\
+    \textbf{\textit{Yi Cao}}, Victor Wu, and Paulette Clancy* \\
+    \textit{npj 2D Materials and Applications, under review (2025)} 
+    \item \textbf{What is Your Force Field \textit{Really} Learning? Gaining Scientific Intuition with A Dual-Level Explainability Framework} \\
+    \textbf{\textit{Yi Cao}}, Peter Mastracco, Jieneng Chen, Alan Yuille, Paulette Clancy* \\ 
+    % \textit{AAAI XAI4Science Workshop, Spotlight Talk (2026)}  
+    \textit{AAAI Conference Workshop (XAI4Science), Peer-reviewed Workshop Paper (2026)}
+     \quad \href{https://openreview.net/forum?id=K95Tt6fYud}{\faBook} 
+     \quad \href{https://github.com/yicao-elina/MigrationBench}{\faGithub\ }\\
+    \textit{*Dual-level explainability framework bridging model reasoning with human understanding in scientific AI}
+    \item \textbf{ARIA: A Causal-Aware Framework for Rescuing LLM Reasoning in Trustworthy Materials Discovery} \\
+    \textbf{\textit{Yi Cao}}, Liaoyaqi Wang, Jieneng Chen, Benjamin Van Durme, Alan Yuille, Paulette Clancy* \\
+    \textit{Submitted to KDD Conference, AI4Sciences Track (2026)} 
+    \quad 
+    % \href{https://openreview.net/forum?id=RnITjvwxke}{\faBook \ } \quad 
+    \href{https://github.com/yicao-elina/LLM4Chem-Explainable-synthesis.git}{\faGithub \ } 
+    % \textit{*Novel causal-aware framework integrating LLMs with knowledge graphs to ensure robust and trustworthy reasoning in materials discovery.}    
+    \item \textbf{Migration as a Probe: A Generalizable Benchmark Framework for Specialist vs. Generalist Machine-Learned Force Fields} \\
+    \textbf{\textit{Yi Cao}} and Paulette Clancy* \\
+    % \textit{NeurIPS AI4Mat Workshop, Spotlight Talk (2025)} 
+    \textit{NeurIPS Conference Workshop (AI4Mat), Peer-reviewed Workshop Paper (2025)}
+    % \href{https://arxiv.org/abs/2509.00090}{Paper} \\
+    \quad \href{https://openreview.net/forum?id=RnITjvwxke}{\faBook\ }
+    \quad \href{https://github.com/yicao-elina/MigrationBench}{\faGithub\ }
+    \quad \href{https://www.linkedin.com/posts/yi-cao-1368ab292_neurips2025-ai4science-ai4mat-activity-7403636953461719040-FNeY?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEb3tPoBgmt_8xQYwQpEY2DbQllFRcSwlU4}{\faGlobe}
+    \\
+    \textit{*Comprehensive benchmarking framework for evaluating MLFF generalization in materials science}
+
+    \item \textbf{Low-energy pathways lead to self-healing defects in CsPbBr$_3$} \\
+    Kumar Miskin, \textbf{\textit{Yi Cao}}, Madaline Marland, Farhan Shaikh, David T. Moore, John Marohn, Paulette Clancy* \\
+    \textit{Phys. Chem. Chem. Phys.}, 27(29), 15446-15459 (2025)  
+    \quad \href{https://doi.org/10.1039/D5CP01641J}{\faBook\ } 
+    \quad \href{https://github.com/pclancy-lab/perovskites_space.git}{\faGithub} \\
+    \textit{*Computational discovery of self-healing mechanisms with implications for rational material design}
+
+    \item \textbf{Brain-targeted nanoparticle drug delivery systems: research advances} \\
+    \textbf{\textit{Yi Cao}} and Chen Jiang* \\
+    \textit{Basic and Clinical Medicine}, 42(1), 2–14 (2022)  
+    \quad \href{https://scholar.google.com/citations?view_op=view_citation&hl=en&user=t_gDF-EAAAAJ&citation_for_view=t_gDF-EAAAAJ:d1gkVwhDpl0C}{\faBook } \\
+\end{enumerate}
+    
+
+
+\section{Conference Presentations}
+\begin{onecolentry}
+\textbf{2026 MRS Spring Meeting \& Exhibit} (Honolulu, HI, May 2026) - \textbf{\textit{Oral Presentation}}\\
+\textit{Migration as a Probe—A Generalizable Benchmark Framework for Specialist vs. Generalist Machine-Learned Force Fields in Doped Materials}
+\vspace{0.1 cm}
+
+\textbf{2026 MRS Spring Meeting \& Exhibit} (Honolulu, HI, Apr 2026) - \textbf{\textit{Oral Presentation}}\\
+\textit{What is Your Force Field Really Learning? Gaining Scientific Intuition and Guiding Feature Engineering with A Dual-Level Explainability Framework}
+\vspace{0.1 cm}
+
+\textbf{2026 MRS Spring Meeting \& Exhibit} (Honolulu, HI, Apr 2026) - \textbf{\textit{Oral Presentation}}\\
+\textit{Overcoming Contextual Tunneling in AI-Driven Materials Discovery: A Causal Framework for Robust Knowledge Integration}
+\vspace{0.1 cm}
+\textbf{Women in Data Science and AI Symposium} (Baltimore, MD, Apr 2026) - \textbf{\textit{Best Poster Award Winner}} \\
+\vspace{0.1 cm}
+\textbf{Women of Whiting Annual Women in STEM Symposium} (Baltimore, MD, Mar 2026) - \textbf{\textit{Top 1 Poster Presentation Award}} \\
+\vspace{0.1 cm}
+\textbf{AAAI XAI4Science Workshop} (Singapore Expo, Jan 2026) - 
+\textbf{\textit{Spotlight Talk}} (Top-tier recognition)\\
+\textit{What is Your Force Field Really Learning? Gaining Scientific Intuition with A Dual-Level Explainability Framework}
+\vspace{0.1 cm}
+
+\textbf{NeurIPS AI4Mat Workshop} (San Diego, CA, Dec 2025) - \textbf{\textit{Spotlight Talk \& Travel Grant Awardee}} (Top-tier recognition) \\
+\textit{Migration as a Probe: A Generalizable Benchmark Framework for Specialist vs. Generalist Machine-Learned Force Fields}
+\vspace{0.1 cm}
+
+\textbf{Prognostics and Health Management (PHM) Society Annual Conference} (Bellevue, WA, Oct 2025) - \textbf{\textit{Invited Talk \& Session Chair}}
+% \quad \href{https://www.linkedin.com/posts/yi-cao-1368ab292_phm2025-ai-machinelearning-activity-7389133295751491584-cIv0?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEb3tPoBgmt_8xQYwQpEY2DbQllFRcSwlU4}{\faLinkedinIn}
+\\
+\textit{Doctoral Symposium - Selected as 1 of 10 PhD students globally; showcased AI applications in predictive maintenance and materials health; Chaired "Advanced AI/ML for PHM" and "Digital Twins and Aviation" sessions}
+\vspace{0.1 cm}
+
+\textbf{AIChE Annual Meeting} (Boston, MA, Nov 2025)
+% \quad \href{https://www.linkedin.com/posts/yi-cao-1368ab292_aiche2025-machinelearning-aiforscience-activity-7392423605621608448-9OI0?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEb3tPoBgmt_8xQYwQpEY2DbQllFRcSwlU4}{\faLinkedinIn}
+\\
+\textit{Poster: Dissecting Cr-Doped Interfaces: How Diffusion Dynamics Reshape the Van Der Waals Gap and Shift Sb$_2$Te$_3$ Thermoelectric Performance} 
+
+\vspace{0.1 cm}
+
+% \textbf{Artificial Intelligence for Materials Science (AIMS) Workshop, NIST} (Rockville, MD, Jul 2025) - Poster
+% \vspace{0.1 cm}
+
+\textbf{Women in AI 2025} (Baltimore, MD, Apr 2025) - \textbf{\textit{Poster Presentation Award Winner}}\\
+\textit{Exploring Low-Energy Pathways for Self-Healing Defects in CsPbBr3—A Computational Study}
+\vspace{0.1 cm}
+
+% \textbf{Quantum Matters in Materials Science Workshop, NIST} (Rockville, MD, Feb 2025)\\
+% \textit{Poster: Topological Materials Engineering for Next-Generation Thermoelectrics}
+% \vspace{0.1 cm}
+
+\textbf{Materials Research Society (MRS) Fall Meeting} (Boston, MA, Dec 2024)\\
+\textit{Poster: Exploring Low-Energy Pathways for Self-Healing Defects in CsPbBr$_3$}
+\end{onecolentry}
+
+    \section{Additional Experiences And Awards}
+
+\begin{twocolentry}{
+    San Diego, CA, USA \\
+    May 2026 to Aug. 2026 \\
+    Internship
+}
+\textbf{Qualcomm},  Engineering Intern (GPU High-Level Modeling)
+\begin{highlights}
+    \item Developing an \textbf{agentic AI workflow} to automate complex debugging processes in GPU high-level modeling (HLM), integrating LLM capabilities with existing diagnostic tools to streamline operations.
+    % \item Leveraging autonomous reasoning and large-scale system optimization to build robust, high-performance computational pipelines, directly translating these skills to accelerate AI-driven materials simulation and discovery.
+\end{highlights}
+\end{twocolentry}
+
+\begin{twocolentry}{
+Global (JHU Site, MD, USA)
+
+Sept. 2025
+
+Team Leader
+
+}
+\textbf{LLM Hackathon for Applications in Materials Science \& Chemistry}
+\quad \href{https://llmhackathon.github.io/awards/}{\faGlobe}
+\begin{highlights}
+\item Led the \textbf{ARIA team} (Autonomous Reasoning Intelligence for Atomics), integrating LLMs with causal knowledge graphs for robust inverse materials design.
+\item Received a \textbf{2025 Visionary Award} (ranked 6th out of 120 teams).
+\item \textbf{Industry Recognition:} Project noticed by CuspAI, leading to ongoing collaboration discussions for commercial applications
+\end{highlights}
+\end{twocolentry}
+
+
+\begin{twocolentry}{
+    Shanghai, China
+
+    Jun. 2024 to Jul. 2024
+
+    Internship
+}
+    \textbf{Viva Biotech}
+    \begin{highlights}
+        \item Conducted Computer-Aided Drug Design (CADD) research using co-solvent MD simulations, optimizing drug discovery through protein-ligand interaction analysis.
+        % \item Collaborated with cross-functional teams to integrate computational insights into experimental workflows, enhancing the efficiency of the drug discovery pipeline.
+    \end{highlights}
+\end{twocolentry}
+
+\begin{twocolentry}{
+    Shanghai, China
+
+    Dec. 2022 to Nov. 2023
+
+    Part-time, Advisor
+}
+    \textbf{Fudan iGEM team, iGEM Competition}
+    \quad \href{https://2023.igem.wiki/fudan/}{\faGlobe}
+    \begin{highlights}
+        \item Guided experimental design, scientific documentation.
+        % \item Led brainstorming sessions and advised on scientific writing.
+        \item Our team won a\textbf{ Gold Medal }and \textbf{Best Environmental Project }title.
+        % \item  \href{https://2023.igem.wiki/fudan/description/}{https://2023.igem.wiki/fudan/description/}
+    \end{highlights}
+    
+\end{twocolentry}
+
+% \vspace{0.2 cm}
+
+\begin{twocolentry}{
+    Pudong, Shanghai, China
+
+    Dec. 2022 to Feb. 2023
+
+    Internship
+}
+    \textbf{Boehringer Ingelheim}
+    \begin{highlights}
+        \item Led a team in developing a white paper on quality culture through research and interviews, resulting in improved company-wide quality guidelines.
+    \end{highlights}
+\end{twocolentry}
+
+\end{document}
